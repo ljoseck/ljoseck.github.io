@@ -28,7 +28,7 @@ session.setAttribute("educator", obj.getEducatorFlag());
 
 /*NOTE: WE WILL NEED TO CHANGE gamelaunch.html TO A MAIN MENU PAGE BELOW!!!!*/
 %>  
-<jsp:include page="gamelaunch.html"></jsp:include>  
+<jsp:include page="main_menu.html"></jsp:include>  
 <%
 }
 else  
