@@ -1,6 +1,15 @@
 var globalX = 0;
 var globalY = 0;
 
+//Used to refresh the screen and give a chance for all objects to be loaded onto the screen.
+var initReload;
+function rel(){
+     if(!initReload){
+         initReload = true;
+         window.location.reload();
+     }
+}
+
 
 
 function draw(){
@@ -88,7 +97,6 @@ function addImageToGrid(image, canvas, x, y, unit){
 	var image1 = document.getElementById(image);
 	ctx.drawImage(image1, x*unit, y*unit, unit, unit);
 }
-
 
 
 draw();

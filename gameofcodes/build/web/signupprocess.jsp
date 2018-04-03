@@ -7,8 +7,8 @@
 <jsp:useBean id="obj" class="GameOfCodes.UserAccount" scope = "session"/>
 <jsp:setProperty property="*" name="obj"/>  
 <%
-    if (request.getParameter("username") != "" && request.getParameter("password") != "" && request.getParameter("firstname") != ""
-            && request.getParameter("lastname") != "" && request.getParameter("type") != "") { //if all fields are filled in, then continue
+    if (!request.getParameter("username").equals("") && !request.getParameter("password").equals("") && !request.getParameter("firstname").equals("")
+            && !request.getParameter("lastname").equals("")) { //if all fields are filled in, then continue
         /*If class number flag is not filled in, then set a signifier stating that the user is not in a class */
         if (request.getParameter("classno") == "") {
             obj.setClassNumber("NOCLASS");
@@ -34,9 +34,8 @@
     session.setAttribute("lvlcomp", obj.getLevelsCompleted());
     session.setAttribute("classno", obj.getClassNumber());
     session.setAttribute("educator", obj.getEducatorFlag());
-    /*NOTE: WE WILL NEED TO CHANGE gamelaunch.html TO A MAIN MENU PAGE BELOW!!!!*/
 %>
-<jsp:include page="gamelaunch.html"></jsp:include>  
+<jsp:include page="main_menu.html"></jsp:include>  
 <%
 } else {
     //out.println("Sorry, the credentials you gave are invalid, or you are trying to sign up an existing account.");

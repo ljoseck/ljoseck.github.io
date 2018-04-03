@@ -37,7 +37,7 @@
     </tr>
     <tr>
         <td>I am:</td>
-        <td><input type="radio" id="acct1" name="type" value="0"/><label for="acct1">A Student</label></td>
+        <td><input type="radio" id="acct1" name="type" value="0" checked/><label for="acct1">A Student</label></td>
         <td><input type="radio" id="acct2" name="type" value="1"/><label for="acct2">An Educator</label></td>
     </tr>
         <td><input type="submit" value="Sign Up"/></td>
