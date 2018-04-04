@@ -34,5 +34,5 @@
 </form>
     
 <p>Not a user? Sign-Up or Play as a Guest:</p>
-<a href="signup.jsp">Sign-Up</a> | <a href="main_menu.jsp">Play as Guest</a><br> 
+<a href="signup.jsp">Sign-Up</a> | <a href="main_menu.html">Play as Guest</a><br> 
 
