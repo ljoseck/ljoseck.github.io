@@ -33,3 +33,26 @@
 	background:rgba(0,0,0,0.5);
 	width:50%;
 }
+
+
+.column1
+{
+    margin-right: 0;
+    float:left;
+    width:50%;
+    height:50%;
+    /*background:rgba(0,0,0,0.5);*/
+}
+
+.column1
+{
+    margin-right: 0;
+    float:left;
+    width:50%;
+    height:100%;
+    /*background:rgba(0,0,0,0.5);*/
+}
+
+#div1{
+    height:100%;
+}
