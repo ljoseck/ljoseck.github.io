@@ -1,21 +1,41 @@
 <html>
 <head>
-    <div style="display:none;">
-      <img id="ground" src="ground.png">
-      <img id="sky" src="sky.png">
-      <img id="sky2" src="sky2.png">
-      <canvas id="canvas">
-                    This text is displayed if your browser does not support HTML5 Canvas.
-        </canvas>
-    </div>
-<head/>
-<!--<body>-->
-    <div id="div1" style="float:left; width:50%; height:50%; border:3px solid black">
-    <canvas id="mainCanvas">
+<div style="display:none;">
+  <img id="ground" src="ground.png">
+  <img id="sky" src="sky.png">
+  <img id="sky2" src="sky2.png">
+  <img id="man" src="man.png">
+  <img id="finish" src="flag-simple.png">
+  <!--<img id="test" src="New Piskel.png">-->
+
+  <link rel="stylesheet" href="style.css">
+  <canvas id="canvas">
 		This text is displayed if your browser does not support HTML5 Canvas.
-    </canvas>
+  </canvas>
+</div>
+</head>
+<body
+>    <div class="column1">
+        <div id="options">
+            <input id="play" type="button" value="play">
+            <input id="step" type="button" value="step">
+            <!--<input id="reset" type="button" value="reset">-->
+            <input id="level1" type="button" value="level1">
+            <input id="level2" type="button" value="level2">
+            
+        </div>
+	<div id="div1">
+	<canvas id="mainCanvas">
+		This text is displayed if your browser does not support HTML5 Canvas.
+        </canvas>
+        </div>
     </div>
+    <div class ="column2">
+        <textarea id="program" cols="40" rows="40"></textarea>
+    </div>
+    <script type="text/javascript" src="level1.js"></script>
+    <script type="text/javascript" src="level2.js"></script>
     <script type="text/javascript" src="main.js"></script>
-<!--</body>-->
+</body>
 
 </html>
