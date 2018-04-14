@@ -1,13 +1,14 @@
-/*
- */
 package GameOfCodes;
+
 
 /**
  *
  * @author Felix Perez
  */
+
 public class AccountValidation {
-    public static boolean Validate(UserAccount user, boolean isNewAccount){
+    
+    public boolean Validate(UserAccount user, boolean isNewAccount){
         boolean result = false;
         if(isNewAccount){
             /*Note: User's number of levels completed is set in createAccount.*/
@@ -20,4 +21,5 @@ public class AccountValidation {
         }
         return result;
     }
+    
 }

@@ -4,7 +4,10 @@
     Author     : Felix Perez
 --%>
 
+<%@page import="GameOfCodes.TestRunner"%>  
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <!DOCTYPE html>
@@ -43,6 +46,11 @@
             
         <p>Not a user? Sign-Up or Play as a Guest:</p>
         <a href="signup.jsp">Sign-Up</a> | <a href="main_menu.html">Play as Guest</a><br> 
-
+        
     </body>
 </html>
+        <%          
+        /* Comment out the lines below to remove JUnit Test reporting functionality. */
+        TestRunner RunTests = new TestRunner();
+        RunTests.runTests();
+         %>
