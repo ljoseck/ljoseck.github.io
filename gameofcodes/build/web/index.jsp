@@ -35,22 +35,19 @@
         </div>
 
         <form action="loginprocess.jsp" method="post"> 
-            <table>
-            <tr>
-                <td>Username:</td>
-                <td><input type="text" name="username"/></td>
-                
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type="password" name="password"/></td>
-                
-            </tr>
-            <tr>
-                <td><input type="submit" value="Log-In"/></td>
-                <td></td>
-            </tr>   
-            </table> 
+            
+            <div class="form-group" align="center">
+                <label for="exampleInputEmail">Username</label>
+                <input type="text" name="username"/>
+            </div>
+
+            <div class="form-group" align="center">
+                <label for="exampleInputEmail">Password</label>
+                <input type="password" name="password"/>
+            </div>
+
+            <input type="submit" value="Log-In"/>
+
         </form>
             
         <p>Not a user? Sign-Up or Play as a Guest:</p>
