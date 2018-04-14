@@ -2,6 +2,12 @@
     Document   : index
     Created on : Feb 13, 2018, 9:26:04 AM
     Author     : Felix Perez
+
+        <div class='row'>
+            <div class=''>
+                
+            </div>
+        </div>
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,7 +24,13 @@
         
         <div class='row'>
             <div class='col-lg-12' align='center'>
-                <img src="GoC-Logo2.png" alt="Logo" width="500px" length="400px">
+                <img src="GoC-Logo2.png" alt="Logo" width="400px" length="350px">
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class='col-md-12' align='center'>
+                <h4><b>LOGIN<b></h4>
             </div>
         </div>
 
