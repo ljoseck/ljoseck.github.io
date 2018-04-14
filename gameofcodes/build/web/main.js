@@ -142,6 +142,7 @@ function step(){
         globalpc++;
     
     draw();
+	//console.log(globalpc, program.length);
 	return globalpc < program.length; 
 }
 

@@ -11,18 +11,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Log-In</title>
+        <title>Log In</title>
     </head>
 
     <body>
         
-        <div class='.container-fluid'>
-            <div class='col-lg-12'>
-                <h1>Welcome to Game of Codes!</h1>
+        <div class='row'>
+            <div class='col-lg-12' align='center'>
+                <img src="GoC-Logo2.png" alt="Logo" width="500px" length="400px">
             </div>
         </div>
 
-        <p>Please Log-In:</p>
         <form action="loginprocess.jsp" method="post"> 
             <table>
             <tr>
