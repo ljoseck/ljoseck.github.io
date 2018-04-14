@@ -28,6 +28,7 @@ if(testing){
 		if(x == y){
 			fail(message);
 		}
+            }
 	
 	function assertNull(x, message = ""){
 		if(x == undefined){
