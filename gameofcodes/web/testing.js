@@ -51,7 +51,15 @@ if(testing){
 		}
 	}
 	//end of Javascript implementation of JUnit
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 41ea70c89b5cffdf372a35eb731c7d022ffba568
+	
+>>>>>>> branch2
 	//@test
 	function testMapGeneration1(){
 		globalMap = [[0,1],[2,3]];
