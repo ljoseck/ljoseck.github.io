@@ -14,16 +14,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<<<<<<< HEAD
         <title>Log-In</title>
-=======
-        <title>Log In</title>
->>>>>>> 255dc492435dda1467581c479366455ac5992b08
     </head>
 
     <body>
+        <audio loop autoplay>
+            <source src="8 Bit Space Groove Chill Pretty Game Music by HeatleyBros.mp3" type="audio/mpeg">
+        </audio>
         
-<<<<<<< HEAD
         <div class='.container-fluid'>
             <div class='col-lg-12'>
                 <h1>Welcome to Game of Codes!</h1>
@@ -31,14 +29,6 @@
         </div>
 
         <p>Please Log-In:</p>
-=======
-        <div class='row'>
-            <div class='col-lg-12' align='center'>
-                <img src="GoC-Logo2.png" alt="Logo" width="500px" length="400px">
-            </div>
-        </div>
-
->>>>>>> 255dc492435dda1467581c479366455ac5992b08
         <form action="loginprocess.jsp" method="post"> 
             <table>
             <tr>
@@ -60,11 +50,7 @@
             
         <p>Not a user? Sign-Up or Play as a Guest:</p>
         <a href="signup.jsp">Sign-Up</a> | <a href="main_menu.html">Play as Guest</a><br> 
-<<<<<<< HEAD
-
-=======
         
->>>>>>> 255dc492435dda1467581c479366455ac5992b08
     </body>
 </html>
         <%          
