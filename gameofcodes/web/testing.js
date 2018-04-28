@@ -38,7 +38,8 @@ if(testing){
 		if(Equals(x,y)){
 			fail(message);
 		}
-	}
+            }
+
 	function assertNull(x, message = ""){
 		if(x == undefined){
 			fail(message);
@@ -51,7 +52,6 @@ if(testing){
 	}
 	//end of Javascript implementation of JUnit
 
-	
 	//@test
 	function testMapGeneration1(){
 		globalMap = [[0,1],[2,3]];

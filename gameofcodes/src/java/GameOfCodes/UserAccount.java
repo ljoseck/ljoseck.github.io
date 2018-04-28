@@ -69,11 +69,11 @@ public class UserAccount {
             this.isEducator = 0;
         }
     }
-    public static boolean readAccountInfo(String username, String password, UserAccount currentUser){
+    public boolean readAccountInfo(String username, String password, UserAccount currentUser){
         boolean result = false;
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameofcodes","root","password");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameofcodes?autoReconnect=true&useSSL=false","root","password");
             PreparedStatement ps = con.prepareStatement(
                "select * from accounts where Username=? and Password=?");
             ps.setString(1, username);
@@ -92,12 +92,12 @@ public class UserAccount {
         return result;
     }
     
-    public static boolean createAccount(String username, String password, String firstname, String lastname, String ClassNum, int isEducator){
+    public boolean createAccount(String username, String password, String firstname, String lastname, String ClassNum, int isEducator){
         
         try{
             
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameofcodes","root","password");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameofcodes?autoReconnect=true&useSSL=false","root","password");
             /*
             * TODO: Add Password requirements to account creation;
             * ex. at least 1 special character, Use Capital and lowercase alphabetical characters, and numbers
@@ -113,7 +113,7 @@ public class UserAccount {
             ResultSet rs = ps.executeQuery();
             check = rs.next();
             if(check){
-                System.out.println("Given credentials already exist in table.");
+                //System.out.println("Given credentials already exist in table.");
                 return false; //found a match in the table to the given "new" credentials, hence deny new entry
             }
                 
@@ -121,7 +121,7 @@ public class UserAccount {
             //NOW, ADD CREDENTIALS INTO TABLE
             int lvlComp = 0;
             if(isEducator != 0) //If the user specifies that the account will be used for education, all levels will be considered complete
-                lvlComp = 10; //10 IS THE CURRENT LEVEL COUNT. WILL EXPAND WHEN THE TIME COMES
+                lvlComp = 5; //5 IS THE CURRENT LEVEL COUNT. WILL EXPAND WHEN THE TIME COMES
                 
             ps = con.prepareStatement(
             "INSERT INTO accounts (Username,Password,FirstName,LastName,LevelsCompleted,ClassNo,Educator) VALUES (?,?,?,?,?,?,?)");
@@ -136,5 +136,18 @@ public class UserAccount {
             
         }catch(Exception e){}
         return true;        
+    }
+    
+    public void deleteAccount(String username, String password){
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameofcodes?autoReconnect=true&useSSL=false","root","password");
+            PreparedStatement ps = con.prepareStatement(
+               "DELETE FROM accounts WHERE Username=? and Password=?");
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.executeUpdate();
+        }
+        catch(Exception e){}   
     }
 }
