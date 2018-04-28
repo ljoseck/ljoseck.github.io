@@ -50,7 +50,7 @@ if(testing){
 		}
 	}
 	//end of Javascript implementation of JUnit
-<<<<<<< HEAD
+
 	
 	//@test
 	function testMapGeneration1(){

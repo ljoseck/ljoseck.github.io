@@ -1,5 +1,5 @@
-function resetLevel2(){
-	document.getElementById("ResetLevel").onclick = resetLevel2;
+function resetLevel3(){//change to current level
+	document.getElementById("ResetLevel").onclick = resetLevel3; //change to current level
 	playing(false);
 	
     globalpc = 0;//for running program
@@ -10,34 +10,32 @@ function resetLevel2(){
 	globalBox = [];
 	globaly = 5;//size of map
 	globalx = 8;
-	
 	globalX = 0;//for imaging translation and zoom (dont change)
 	globalY = 0;
+	level = 3;//change to current level
 	
-	level = 2;
-	
+	//put in globalMap
 	var S = undefined;
 	var G = "ground";
 	var F = "finish";
 	var M = "man";
 	
-    // for(var i = 0; i < globalx; i++){
-        // globalMap.push(new Array(globaly));
-    // }
-    // globalMap[1][globaly-2] = "man";
-    // globalMap[3][globaly-2] = "finish";
-    
+	//put in globalBox
+	var B = "1,box";
+	var b = "0,1,button";
+	var L = "locked";
+	
 	globalMap = [
-	[S,S,S,S,S,S,S,S],
-	[S,S,S,S,S,S,S,S],
-	[S,S,S,S,G,S,S,S],
-	[S,M,S,G,G,S,F,S],
+	[S,S,S,S,S,S,S,G],
+	[S,S,S,S,S,S,G,G],
+	[S,S,S,S,S,G,G,G],
+	[S,S,M,S,S,S,F,G],
 	[G,G,G,G,G,G,G,G]];
 	globalBox = [
 	[S,S,S,S,S,S,S,S],
 	[S,S,S,S,S,S,S,S],
 	[S,S,S,S,S,S,S,S],
-	[S,S,S,S,S,S,S,S],
+	[S,B,S,S,b,L,S,S],
 	[G,G,G,G,G,G,G,G]];
 	invert();
 	updateTutorial();
