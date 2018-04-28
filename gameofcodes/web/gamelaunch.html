@@ -5,38 +5,95 @@
   <img id="sky" src="sky.png">
   <img id="sky2" src="sky2.png">
   <img id="man" src="man.png">
-  <img id="finish" src="flag-simple.png">
-  <!--<img id="test" src="New Piskel.png">-->
+  <img id="manb" src="man with box.png">
+  <img id="finish" src="Better Flag.png">
+  <img id="box" src="Box.png">
+  <img id="button" src="Button.png">
+  <img id="box-button" src="Box with Button.png">
+  <img id="lock" src="lock.png">
+  <img id="locked" src="locked.png">
+  <img id="0" src="0.png">
+  <img id="1" src="1.png">
+  <img id="2" src="2.png">
+  <img id="3" src="3.png">
+  <img id="4" src="4.png">
+  <img id="5" src="5.png">
+  <img id="6" src="6.png">
+  <img id="7" src="7.png">
+  <img id="8" src="8.png">
+  <img id="9" src="9.png">
 
+  <input id="playing" type="text" value="">
   <link rel="stylesheet" href="style.css">
   <canvas id="canvas">
 		This text is displayed if your browser does not support HTML5 Canvas.
   </canvas>
 </div>
 </head>
-<body
->    <div class="column1">
+<body>
+    <div class="column1">
         <div id="options">
-            <input id="play" type="button" value="play">
-            <input id="step" type="button" value="step">
+            <input id="play" type="button" value="Play">
+            <input id="step" type="button" value="Step">
+
+            <input id="stop" type="button" value="Stop" style="display: none">
+            <input id="go" type="button" value="Go" style="display: none">
+            <input id="fast" type="button" value="Faster">
+            <input id="faster" type="button" value="Even Faster">
+            <input id="fastest" type="button" value="Slow">
+
+            <input id="ResetLevel" type="button" value="Reset Level">
+            <input id="LevelSelect" type="button" value="Level Select">
             <!--<input id="reset" type="button" value="reset">-->
+            <div style="display: none">
             <input id="level1" type="button" value="level1">
             <input id="level2" type="button" value="level2">
-            
+            <input id="level3" type="button" value="level3">
+            <input id="level4" type="button" value="level4">
+            <input id="level5" type="button" value="level5">
+            <input id="level6" type="button" value="level6">
+            <input id="level7" type="button" value="level7">
+            <input id="level8" type="button" value="level8">
+            <input id="level9" type="button" value="level9">
+            </div>
         </div>
-	<div id="div1">
-	<canvas id="mainCanvas">
-		This text is displayed if your browser does not support HTML5 Canvas.
-        </canvas>
-        </div>
+		<div id="div1">
+			<canvas id="mainCanvas">
+				This text is displayed if your browser does not support HTML5 Canvas.
+	        </canvas>
+	    </div>
     </div>
     <div class ="column2">
-        <textarea id="program" cols="40" rows="40"></textarea>
+    	<div class ="tutorial">
+    		This is the defult header for the Tutorial
+    		<hr>
+    		<div id = "tutorial1" style="display: none">
+    			tutorial1 text goes here
+    		</div>
+    		<div id = "tutorial2" style="display: none">
+    			moveR | moves the player right one square</br>
+    			moveL |<br>
+    			<br>
+    			jumpR | <br>
+    			jumpL | <br>
+    			<br>
+    			loop &ltI&gt { | loops the next comands &ltI&gt number of times<br>
+    			<br>
+    			}<br>
+    			<br>
+    			pick <br>
+    			<br>
+    			put <br>
+    		</div>
+    	</div>
+        <textarea id="program"></textarea>
     </div>
     <script type="text/javascript" src="level1.js"></script>
     <script type="text/javascript" src="level2.js"></script>
+    <script type="text/javascript" src="level3.js"></script>
+    <script type="text/javascript" src="level4.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="testing.js"></script>
 </body>
 
-</html>
+</html>	
