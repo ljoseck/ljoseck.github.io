@@ -159,6 +159,7 @@ function step(){
         globalpc++;
     
     draw();
+<<<<<<< HEAD
 	
 	
 	// console.log("Man var is " + man);
@@ -170,6 +171,10 @@ function step(){
 	// console.log(globalMap);
 	//console.log(globalpc, program.length);
 	return (globalpc - 1 < program.length);
+=======
+	//console.log(globalpc, program.length);
+	return globalpc < program.length; 
+>>>>>>> 41ea70c89b5cffdf372a35eb731c7d022ffba568
 }
 
 function run(program, pc){//returns true if line of program is used

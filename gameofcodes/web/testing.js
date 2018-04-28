@@ -38,7 +38,8 @@ if(testing){
 		if(Equals(x,y)){
 			fail(message);
 		}
-	}
+            }
+
 	function assertNull(x, message = ""){
 		if(x == undefined){
 			fail(message);
@@ -50,7 +51,10 @@ if(testing){
 		}
 	}
 	//end of Javascript implementation of JUnit
+<<<<<<< HEAD
 
+=======
+>>>>>>> 41ea70c89b5cffdf372a35eb731c7d022ffba568
 	
 	//@test
 	function testMapGeneration1(){
