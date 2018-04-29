@@ -40,7 +40,7 @@ function resetLevel5(){//change to current level
 	[S,S,S,S,L ,S ,l,S,S],
 	[S,B,S,b,L ,b1,l,S,S],
 	[S,S,H,G,G ,S ,S,S,S],
-	[S,S,H,l,B1,S ,S,S,S],
+	[S,S,H,L,B1,S ,S,S,S],
 	[G,G,G,G,G ,G ,G,G,G]];
 	invert();
 	updateTutorial();
