@@ -32,18 +32,22 @@
         <h3 align="center">Log in!</h3>
 
         <form action="loginprocess.jsp" method="post" align="center"> 
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="text" name="username"/>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" name="password"/>
-            </div>
-
-            <button type="submit" class="btn btn-primary" align="center">Log-In</button>
-            </div>
+            <table align="center">
+            <tr>
+                <td>Username:</td>
+                <td><input type="text" name="username"/></td>
+                
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="password" name="password"/></td>
+                
+            </tr>
+            <tr align="center">
+                <td><input type="submit" value="Log-In"/></td>
+                <td></td>
+            </tr>   
+            </table> 
         </form>
         <div align="center">
             <p>Not a user? You can <a href="signup.jsp">Sign-Up</a> or <a href="main_menu.html">play as a guest</a>
