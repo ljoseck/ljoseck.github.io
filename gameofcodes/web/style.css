@@ -71,7 +71,49 @@
 
 #program
 {
+	padding: 2px;
+	letter-spacing: 1px;
+	
+	//font-family: Arial;
+	//margin: 0 auto;
+	position: absolute;
 	width: 100%;
-	height:78%;
+	height:100%;
+	height:100%;
 	font-size: 40px;
+	
+}
+
+#highlight 
+{
+	padding: 3px;
+	padding-bottom: 10px;
+	letter-spacing: 1px;
+	overflow: hidden;
+	height:100%;
+	position: absolute;
+	font-family: monospace;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	color: transparent;
+	font-size: 40px;
+	user-select: none;
+}
+
+#father
+{
+	margin: 0 auto;
+	position: relative;
+	height:  78%;
+	width:  100%;
+}
+
+.mark {
+	//border-radius: 3px;
+	//color: transparent;
+	background-color: #b1d5e5;
+}
+
+.body{
+	overflow-y: hidden;
 }
