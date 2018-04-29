@@ -51,7 +51,7 @@ if(testing){
 		}
 	}
 	//end of Javascript implementation of JUnit
-	
+
 	//@test
 	function testMapGeneration1(){
 		globalMap = [[0,1],[2,3]];
