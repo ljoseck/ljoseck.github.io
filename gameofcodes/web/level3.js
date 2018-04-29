@@ -5,13 +5,14 @@ function resetLevel3(){//change to current level
     globalpc = 0;//for running program
     globalMap = [];
     globalStack = [];
-	
 	globalMap = [];
 	globalBox = [];
 	globaly = 5;//size of map
 	globalx = 8;
 	globalX = 0;//for imaging translation and zoom (dont change)
 	globalY = 0;
+	man = "man";
+	
 	level = 3;//change to current level
 	
 	//put in globalMap
@@ -40,28 +41,4 @@ function resetLevel3(){//change to current level
 	invert();
 	updateTutorial();
     draw();
-}
-
-
-function invert(){
-	var tempMap = [];
-	for(var i = 0; i < globalx; i++){
-		var temp =[];
-		for(var j = 0; j < globaly; j++){
-			temp.push(globalMap[j][i]);
-		}
-		tempMap.push(temp);
-	}
-	globalMap = tempMap;
-	try{
-		var tempMap = [];
-		for(var i = 0; i < globalx; i++){
-			var temp =[];
-			for(var j = 0; j < globaly; j++){
-				temp.push(globalBox[j][i]);
-			}
-			tempMap.push(temp);
-		}
-		globalBox = tempMap;
-		}catch(e){};
 }

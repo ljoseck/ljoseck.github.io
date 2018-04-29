@@ -13,6 +13,7 @@ function resetLevel2(){
 	
 	globalX = 0;//for imaging translation and zoom (dont change)
 	globalY = 0;
+	man = "man";
 	
 	level = 2;
 	
@@ -20,12 +21,6 @@ function resetLevel2(){
 	var G = "ground";
 	var F = "finish";
 	var M = "man";
-	
-    // for(var i = 0; i < globalx; i++){
-        // globalMap.push(new Array(globaly));
-    // }
-    // globalMap[1][globaly-2] = "man";
-    // globalMap[3][globaly-2] = "finish";
     
 	globalMap = [
 	[S,S,S,S,S,S,S,S],
