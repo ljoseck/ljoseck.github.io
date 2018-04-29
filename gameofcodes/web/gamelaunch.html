@@ -2,6 +2,7 @@
 <head>
 <audio loop autoplay>
     <source src="8 Bit Summer Fun Upbeat Game Music by HeatleyBros.mp3" type="audio/mpeg">
+    <!--Music from: https://www.youtube.com/watch?v=TiE9Vvmlxew&index=10&list=PLobY7vO0pgVKn4FRDgwXk5FUSiGS8_jA8 -->
 </audio>
 <div style="display:none;">
   <img id="ground" src="ground.png">
@@ -15,6 +16,7 @@
   <img id="box-button" src="Box with Button.png">
   <img id="lock" src="lock.png">
   <img id="locked" src="locked.png">
+  <img id="ladder" src="ladder.png">
   <img id="0" src="0.png">
   <img id="1" src="1.png">
   <img id="2" src="2.png">
@@ -33,14 +35,14 @@
   </canvas>
 </div>
 </head>
-<body>
+<body class="body">
     <div class="column1">
         <div id="options">
             <input id="play" type="button" value="Play">
             <input id="step" type="button" value="Step">
 
-            <input id="stop" type="button" value="Stop" style="display: none">
-            <input id="go" type="button" value="Go" style="display: none">
+            <input id="stop" type="button" value="Stop">
+            <input id="go" type="button" value="Go">
             <input id="fast" type="button" value="Faster">
             <input id="faster" type="button" value="Even Faster">
             <input id="fastest" type="button" value="Slow">
@@ -89,12 +91,17 @@
     			put <br>
     		</div>
     	</div>
+    	<div id="father">
         <textarea id="program"></textarea>
+    	<div id="highlight">
+    	</div>
+    	</div>
     </div>
     <script type="text/javascript" src="level1.js"></script>
     <script type="text/javascript" src="level2.js"></script>
     <script type="text/javascript" src="level3.js"></script>
     <script type="text/javascript" src="level4.js"></script>
+    <script type="text/javascript" src="level5.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="testing.js"></script>
 </body>

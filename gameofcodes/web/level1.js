@@ -13,6 +13,7 @@ function resetLevel1(){
 	
 	globalX = 0;//for imaging translation and zoom (dont change)
 	globalY = 0;
+	man = "man";
 	
 	level = 1;
 	

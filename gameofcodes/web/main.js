@@ -9,6 +9,7 @@ var globalpc = 0;//for running program
 var globalStack = [];
 var globalBox = [];
 var man = "man";
+var onFlag = false;
 
 var level = window.location.search.substring(6);
 if(level == "")
@@ -19,6 +20,7 @@ function reset(){
     globalpc = 0;//for running program
     globalMap = [];
     globalStack = [];
+	man = "man";
 	playing(false);
     for(var i = 0; i < globalx; i++){
         globalMap.push(new Array(globaly));
@@ -33,7 +35,9 @@ function reset(){
 	globalBox[0][2] = "3,box";
 	globalBox[1][2] = "0,3,button";
     globalMap[1][globaly-2] = man;
+    globalBox[4][globaly-2] = "ladder";
     globalBox[3][globaly-2] = "lock";
+	
     
     draw();
 }
@@ -131,7 +135,7 @@ function makeSquareGrid(canvas, x, y){
 }
 
 function addImageToGrid(image, canvas, x, y, unit){
-    try{
+    try{	
         if(image.substring(1).includes("box")){
 			addImageToGrid(image.substring(1), canvas, x, y, unit)
             image = image.substring(0,1);
@@ -149,26 +153,35 @@ function addImageToGrid(image, canvas, x, y, unit){
 		var ctx = canvas.getContext('2d');
 		var image1 = document.getElementById(image);
 		ctx.drawImage(image1, x*unit, y*unit, unit, unit);
+		if((image.includes("ladder") || image.includes("lock")) && globalMap[x][y] == man){
+			addImageToGrid(man, canvas, x, y, unit)
+		}
     }catch(e){};
 }
 
 function step(){
 	playing(true);
+	onFlag = false;
     var program = document.getElementById("program").value.split("\n");
-    if(run(program, globalpc))
+	if(globalpc > program.length)
+		return false;
+	
+	var fell = false;
+	if(run(program, globalpc)){
         globalpc++;
-    
+	}else{
+		globalpc++; //if the player is falling down still highlight the next command
+		fell = true;
+	}
+	
     draw();
+	if(fell)
+		globalpc--; //if the player is falling down still highlight the next command
+	if(onFlag){
+		draw();
+		victory();
+	}
 	
-	
-	// console.log("Man var is " + man);
-	
-    // var x,y;
-    // [x, y] = findPlayer();
-	// //console.log(x + " and " + y)
-	// //console.log("man found is " + globalMap[x][y]);
-	// console.log(globalMap);
-	//console.log(globalpc, program.length);
 	return (globalpc - 1 < program.length);
 }
 
@@ -187,13 +200,25 @@ function run(program, pc){//returns true if line of program is used
     else if(program[pc].includes("jumpL"))
         return jumpBack();
     else if(program[pc].includes("}"))
-        return loopBack();
+        return (loopBack() && run(program, ++globalpc));
     else if(program[pc].includes("loop"))
         return loop(program[pc].replace("loop",""), pc);
 	else if(program[pc].includes("pick"))
 		return pick();
 	else if(program[pc].includes("put"))
 		return put();
+	else if(program[pc].includes("climb"))
+		return climb();
+    return true;
+}
+
+function climb(){
+	var x,y;
+	[x, y] = findPlayer();
+    if(collsion(x, y-1)){
+        globalMap[x][y-1] = man;
+        globalMap[x][y] = undefined;
+    }
     return true;
 }
 
@@ -202,18 +227,20 @@ function put(){
 	[x, y] = findPlayer();
 	if(man == "man")
 		return true;
-	man = "man"
-	globalMap[x][y] = man;
 	if(!globalBox[x][y]){
 		globalBox[x][y] = "1,box";
-	}else{
+		
+		man = "man"
+		globalMap[x][y] = man;
+	}else if(!globalBox[x][y].includes("lock")){
+		man = "man"
+		globalMap[x][y] = man;
 		var box = globalBox[x][y].split(",");
 		box[0]++;
 		if(box[0] >= box[1])
 			toggleLocks();
 		globalBox[x][y] = box.join(",");
 	}
-	
 	return true;
 }
 
@@ -260,8 +287,8 @@ function collsion(x,y){//bool true if no collsion at x,y
 	if(x < 0 || y < 0 || x >= globalx || y >= globaly)
 		return false;
 	if(globalMap[x][y] == "finish"){
-		draw();
-		victory();
+		onFlag = true;
+		return true;
 	}
 	else if(globalBox[x][y] == "locked"){
 		return false;
@@ -271,7 +298,8 @@ function collsion(x,y){//bool true if no collsion at x,y
 	}
 }
 
-function victory(){
+async function victory(){
+	await sleep(speed());
 	alert("completed level " + level);
 	window.location = "gamelaunch.html?level" + (parseInt(level) + 1);
 }
@@ -279,7 +307,7 @@ function victory(){
 function recalc(){
     var x,y;
     [x, y] = findPlayer();
-    if(collsion(x, y+1)){//player falls one block
+    if(collsion(x, y + 1) && globalBox[x][y + 1] != "ladder"){//player falls one block
         globalMap[x][y+1] = man;
         globalMap[x][y] = undefined;
         return false;
@@ -336,16 +364,17 @@ function findPlayer(){
             }
         }
     }
+	console.log("cant find player");
     return [-1, -1];
 }
 
-function highlight(pc){
-	program = document.getElementById("program");
-	var index1 = getPosition(program.value, "\n", pc);
-	var index2 = getPosition(program.value, "\n", pc + 1);
-	program.setSelectionRange(index1 == 0 ? 0 : index1 + 1, index2);
-	program.focus();
-}
+// function highlight(pc){
+	// program = document.getElementById("program");
+	// var index1 = getPosition(program.value, "\n", pc);
+	// var index2 = getPosition(program.value, "\n", pc + 1);
+	// program.setSelectionRange(index1 == 0 ? 0 : index1 + 1, index2);
+	// program.focus();
+// }
 
 function getPosition(string, subString, index) {
    return string.split(subString, index).join(subString).length;
@@ -358,14 +387,15 @@ function sleep(ms) {
 function playing(bool){
 	if(bool){
 		document.getElementById("playing").value = "1";	
-		//document.getElementById("program").disabled = true;	
+		document.getElementById("highlight").hidden = false;
+		document.getElementById("program").disabled = true;	
 		
 	}
 	else{
 		document.getElementById("playing").value = "";
 		document.getElementById("program").disabled = false;
 		document.getElementById("play").disabled = false;
-		console.log("hidding");
+		document.getElementById("highlight").hidden = true;
 		hideSpeed();
 	}
 }
@@ -402,19 +432,39 @@ function hideSpeed(){
 	document.getElementById("fast").hidden = true;
 	document.getElementById("faster").hidden = true;
 	document.getElementById("fastest").hidden = true;
-	
+	document.getElementById("stop").hidden = true;
+	document.getElementById("go").hidden = true;
 }
 
 async function play(){
-	document.getElementById("ResetLevel").onclick();
+	doReset();
 	document.getElementById("play").disabled = true;
+	document.getElementById("stop").hidden = false;
+	highlight(0);
 	fastest();
 	playing(true);
 	await sleep(200);
+	if(await playHelper())
+		playing(false);
+}
+
+async function playHelper(){
 	while(isPlaying() && step()){
+		if(stoped())
+			return false;
 		await sleep(speed());
 	}
-	playing(false);
+	return true;
+}
+
+function stoped(){
+	return document.getElementById("stop").hidden;
+}
+
+function go(){
+	document.getElementById("stop").hidden = false;
+	document.getElementById("go").hidden = true;
+	playHelper();
 }
 
 function toggleLocks(){
@@ -448,6 +498,39 @@ function isPlaying(){
 	return document.getElementById("playing").value;
 }
 
+function stop(){
+	document.getElementById("stop").hidden = true;
+	document.getElementById("go").hidden = false;
+}
+
+function applyHighlights(text, pc){
+	text = text.replace(/\n$/g, '\n\n').split("\n");
+	//text = text.replace(/[A-Z].*?\b/g, '<mark class="mark">$&</mark>');
+	//console.log(text.split("\n"));
+	if(text[pc]){
+		text[pc] = "<mark class='mark'>" + text[pc] + "</mark>";
+	}else{
+		text[pc] = "<mark class='mark'> </mark>";
+	}
+	text.push("")
+	return text.join("\n");
+}
+
+function highlight(pc){
+	var text = document.getElementById("program").value;
+	var highlightedText = applyHighlights(text, pc);
+	document.getElementById("highlight").innerHTML = highlightedText;
+	handleScroll()
+}
+
+function handleScroll(){
+  var scrollTop = document.getElementById("program").scrollTop;
+  document.getElementById("highlight").scrollTop = scrollTop;
+}
+
+
+
+
 
 
 updateTutorial();
@@ -460,9 +543,15 @@ document.getElementById("step").onclick = step;
 document.getElementById("fast").onclick = fast;
 document.getElementById("faster").onclick = faster;
 document.getElementById("fastest").onclick = fastest;
+document.getElementById("go").onclick = go;
+document.getElementById("stop").onclick = stop;
 
+document.getElementById("program").onscroll = handleScroll;
+document.getElementById("highlight").ondblclick = doReset;
 
-
+function doReset(){
+	document.getElementById("ResetLevel").onclick();
+}
 
 
 try{

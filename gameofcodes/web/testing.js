@@ -51,10 +51,6 @@ if(testing){
 		}
 	}
 	//end of Javascript implementation of JUnit
-<<<<<<< HEAD
-
-=======
->>>>>>> 41ea70c89b5cffdf372a35eb731c7d022ffba568
 	
 	//@test
 	function testMapGeneration1(){
