@@ -531,7 +531,9 @@ function handleScroll(){
 
 
 
-
+function doReset() {
+	document.getElementById("ResetLevel").onclick();
+}
 
 updateTutorial();
 document.getElementById("play").onclick = play;
@@ -549,9 +551,7 @@ document.getElementById("stop").onclick = stop;
 document.getElementById("program").onscroll = handleScroll;
 document.getElementById("highlight").ondblclick = doReset;
 
-function doReset(){
-	document.getElementById("ResetLevel").onclick();
-}
+
 
 
 try{
