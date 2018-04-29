@@ -12,13 +12,8 @@
 if(request.getParameter("username")!="" && request.getParameter("password")!="" ){
 obj.setUsername(request.getParameter("username"));
 obj.setPassword(request.getParameter("password"));
-<<<<<<< HEAD
-AccountValidation accountValidater = new AccountValidation();
-boolean status = accountValidater.Validate(obj, false);  /*False since it is not a new account*/
-=======
 AccountValidation accountValidator = new AccountValidation();
 boolean status = accountValidator.Validate(obj, false);  /*False since it is not a new account*/
->>>>>>> affc1f2d67c0fbaeb140b78b40736cdaacff5413
 if(status){  
 out.println("Hello " + obj.getUsername() + ", you are successfully logged in.");%>
 <br>
