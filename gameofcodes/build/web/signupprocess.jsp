@@ -7,6 +7,7 @@
 <jsp:useBean id="obj" class="GameOfCodes.UserAccount" scope = "session"/>
 <jsp:setProperty property="*" name="obj"/>  
 <%
+    AccountValidation accValidator = new AccountValidation();
     if (!request.getParameter("username").equals("") && !request.getParameter("password").equals("") && !request.getParameter("firstname").equals("")
             && !request.getParameter("lastname").equals("")) { //if all fields are filled in, then continue
         /*If class number flag is not filled in, then set a signifier stating that the user is not in a class */
@@ -20,7 +21,7 @@
         obj.setFirstName(request.getParameter("firstname"));
         obj.setLastName(request.getParameter("lastname"));
         obj.setEducatorFlag(Integer.parseInt(request.getParameter("type")));
-        boolean status = AccountValidation.Validate(obj, true);/*True since it is a new account*/
+        boolean status = accValidator.Validate(obj, true);/*True since it is a new account*/
 
         if (status) {
             out.println("Hello " + obj.getUsername() + ", you are successfully signed-up and logged in.");%>
