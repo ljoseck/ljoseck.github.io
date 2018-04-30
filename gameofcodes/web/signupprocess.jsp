@@ -36,7 +36,7 @@
     session.setAttribute("classno", obj.getClassNumber());
     session.setAttribute("educator", obj.getEducatorFlag());
 %>
-<jsp:include page="main_menu.html"></jsp:include>  
+<jsp:include page="main_menu.jsp"></jsp:include>  
 <%
 } else {
     //out.println("Sorry, the credentials you gave are invalid, or you are trying to sign up an existing account.");

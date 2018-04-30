@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UserAccount {
     private String username;
@@ -116,6 +118,24 @@ public class UserAccount {
                 //System.out.println("Given credentials already exist in table.");
                 return false; //found a match in the table to the given "new" credentials, hence deny new entry
             }
+            if(isEducator == 1){
+                if(ClassNum.equals("NOCLASS")){
+                    return false; //cannot have the default string for specifying accounts without a class.
+                }
+                ps = con.prepareStatement(
+                "select * from accounts where ClassNo=? and Educator=?");
+                ps.setString(1, ClassNum);
+                ps.setInt(2, isEducator);
+                
+                rs = ps.executeQuery();
+                check = rs.next();
+                if(check){
+                    //System.out.println("An educator account already exists for the given class number.");
+                    return false;
+                }
+                
+            }
+           
                 
             //PAST THIS POINT, THE GIVEN CREDENTIALS ARE CONSIDERED VALID
             //NOW, ADD CREDENTIALS INTO TABLE
@@ -149,5 +169,29 @@ public class UserAccount {
             ps.executeUpdate();
         }
         catch(Exception e){}   
+    }
+    
+    public ArrayList<UserAccount> getStudents(){
+        ArrayList<UserAccount> students = new ArrayList<>();
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gameofcodes?autoReconnect=true&useSSL=false","root","password");
+            PreparedStatement ps = con.prepareStatement(
+               "select * from accounts where ClassNo=?");
+            
+            ps.setString(1, this.getClassNumber());
+            ResultSet rs = ps.executeQuery();
+            while(rs.next() != false){
+                if(rs.getInt(5) != 0) continue;
+                UserAccount student = new UserAccount();
+                student.setUsername(rs.getString(1));
+                student.setFirstName(rs.getString(3));
+                student.setLastName(rs.getString(4));
+                student.setLevelsCompleted(rs.getInt(5));
+                students.add(student);
+            }
+        }catch(Exception e){} 
+        
+        return students;
     }
 }

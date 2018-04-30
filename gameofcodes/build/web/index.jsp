@@ -4,7 +4,8 @@
     Author     : Felix Perez
 --%>
 
-<%@page import="GameOfCodes.TestRunner"%>  
+<%@page import="GameOfCodes.TestRunner"%> 
+<%@page import="java.util.*"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -50,12 +51,24 @@
         </form>
             
         <p>Not a user? Sign-Up or Play as a Guest:</p>
-        <a href="signup.jsp">Sign-Up</a> | <a href="main_menu.html">Play as Guest</a><br> 
+        <a href="signup.jsp">Sign-Up</a> | <a href="main_menu.jsp" name="guest" value="1" >Play as Guest</a><br> 
         
     </body>
 </html>
-        <%          
-        /* Comment out the lines below to remove JUnit Test reporting functionality. */
-        TestRunner RunTests = new TestRunner();
-        RunTests.runTests();
+        <%
+            try{
+                
+                if(session.getAttributeNames().nextElement() != null){
+                    //Removes all session parameters
+                    session.invalidate();
+                    
+                }
+            }
+            catch(NoSuchElementException e){
+                //If there are no session parameters, do nothing.
+            }
+            
+            /* Comment out the lines below to remove JUnit Test reporting functionality. */
+            //TestRunner RunTests = new TestRunner();
+            //RunTests.runTests();
          %>
