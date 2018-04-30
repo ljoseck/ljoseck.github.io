@@ -7,18 +7,37 @@ var globalx = 5;
 
 var globalpc = 0;//for running program
 var globalStack = [];
+var globalBox = [];
+var man = "man";
+var onFlag = false;
 
-var level = 0;
+var level = window.location.search.substring(6);
+if(level == "")
+	level = "1";
 
 function reset(){
+	console.log("invalid URL input");
     globalpc = 0;//for running program
     globalMap = [];
     globalStack = [];
+	man = "man";
+	playing(false);
     for(var i = 0; i < globalx; i++){
         globalMap.push(new Array(globaly));
     }
-    globalMap[1][globaly-2] = "man";
-    globalMap[3][globaly-2] = "ground";
+	
+	globalBox = [];
+    for(var i = 0; i < globalx; i++){
+        globalBox.push(new Array(globaly));
+    }
+	
+	
+	globalBox[0][2] = "3,box";
+	globalBox[1][2] = "0,3,button";
+    globalMap[1][globaly-2] = man;
+    globalBox[4][globaly-2] = "ladder";
+    globalBox[3][globaly-2] = "lock";
+	
     
     draw();
 }
@@ -28,43 +47,34 @@ function draw(){
 
 	var width = canvas.width = window.innerWidth;
 	var height = canvas.height = window.innerHeight*2;
-	// var width = document.getElementById("div1").offsetWidth;
-	// var height = document.getElementById("div1").offsetHeight;
-
-
-	// canvas.width = width;
-	// canvas.height = height;
-
-
-	//var ctx = canvas.getContext('2d');
 	
 	var y = globaly;
 	var x = globalx;
 	var unit = makeSquareGrid(canvas, x, y);
 	//addImageToGrid('ground', canvas, 0, 0, unit);
-        var backgroundMap = [];
+    var backgroundMap = [];
 	for(var i = 0; i < x; i++){
             var temp =[];
 		for(var j = 0; j < y; j++){
 			if(j < y - 1)
 				if((i*j)%4 < (i+j)%3)
-                                    temp.push("sky");
+					temp.push("sky");
 					//('sky', canvas, i, j, unit);
 				else
-                                    temp.push("sky2");
+					temp.push("sky2");
 					//addImageToGrid('sky2', canvas, i, j, unit);
 					
 			else
-                            //temp.push("ground");
-                            globalMap[i][j] = "ground";
+				globalMap[i][j] = "ground";
 				//addImageToGrid('ground', canvas, i, j, unit);
 		}
             backgroundMap.push(temp);
 	}
-        
-        drawmap(backgroundMap, canvas, x, y, unit);
-		addImageToGrid("test", canvas, 1,1,unit);
-	//alert(unit);
+	drawmap(backgroundMap, canvas, x, y, unit);
+	drawmap(globalMap, canvas, x, y, unit);
+	drawmap(globalBox, canvas, x, y, unit);
+	
+	addImageToGrid("test", canvas, 1,1,unit);
 	//ctx.drawImage(image, 0, 0, 100, 100);
 	
 	var mainCanvas = document.getElementById("mainCanvas");
@@ -72,22 +82,21 @@ function draw(){
 	var width = document.getElementById("div1").offsetWidth;
 	var height = document.getElementById("div1").offsetHeight;
 
-	//alert(height);
 	mainCanvas.width = width;
 	mainCanvas.height = height;
 	//console.log([width + globalX, (width + globalX)/canvas.width*canvas.height]);
 	mainCtx.drawImage(canvas, globalX, globalY, canvas.width, canvas.height, 0, 0, width + globalX, (width + globalX)/canvas.width*canvas.height);
-	//mainCtx.drawImage(canvas, 0, 0);
 }
 
 
 function drawmap(map, canvas, x, y, unit){
     for(var i = 0; i < x; i++){
         for(var j = 0; j < y; j++){
-            addImageToGrid(map[i][j], canvas, i, j, unit);
+			try{
+				addImageToGrid(map[i][j], canvas, i, j, unit);
+			}catch(e){};
         }
     }
-    //console.log(map);
       
 }
 function makeGrid(canvas, x, y){
@@ -126,24 +135,54 @@ function makeSquareGrid(canvas, x, y){
 }
 
 function addImageToGrid(image, canvas, x, y, unit){
-    try{
-        if(globalMap[x][y]){
-            image = globalMap[x][y];
+    try{	
+        if(image.substring(1).includes("box")){
+			addImageToGrid(image.substring(1), canvas, x, y, unit)
+            image = image.substring(0,1);
         }
-	var ctx = canvas.getContext('2d');
-	var image1 = document.getElementById(image);
-	ctx.drawImage(image1, x*unit, y*unit, unit, unit);
+		if(image.substring(1).includes("button")){
+			if(image.substring(0,1) == "0"){//} image.substring(2,3)){
+				addImageToGrid("button", canvas, x, y, unit)
+				image = "" + (image.substring(2,3) - image.substring(0,1));
+			}
+			else{
+				addImageToGrid("" + (image.substring(2,3) - image.substring(0,1)), canvas, x, y, unit)
+				image = "box-button";
+			}
+		}
+		var ctx = canvas.getContext('2d');
+		var image1 = document.getElementById(image);
+		ctx.drawImage(image1, x*unit, y*unit, unit, unit);
+		if((image.includes("ladder") || image.includes("lock")) && globalMap[x][y] == man){
+			addImageToGrid(man, canvas, x, y, unit)
+		}
     }catch(e){};
 }
 
 function step(){
+	playing(true);
+	onFlag = false;
     var program = document.getElementById("program").value.split("\n");
-    if(run(program, globalpc))
+	if(globalpc > program.length)
+		return false;
+	
+	var fell = false;
+	if(run(program, globalpc)){
         globalpc++;
-    
+	}else{
+		globalpc++; //if the player is falling down still highlight the next command
+		fell = true;
+	}
+	
     draw();
-	//console.log(globalpc, program.length);
-	return globalpc < program.length; 
+	if(fell)
+		globalpc--; //if the player is falling down still highlight the next command
+	if(onFlag){
+		draw();
+		victory();
+	}
+	
+	return (globalpc - 1 < program.length);
 }
 
 function run(program, pc){//returns true if line of program is used
@@ -151,7 +190,7 @@ function run(program, pc){//returns true if line of program is used
     if(!recalc())
         return false;
     if(program[pc] === undefined)
-        return false;
+        return true;
     else if(program[pc].includes("moveR"))
         return moveForward();
     else if(program[pc].includes("moveL"))
@@ -161,10 +200,71 @@ function run(program, pc){//returns true if line of program is used
     else if(program[pc].includes("jumpL"))
         return jumpBack();
     else if(program[pc].includes("}"))
-        return loopBack();
-    if(program[pc].includes("loop"))
+        return (loopBack() && run(program, ++globalpc));
+    else if(program[pc].includes("loop"))
         return loop(program[pc].replace("loop",""), pc);
+	else if(program[pc].includes("pick"))
+		return pick();
+	else if(program[pc].includes("put"))
+		return put();
+	else if(program[pc].includes("climb"))
+		return climb();
     return true;
+}
+
+function climb(){
+	var x,y;
+	[x, y] = findPlayer();
+    if(collsion(x, y-1)){
+        globalMap[x][y-1] = man;
+        globalMap[x][y] = undefined;
+    }
+    return true;
+}
+
+function put(){
+	var x,y;
+	[x, y] = findPlayer();
+	if(man == "man")
+		return true;
+	if(!globalBox[x][y]){
+		globalBox[x][y] = "1,box";
+		
+		man = "man"
+		globalMap[x][y] = man;
+	}else if(!globalBox[x][y].includes("lock")){
+		man = "man"
+		globalMap[x][y] = man;
+		var box = globalBox[x][y].split(",");
+		box[0]++;
+		if(box[0] >= box[1])
+			toggleLocks();
+		globalBox[x][y] = box.join(",");
+	}
+	return true;
+}
+
+function pick(){
+	try{
+		if(man === "manb")
+			return true;
+		var x,y;
+		[x, y] = findPlayer();
+		var box = globalBox[x][y].split(",");
+		if(parseInt(box[0]) > 0){
+			man = "manb";
+			if(parseInt(box[1]) >= 0 && box[0] == box[1]){
+				toggleLocks();
+			}
+			box[0]--;
+			if(box[0] > 0 || parseInt(box[1]) >= 0)
+				globalBox[x][y] = box.join(",");
+			else
+				globalBox[x][y] = undefined;
+			globalMap[x][y] = man;
+		}
+	}catch(e){};
+	return true;
 }
 
 function loopBack(){
@@ -183,25 +283,32 @@ function loop(num, pc){
     return true;
 }
 
-function collsion(x,y){//bool
+function collsion(x,y){//bool true if no collsion at x,y
 	if(x < 0 || y < 0 || x >= globalx || y >= globaly)
 		return false;
-	if(globalMap[x][y] == "finish")
-		victory();
-	else
+	if(globalMap[x][y] == "finish"){
+		onFlag = true;
+		return true;
+	}
+	else if(globalBox[x][y] == "locked"){
+		return false;
+	}
+	else{
 		return !globalMap[x][y];
+	}
 }
 
-function victory(){
-	alert("completed level" + level);
-	window.location = "gamelaunch.html?level" + level;
+async function victory(){
+	await sleep(speed());
+	alert("completed level " + level);
+	window.location = "gamelaunch.html?level" + (parseInt(level) + 1);
 }
 
 function recalc(){
     var x,y;
     [x, y] = findPlayer();
-    if(collsion(x, y+1)){//player falls one block
-        globalMap[x][y+1] = "man";
+    if(collsion(x, y + 1) && globalBox[x][y + 1] != "ladder"){//player falls one block
+        globalMap[x][y+1] = man;
         globalMap[x][y] = undefined;
         return false;
     }
@@ -213,7 +320,7 @@ function jumpFoward(){
     var x,y;
     [x, y] = findPlayer();
     if(collsion(x, y-1) && collsion(x+1, y-1)){
-        globalMap[x+1][y-1] = "man";
+        globalMap[x+1][y-1] = man;
         globalMap[x][y] = undefined;
     }
     return true;
@@ -223,7 +330,7 @@ function jumpBack(){
     var x,y;
     [x, y] = findPlayer();
     if(collsion(x, y-1) && collsion(x-1, y-1)){
-        globalMap[x-1][y-1] = "man";
+        globalMap[x-1][y-1] = man;
         globalMap[x][y] = undefined;
     }
     return true;
@@ -233,7 +340,7 @@ function moveForward(){
     var x,y;
     [x, y] = findPlayer();
     if(collsion(x+1, y)){
-        globalMap[x+1][y] = "man";
+        globalMap[x+1][y] = man;
         globalMap[x][y] = undefined;
     }
     return true;
@@ -243,7 +350,7 @@ function moveBack(){
     var x,y;
     [x, y] = findPlayer();
     if(collsion(x-1, y)){
-        globalMap[x-1][y] = "man";
+        globalMap[x-1][y] = man;
         globalMap[x][y] = undefined;
     }
     return true;
@@ -252,21 +359,22 @@ function moveBack(){
 function findPlayer(){
     for(var i = 0; i < globalx; i++){
         for(var j = 0; j < globaly; j++){
-            if(globalMap[i][j] === "man"){
+            if(globalMap[i][j] == man){
                 return [i, j];
             }
         }
     }
+	console.log("cant find player");
     return [-1, -1];
 }
 
-function highlight(pc){
-	program = document.getElementById("program");
-	var index1 = getPosition(program.value, "\n", pc);
-	var index2 = getPosition(program.value, "\n", pc + 1);
-	program.setSelectionRange(index1 == 0 ? 0 : index1 + 1, index2);
-	program.focus();
-}
+// function highlight(pc){
+	// program = document.getElementById("program");
+	// var index1 = getPosition(program.value, "\n", pc);
+	// var index2 = getPosition(program.value, "\n", pc + 1);
+	// program.setSelectionRange(index1 == 0 ? 0 : index1 + 1, index2);
+	// program.focus();
+// }
 
 function getPosition(string, subString, index) {
    return string.split(subString, index).join(subString).length;
@@ -276,18 +384,198 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function play(){
-	while(step()){
-		await sleep(500);
+function playing(bool){
+	if(bool){
+		document.getElementById("playing").value = "1";	
+		document.getElementById("highlight").hidden = false;
+		document.getElementById("program").disabled = true;	
+		
+	}
+	else{
+		document.getElementById("playing").value = "";
+		document.getElementById("program").disabled = false;
+		document.getElementById("play").disabled = false;
+		document.getElementById("highlight").hidden = true;
+		hideSpeed();
 	}
 }
 
+function speed(){
+	if(!document.getElementById("fast").hidden)
+		return 500;
+	if(!document.getElementById("faster").hidden)
+		return 200;
+	if(!document.getElementById("fastest").hidden)
+		return 70;
+	return 500;
+}
 
+function fast(){
+	document.getElementById("fast").hidden = true;
+	document.getElementById("faster").hidden = false;
+	document.getElementById("fastest").hidden = true;
+}
+
+function faster(){
+	document.getElementById("fast").hidden = true;
+	document.getElementById("faster").hidden = true;
+	document.getElementById("fastest").hidden = false;
+}
+
+function fastest(){
+	document.getElementById("fast").hidden = false;
+	document.getElementById("faster").hidden = true;
+	document.getElementById("fastest").hidden = true;
+}
+
+function hideSpeed(){
+	document.getElementById("fast").hidden = true;
+	document.getElementById("faster").hidden = true;
+	document.getElementById("fastest").hidden = true;
+	document.getElementById("stop").hidden = true;
+	document.getElementById("go").hidden = true;
+}
+
+async function play(){
+	doReset();
+	document.getElementById("play").disabled = true;
+	document.getElementById("stop").hidden = false;
+	highlight(0);
+	fastest();
+	playing(true);
+	await sleep(200);
+	if(await playHelper())
+		playing(false);
+}
+
+async function playHelper(){
+	while(isPlaying() && step()){
+		if(stoped())
+			return false;
+		await sleep(speed());
+	}
+	return true;
+}
+
+function stoped(){
+	return document.getElementById("stop").hidden;
+}
+
+function go(){
+	document.getElementById("stop").hidden = false;
+	document.getElementById("go").hidden = true;
+	playHelper();
+}
+
+function toggleLocks(){
+	for(var i = 0; i < globalx; i++){
+        for(var j = 0; j < globaly; j++){
+            if(globalBox[i][j] == "locked"){
+                globalBox[i][j] = "lock";
+            }else if(globalBox[i][j] == "lock"){
+				globalBox[i][j] = "locked"
+			}
+        }
+    }
+}
+
+function updateTutorial(){
+	for(var i = 1; i <= 9; i++){
+		try{
+			var div = document.getElementById("tutorial" + i);
+			if(i == level)
+				div.style = "display: show";
+			else
+				div.style = "display: none";
+		}catch(e){
+			return;
+		}
+			
+	}
+}
+
+function isPlaying(){
+	return document.getElementById("playing").value;
+}
+
+function stop(){
+	document.getElementById("stop").hidden = true;
+	document.getElementById("go").hidden = false;
+}
+
+function applyHighlights(text, pc){
+	text = text.replace(/\n$/g, '\n\n').split("\n");
+	//text = text.replace(/[A-Z].*?\b/g, '<mark class="mark">$&</mark>');
+	//console.log(text.split("\n"));
+	if(text[pc]){
+		text[pc] = "<mark class='mark'>" + text[pc] + "</mark>";
+	}else{
+		text[pc] = "<mark class='mark'> </mark>";
+	}
+	text.push("")
+	return text.join("\n");
+}
+
+function highlight(pc){
+	var text = document.getElementById("program").value;
+	var highlightedText = applyHighlights(text, pc);
+	document.getElementById("highlight").innerHTML = highlightedText;
+	handleScroll()
+}
+
+function handleScroll(){
+  var scrollTop = document.getElementById("program").scrollTop;
+  document.getElementById("highlight").scrollTop = scrollTop;
+}
+
+
+
+
+function doReset() {
+	document.getElementById("ResetLevel").onclick();
+}
+
+updateTutorial();
 document.getElementById("play").onclick = play;
 document.getElementById("step").onclick = step;
 //document.getElementById("reset").onclick = reset;
-document.getElementById("level1").onclick = resetLevel1;
-document.getElementById("level2").onclick = resetLevel2;
+
+//document.getElementById("go").onclick = go;
+//document.getElementById("stop").onclick = stop;
+document.getElementById("fast").onclick = fast;
+document.getElementById("faster").onclick = faster;
+document.getElementById("fastest").onclick = fastest;
+document.getElementById("go").onclick = go;
+document.getElementById("stop").onclick = stop;
+
+document.getElementById("program").onscroll = handleScroll;
+document.getElementById("highlight").ondblclick = doReset;
+
+
+
+
+try{
+	document.getElementById("LevelSelect").onclick = function(){window.location.href='./main_menu.html'};
+	document.getElementById("ResetLevel").onclick = reset;
+	document.getElementById("level1").onclick = resetLevel1;
+	document.getElementById("level2").onclick = resetLevel2;
+	document.getElementById("level3").onclick = resetLevel3;
+	document.getElementById("level4").onclick = resetLevel4;
+	document.getElementById("level5").onclick = resetLevel5;
+	document.getElementById("level6").onclick = resetLevel6;
+	document.getElementById("level7").onclick = resetLevel7;
+	document.getElementById("level8").onclick = resetLevel8;
+	document.getElementById("level9").onclick = resetLevel9;
+}catch(e){};
 onresize = draw;
 
-reset(); //TODO run after delay
+
+//var reset = resetLevel1;
+try{
+	reset = document.getElementById("level" + level).onclick;
+}catch(e){
+	//reset = resetLevel1;
+};
+reset();
+setTimeout(draw, 500);
+setTimeout(draw, 5000);

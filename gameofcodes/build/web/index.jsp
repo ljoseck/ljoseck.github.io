@@ -24,34 +24,31 @@
             <!--Music from: https://www.youtube.com/watch?v=Bok8nLviThg&index=9&list=PLobY7vO0pgVKn4FRDgwXk5FUSiGS8_jA8 -->
         </audio>
         
-        <div class='.container-fluid'>
-            <div class='col-lg-12'>
-                <h1>Welcome to Game of Codes!</h1>
+        <div class='row'>
+            <div class='col-lg-12 text-center'>
+                <img src="GoC-Logo2.png" alt="Logo" width="450px" height="300px">
             </div>
         </div>
 
-        <p>Please Log-In:</p>
-        <form action="loginprocess.jsp" method="post"> 
-            <table>
-            <tr>
-                <td>Username:</td>
-                <td><input type="text" name="username"/></td>
+        <h3 align="center">Log in!</h3>
+
+        <form action="loginprocess.jsp" method="post" align="center"> 
+            <table align="center">
+                <tr>
+                    <td>Username:</td>
+                    <td><input type="text" name="username"/></td>
+                    
+                </tr>
+
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" name="password"/></td>
+                    
+                </tr>
                 
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type="password" name="password"/></td>
-                
-            </tr>
-            <tr>
-                <td><input type="submit" value="Log-In"/></td>
-                <td></td>
-            </tr>   
             </table> 
+            <button type="submit" class="btn btn-primary" align="center">Log-In</button>
         </form>
-            
-        <p>Not a user? Sign-Up or Play as a Guest:</p>
-        <a href="signup.jsp">Sign-Up</a> | <a href="main_menu.jsp" name="guest" value="1" >Play as Guest</a><br> 
         
     </body>
 </html>
@@ -71,4 +68,15 @@
             /* Comment out the lines below to remove JUnit Test reporting functionality. */
             //TestRunner RunTests = new TestRunner();
             //RunTests.runTests();
+            %>
+        <div align="center">
+            <p>Not a user? You can <a href="signup.jsp">Sign-Up</a> or <a href="main_menu.jsp">play as a guest</a>
+        </div>
+        
+    </body>
+</html>
+        <%          
+        /* Comment out the lines below to remove JUnit Test reporting functionality. */
+//        TestRunner RunTests = new TestRunner();
+//        RunTests.runTests();
          %>
