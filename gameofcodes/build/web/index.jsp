@@ -47,7 +47,9 @@
                 </tr>
                 
             </table> 
+            <div align="center">
             <button type="submit" class="btn btn-primary" align="center">Log-In</button>
+            </div>
         </form>
         
     </body>
@@ -70,7 +72,7 @@
             //RunTests.runTests();
             %>
         <div align="center">
-            <p>Not a user? You can <a href="signup.jsp">Sign-Up</a> or <a href="main_menu.jsp">play as a guest</a>
+            <p>Not a user? You can <a href="signup.jsp">Sign-Up</a> or <a href="main_menu.jsp">Play as a Guest</a>!</p>
         </div>
         
     </body>
