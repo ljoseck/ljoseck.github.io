@@ -8,7 +8,7 @@ package GameOfCodes;
 
 public class AccountValidation {
     
-    public boolean Validate(UserAccount user, boolean isNewAccount){
+    public static boolean Validate(UserAccount user, boolean isNewAccount){
         boolean result = false;
         if(isNewAccount){
             /*Note: User's number of levels completed is set in createAccount.*/
