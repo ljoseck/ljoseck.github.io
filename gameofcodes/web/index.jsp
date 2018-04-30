@@ -9,6 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="style.css">
 
 <!DOCTYPE html>
 <html>
@@ -29,27 +30,28 @@
             </div>
         </div>
 
-        <h3 align="center">Log in!</h3>
 
-        <form action="loginprocess.jsp" method="post" align="center"> 
-            <table align="center">
-                <tr>
-                    <td>Username:</td>
-                    <td><input type="text" name="username"/></td>
-                    
-                </tr>
+        <div class="form-group card-background" align="center">
+            <h3 align="center">Log In</h3>
+                    <form action="loginprocess.jsp" method="post" align="center"> 
 
-                <tr>
-                    <td>Password:</td>
-                    <td><input type="password" name="password"/></td>
-                    
-                </tr>
-                
-            </table> 
-            <button type="submit" class="btn btn-primary" align="center">Log-In</button>
-        </form>
-        <div align="center">
-            <p>Not a user? You can <a href="signup.jsp">Sign-Up</a> or <a href="main_menu.html">play as a guest</a>
+                            <div class="form-card">
+                                <label for="userName">Username:</label>
+                                <input type="text" name="username"/>
+                            </div>
+                            <div class="form-card">
+                                <label for="password">Password:</label>
+                                <input type="password" name="password">
+                            </div>
+                        
+                            <button type="submit" class="btn btn-primary" align="center">Log-In</button>
+
+                    </form>
+
+                <div align="center">
+                    <p>Not a user? You can <a href="signup.jsp">Sign-Up</a> or <a href="main_menu.html">play as a guest</a>
+                </div>
+            </div>
         </div>
         
     </body>
