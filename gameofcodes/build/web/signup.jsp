@@ -23,14 +23,14 @@
         <td>Please enter your Password:</td>
          <td><input type="password" name="password"/></td>
     </tr>
-    <tr>
+<!--    <tr>
         <td>Please enter your First Name:</td>
         <td><input type="text" name="firstname"/></td>
     </tr>
     <tr>
         <td>Please enter your Last Name:</td>
         <td><input type="text" name="lastname"/></td>
-    </tr>
+    </tr>-->
     <tr>
         <td>Please enter a Class Number (Optional):</td>
         <td><input type="text" name="classno"/></td>
