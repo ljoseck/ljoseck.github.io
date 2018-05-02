@@ -36,8 +36,8 @@
             //Get all items from the inventory
         %>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <!--<th>First Name</th>
+                <th>Last Name</th>-->
                 <th>Username</th>
                 <th>Levels Completed</th>
             </tr>
@@ -51,8 +51,8 @@
 
                 out.print("<tr>");
                 //name, barcode, and price can be changed by the Manager
-                out.print("<td>" + student.getFirstName() + "</td>");
-                out.print("<td>" + student.getLastName() + "</td>");
+//                out.print("<td>" + student.getFirstName() + "</td>");
+//                out.print("<td>" + student.getLastName() + "</td>");
                 out.print("<td>" + student.getUsername() + "</td>");
                 out.print("<td>" + Integer.toString(student.getLevelsCompleted()) + "</td>");
                 //out.print("<td>"); out.print(i.getQty()); 

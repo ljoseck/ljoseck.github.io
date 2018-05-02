@@ -18,8 +18,8 @@ import java.util.Arrays;
 public class UserAccount {
     private String username;
     private String password;
-    private String firstName;
-    private String lastName;
+    //private String firstName;
+    //private String lastName;
     private int levelsCompleted;
     private String classNumber;
     private int isEducator;
@@ -36,18 +36,18 @@ public class UserAccount {
     public void setPassword(String pass){
         this.password = pass;
     }
-    public String getFirstName(){
-        return this.firstName;
-    }
-    public void setFirstName(String fname){
-        this.firstName = fname;
-    }
-    public String getLastName(){
-        return this.lastName;
-    }
-    public void setLastName(String lname){
-        this.lastName = lname;
-    }
+//    public String getFirstName(){
+//        return this.firstName;
+//    }
+//    public void setFirstName(String fname){
+//        this.firstName = fname;
+//    }
+//    public String getLastName(){
+//        return this.lastName;
+//    }
+//    public void setLastName(String lname){
+//        this.lastName = lname;
+//    }
     public int getLevelsCompleted(){
         return this.levelsCompleted;
     }
@@ -84,8 +84,8 @@ public class UserAccount {
             ResultSet rs = ps.executeQuery();
             result = rs.next();
             //gather rest of account information: credit card number and email address
-            currentUser.setFirstName(rs.getString(3));
-            currentUser.setLastName(rs.getString(4));
+//            currentUser.setFirstName(rs.getString(3));
+//            currentUser.setLastName(rs.getString(4));
             currentUser.setLevelsCompleted(rs.getInt(5));
             currentUser.setClassNumber(rs.getString(6));
             currentUser.setEducatorFlag(rs.getInt(7));
@@ -94,7 +94,7 @@ public class UserAccount {
         return result;
     }
     
-    public boolean createAccount(String username, String password, String firstname, String lastname, String ClassNum, int isEducator){
+    public boolean createAccount(String username, String password, /*String firstname, String lastname,*/ String ClassNum, int isEducator){
         
         try{
             
@@ -147,8 +147,10 @@ public class UserAccount {
             "INSERT INTO accounts (Username,Password,FirstName,LastName,LevelsCompleted,ClassNo,Educator) VALUES (?,?,?,?,?,?,?)");
             ps.setString(1,username);
             ps.setString(2,password);
-            ps.setString(3,firstname);
-            ps.setString(4,lastname);
+//            ps.setString(3,firstname);
+//            ps.setString(4,lastname);
+            ps.setString(3,"");
+            ps.setString(4,"");
             ps.setInt(5,lvlComp);
             ps.setString(6,ClassNum);
             ps.setInt(7,isEducator);
@@ -185,8 +187,8 @@ public class UserAccount {
                 if(rs.getInt(5) != 0) continue;
                 UserAccount student = new UserAccount();
                 student.setUsername(rs.getString(1));
-                student.setFirstName(rs.getString(3));
-                student.setLastName(rs.getString(4));
+//                student.setFirstName(rs.getString(3));
+//                student.setLastName(rs.getString(4));
                 student.setLevelsCompleted(rs.getInt(5));
                 students.add(student);
             }

@@ -17,8 +17,8 @@ public class TestUserAccount {
         UserAccount test = new UserAccount();
         test.setClassNumber("1337");
         test.setEducatorFlag(1);
-        test.setFirstName("John");
-        test.setLastName("Doe");
+//        test.setFirstName("John");
+//        test.setLastName("Doe");
         test.setLevelsCompleted(0);
         test.setPassword("password");
         test.setUsername("anotheruser");
@@ -36,14 +36,14 @@ public class TestUserAccount {
         UserAccount test = new UserAccount();
         test.setClassNumber("1337");
         test.setEducatorFlag(1);
-        test.setFirstName("John");
-        test.setLastName("Doe");
+//        test.setFirstName("John");
+//        test.setLastName("Doe");
         test.setLevelsCompleted(0);
         test.setPassword("password");
         test.setUsername("anotheruser");
         
         Assert.assertTrue("Test Create Account - Success",test.createAccount(test.getUsername(),test.getPassword(), 
-                test.getFirstName(), test.getLastName(), test.getClassNumber(), test.getEducatorFlag()));
+                /*test.getFirstName(), test.getLastName(),*/ test.getClassNumber(), test.getEducatorFlag()));
         
         test.deleteAccount(test.getUsername(), test.getPassword());
         System.out.println("Test Create Account - Success: Completed");
@@ -54,17 +54,17 @@ public class TestUserAccount {
         UserAccount test = new UserAccount();
         test.setClassNumber("1337");
         test.setEducatorFlag(1);
-        test.setFirstName("John");
-        test.setLastName("Doe");
+//        test.setFirstName("John");
+//        test.setLastName("Doe");
         test.setLevelsCompleted(0);
         test.setPassword("password");
         test.setUsername("anotheruser");
         
         test.createAccount(test.getUsername(),test.getPassword(), 
-                test.getFirstName(), test.getLastName(), test.getClassNumber(), test.getEducatorFlag());
+                /*test.getFirstName(), test.getLastName(),*/ test.getClassNumber(), test.getEducatorFlag());
         
         Assert.assertFalse("Test Create Account - Failure",test.createAccount(test.getUsername(),test.getPassword(), 
-                test.getFirstName(), test.getLastName(), test.getClassNumber(), test.getEducatorFlag()));
+                /*test.getFirstName(), test.getLastName(),*/ test.getClassNumber(), test.getEducatorFlag()));
         
         test.deleteAccount(test.getUsername(), test.getPassword());
         System.out.println("Test Create Account - Failure: Completed");
@@ -75,13 +75,13 @@ public class TestUserAccount {
         UserAccount test = new UserAccount();
         test.setClassNumber("1337");
         test.setEducatorFlag(1);
-        test.setFirstName("John");
-        test.setLastName("Doe");
+//        test.setFirstName("John");
+//        test.setLastName("Doe");
         test.setLevelsCompleted(0);
         test.setPassword("password");
         test.setUsername("anotheruser");
         
-        test.createAccount(test.getUsername(), test.getPassword(), test.getFirstName(), test.getLastName(), test.getClassNumber(), test.getEducatorFlag());
+        test.createAccount(test.getUsername(), test.getPassword(), /*test.getFirstName(), test.getLastName(),*/ test.getClassNumber(), test.getEducatorFlag());
         
         Assert.assertTrue("Test Read Account Info - Success",test.readAccountInfo(test.getUsername(), test.getPassword(), test));
         
