@@ -670,7 +670,7 @@ document.getElementById("highlight").ondblclick = doReset;
 
 
 try{
-	document.getElementById("LevelSelect").onclick = function(){window.location.href='./main_menu.jps'};
+	document.getElementById("LevelSelect").onclick = function(){window.location.href='./main_menu.html'};
 	document.getElementById("ResetLevel").onclick = reset;
 	document.getElementById("level1").onclick = resetLevel1;
 	document.getElementById("level2").onclick = resetLevel2;
