@@ -4,6 +4,8 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<jsp:useBean id="obj" class="GameOfCodes.UserAccount" scope = "session"/>
+<jsp:setProperty property="*" name="obj"/>  
 <html>
     <head>
         <title>Main Menu</title>
@@ -24,8 +26,28 @@ and open the template in the editor.
         <!-- 
         Buttons for settings and logout
         -->
+        <%
+            //if(obj.getFirstName().equals(""))session.setAttribute("educator", 0);
+            try{
+            if(Integer.parseInt(session.getAttribute("educator").toString()) == 1){
+        %>
+            <button type="button" onclick="window.location.href='classroom.jsp'">Classroom</button>
             <button type="button" onclick="window.location.href='settings.jsp'">Settings</button>
             <button type="button" onclick="window.location.href='index.jsp'">Logout</button>
+            <%}else{%>
+            <button type="button" onclick="window.location.href='settings.jsp'">Settings</button>
+            <button type="button" onclick="window.location.href='index.jsp'">Logout</button>
+            <%
+            }
+            }catch(NullPointerException e){
+            %>
+            <button type="button" onclick="window.location.href='settings.jsp'">Settings</button>
+            <button type="button" onclick="window.location.href='index.jsp'">Exit</button>
+            <%
+            }
+            %>
+            
+            
         </div>
         <!--
         Game of Codes logo image
@@ -52,12 +74,6 @@ and open the template in the editor.
             <br>
             <br>
             <button type="button" onclick="window.location.href='gamelaunch.html?level6'"">Level 6</button>
-<!--            <br>
-            <br>
-            <button type="button">Level 6</button>
-            <br>
-            <br>
-            <button type="button">Level 7</button>-->
             
         </div>
     </body>        

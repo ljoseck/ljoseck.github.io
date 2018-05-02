@@ -4,11 +4,13 @@
     Author     : Felix Perez
 --%>
 
-<%@page import="GameOfCodes.TestRunner"%>  
+<%@page import="GameOfCodes.TestRunner"%> 
+<%@page import="java.util.*"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="style.css">
 
 <!DOCTYPE html>
 <html>
@@ -23,39 +25,51 @@
             <!--Music from: https://www.youtube.com/watch?v=Bok8nLviThg&index=9&list=PLobY7vO0pgVKn4FRDgwXk5FUSiGS8_jA8 -->
         </audio>
         
-        <div class='.container-fluid'>
-            <div class='col-lg-12'>
-                <h1>Welcome to Game of Codes!</h1>
+        <div class='row'>
+            <div class='col-lg-12 text-center'>
+                <img src="GoC-Logo2.png" alt="Logo" width="450px" height="300px">
             </div>
         </div>
 
-        <p>Please Log-In:</p>
-        <form action="loginprocess.jsp" method="post"> 
-            <table>
-            <tr>
-                <td>Username:</td>
-                <td><input type="text" name="username"/></td>
-                
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type="password" name="password"/></td>
-                
-            </tr>
-            <tr>
-                <td><input type="submit" value="Log-In"/></td>
-                <td></td>
-            </tr>   
-            </table> 
-        </form>
-            
-        <p>Not a user? Sign-Up or Play as a Guest:</p>
-        <a href="signup.jsp">Sign-Up</a> | <a href="main_menu.html">Play as Guest</a><br> 
+        <div class="form-group card-background" align="center">
+            <h3 align="center">Log In</h3>
+                    <form action="loginprocess.jsp" method="post" align="center"> 
+
+                            <div class="form-card">
+                                <div class="row">
+                                    <label for="username" class="col-md-5">Username:</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="username"/>        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-card">
+                                <div class="row">
+                                    <label for="password" class="col-md-5">Password:</label>
+                                    <div class="col-md-7">
+                                        <input type="password" class="form-control" name="password">            
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="form-card">
+                                <div>
+                                    <button type="submit" class="btn btn-primary " align="center">Log-In</button>    
+                                </div>
+                            </div>
+                    </form>
+
+                <div align="center">
+                    <p>Not a user? You can <a href="signup.jsp">Sign-Up</a> or <a href="main_menu.jsp">play as a guest</a>
+                </div>
+            </div>
+        </div>
         
     </body>
 </html>
         <%          
         /* Comment out the lines below to remove JUnit Test reporting functionality. */
-        TestRunner RunTests = new TestRunner();
-        RunTests.runTests();
+//        TestRunner RunTests = new TestRunner();
+//        RunTests.runTests();
          %>
