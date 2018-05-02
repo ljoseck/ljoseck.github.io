@@ -21,15 +21,15 @@ out.println("Hello " + obj.getUsername() + ", you are successfully logged in.");
 session.setAttribute("session","TRUE");
 session.setAttribute("username", obj.getUsername());
 session.setAttribute("password", obj.getPassword());
-session.setAttribute("firstname", obj.getFirstName());
-session.setAttribute("lastname", obj.getLastName());
+//session.setAttribute("firstname", obj.getFirstName());
+//session.setAttribute("lastname", obj.getLastName());
 session.setAttribute("lvlcomp", obj.getLevelsCompleted());
 session.setAttribute("classno", obj.getClassNumber());
 session.setAttribute("educator", obj.getEducatorFlag());
 
 /*NOTE: WE WILL NEED TO CHANGE gamelaunch.html TO A MAIN MENU PAGE BELOW!!!!*/
 %>  
-<jsp:include page="main_menu.html"></jsp:include>  
+<jsp:include page="main_menu.jsp"></jsp:include>  
 <%
 }
 else  

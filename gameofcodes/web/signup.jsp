@@ -24,7 +24,7 @@
         
         <div class='row'>
             <div class='col-lg-12 text-center'>
-                <img src="GoC-Logo2.png" alt="Logo" width="300px" height="200px">
+                <img src="GoC-Logo2.png" alt="Logo" width="450px" height="300px">
             </div>
         </div>
 
@@ -48,7 +48,7 @@
                                 <%-- UserName --%>
                                 <div class="form-group">
                                     <div class="row">
-                                        <label for="username" class="col-md-5">Enter username: </label>
+                                        <label for="username" class="col-md-5">Choose a username: </label>
                                         <div class="col-md-7">
                                             <input type="text" class="form-control" name="username">
                                         </div>
@@ -64,27 +64,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <%-- First-Name --%>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="firstname" class="col-md-5">Enter first name:</label>
-                                        <div class="col-md-7">
-                                            <input type="text" class="form-control"name="firstname">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <%-- Last-Name --%>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="lastname" class="col-md-5">Enter last name:</label>
-                                        <div class="col-md-7">
-                                            <input type="text" class="form-control"name="lastname">
-                                        </div>
-                                    </div>
-                                </div>
-                                
                                 <%-- Class-code --%>
                                 <div class="form-group">
                                     <div class="row">
@@ -128,5 +107,4 @@
 
     </body>
 </html>
-
     

@@ -8,8 +8,8 @@
 <jsp:setProperty property="*" name="obj"/>  
 <%
     AccountValidation accValidator = new AccountValidation();
-    if (!request.getParameter("username").equals("") && !request.getParameter("password").equals("") && !request.getParameter("firstname").equals("")
-            && !request.getParameter("lastname").equals("")) { //if all fields are filled in, then continue
+    if (!request.getParameter("username").equals("") && !request.getParameter("password").equals("")/* && !request.getParameter("firstname").equals("")
+            && !request.getParameter("lastname").equals("")*/) { //if all fields are filled in, then continue
         /*If class number flag is not filled in, then set a signifier stating that the user is not in a class */
         if (request.getParameter("classno") == "") {
             obj.setClassNumber("NOCLASS");
@@ -18,8 +18,8 @@
         }
         obj.setUsername(request.getParameter("username"));
         obj.setPassword(request.getParameter("password"));
-        obj.setFirstName(request.getParameter("firstname"));
-        obj.setLastName(request.getParameter("lastname"));
+        //obj.setFirstName(request.getParameter("firstname"));
+        //obj.setLastName(request.getParameter("lastname"));
         obj.setEducatorFlag(Integer.parseInt(request.getParameter("type")));
         boolean status = accValidator.Validate(obj, true);/*True since it is a new account*/
 
@@ -30,13 +30,13 @@
     session.setAttribute("session","TRUE");
     session.setAttribute("username", obj.getUsername());
     session.setAttribute("password", obj.getPassword());
-    session.setAttribute("firstname", obj.getFirstName());
-    session.setAttribute("lastname", obj.getLastName());
+    //session.setAttribute("firstname", obj.getFirstName());
+    //session.setAttribute("lastname", obj.getLastName());
     session.setAttribute("lvlcomp", obj.getLevelsCompleted());
     session.setAttribute("classno", obj.getClassNumber());
     session.setAttribute("educator", obj.getEducatorFlag());
 %>
-<jsp:include page="main_menu.html"></jsp:include>  
+<jsp:include page="main_menu.jsp"></jsp:include>  
 <%
 } else {
     //out.println("Sorry, the credentials you gave are invalid, or you are trying to sign up an existing account.");

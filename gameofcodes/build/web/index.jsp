@@ -4,7 +4,8 @@
     Author     : Felix Perez
 --%>
 
-<%@page import="GameOfCodes.TestRunner"%>  
+<%@page import="GameOfCodes.TestRunner"%> 
+<%@page import="java.util.*"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
