@@ -1,0 +1,26 @@
+moveR
+climbUp
+jumpL
+loop 3{
+pick
+moveR
+moveR
+put
+moveL
+moveL
+}
+moveR
+climbDown
+climbDown
+moveR
+moveR
+pick
+moveL
+moveL
+climbUp
+jumpR
+moveR
+moveR
+put
+moveR
+moveR

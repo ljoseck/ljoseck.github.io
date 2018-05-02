@@ -74,7 +74,7 @@ function draw(){
 	drawmap(globalMap, canvas, x, y, unit);
 	drawmap(globalBox, canvas, x, y, unit);
 	
-	addImageToGrid("test", canvas, 1,1,unit);
+	//addImageToGrid("test", canvas, 1,1,unit);
 	//ctx.drawImage(image, 0, 0, 100, 100);
 	
 	var mainCanvas = document.getElementById("mainCanvas");
@@ -93,12 +93,113 @@ function drawmap(map, canvas, x, y, unit){
     for(var i = 0; i < x; i++){
         for(var j = 0; j < y; j++){
 			try{
-				addImageToGrid(map[i][j], canvas, i, j, unit);
-			}catch(e){};
+				if(map[i][j].includes("lock"))
+					addLockToGrid(map[i][j], canvas, i, j, unit);
+				else if(map[i][j].includes("ground"))
+					addGroundToGrid(canvas, i, j, unit);
+				else
+					addImageToGrid(map[i][j], canvas, i, j, unit);
+			}catch(e){
+			};
         }
     }
       
 }
+
+function addGroundToGrid(canvas, i, j, unit){
+	if(getGround(i, j - 1)){
+		if(getGround(i - 1, j) && getGround(i + 1, j)){
+			addImageToGrid("groundTT", canvas, i, j, unit);
+		}else if(getGround(i - 1, j)){
+			addImageToGrid("groundTL", canvas, i, j, unit);
+		}else if(getGround(i + 1, j)){
+			addImageToGrid("groundTR", canvas, i, j, unit);
+		}else{
+			addImageToGrid("groundT", canvas, i, j, unit);			
+		}
+	}else{
+		if(getGround(i - 1, j) && getGround(i + 1, j)){
+			addImageToGrid("groundLR", canvas, i, j, unit);
+		}else if(getGround(i - 1, j)){
+			addImageToGrid("groundL", canvas, i, j, unit);
+		}else if(getGround(i + 1, j)){
+			addImageToGrid("groundR", canvas, i, j, unit);
+		}else{
+			addImageToGrid("groundN", canvas, i, j, unit);			
+		}
+	}
+	if(!getGround(i, j - 1) && !getGround(i + 1, j) && getGround(i + 1, j - 1))
+		addImageToGrid("groundCR", canvas, i, j, unit);
+	
+	if(!getGround(i, j - 1) && !getGround(i - 1, j) && getGround(i - 1, j - 1))
+		addImageToGrid("groundCL", canvas, i, j, unit);
+	
+}
+
+function getGround(i, j){
+	try{
+		return globalMap[i][j] != "ground";
+	}catch(e){
+		return false;
+	}
+}
+
+
+
+function addLockToGrid(lock, canvas, i, j, unit){
+	if(lock == "locked"){
+		try{
+			if((globalMap[i - 1][j] == "ground" || globalBox[i - 1][j] == "locked") && (globalMap[i + 1][j] == "ground" || globalBox[i + 1][j] == "locked")){
+				if(globalBox[i - 1][j] == "locked" && globalBox[i + 1][j] == "locked"){
+					addImageToGrid("lockedLC", canvas, i, j, unit);
+				}else if(globalBox[i - 1][j] == "ground" || globalBox[i - 1][j] == undefined){
+					addImageToGrid("lockedLL", canvas, i, j, unit);
+				}else if(globalBox[i + 1][j] == "ground" || globalBox[i + 1][j] == undefined){
+					addImageToGrid("lockedLR", canvas, i, j, unit);
+				}else{
+					addImageToGrid("lockedL", canvas, i, j, unit);
+				}
+			}else{
+				if((globalMap[i][j - 1] == "ground" || (globalBox[i][j - 1] == undefined && globalMap[i][j - 1] == undefined))
+				&& (globalMap[i][j + 1] == "ground" || (globalBox[i][j + 1] == undefined && globalMap[i][j + 1] == undefined))){
+					addImageToGrid("locked", canvas, i, j, unit);
+				}else if(globalBox[i][j - 1] == "ground" || globalBox[i][j - 1] == undefined){
+					addImageToGrid("lockedT", canvas, i, j, unit);
+				}else if(globalBox[i][j + 1] == "ground" || globalBox[i][j + 1] == undefined){
+					addImageToGrid("lockedB", canvas, i, j, unit);
+				}else{
+					addImageToGrid("lockedC", canvas, i, j, unit);
+				}
+			}
+		}catch(e){
+			addImageToGrid(lock, canvas, i, j, unit);
+		}
+	}else{
+		try{
+			if((globalMap[i - 1][j] == "ground" || globalBox[i - 1][j] == "lock") && (globalMap[i + 1][j] == "ground" || globalBox[i + 1][j] == "lock")){
+				if(globalBox[i - 1][j] != "lock"){
+					addImageToGrid("lockL", canvas, i, j, unit);
+				}
+				if(globalBox[i + 1][j] != "lock"){
+					addImageToGrid("lockR", canvas, i, j, unit);
+				}
+			}else{
+				if(globalBox[i][j - 1] != "lock"){
+					addImageToGrid("lockT", canvas, i, j, unit);
+				}
+				if(globalBox[i][j + 1] != "lock"){
+					addImageToGrid("lockB", canvas, i, j, unit);
+				}
+			}
+		}catch(e){
+			addImageToGrid(lock, canvas, i, j, unit);
+		}
+	}
+}
+
+
+
+
 function makeGrid(canvas, x, y){
 	var ctx = canvas.getContext('2d');
 	return makeGridHelper(ctx, x, y, canvas.width, canvas.height);
@@ -143,11 +244,13 @@ function addImageToGrid(image, canvas, x, y, unit){
 		if(image.substring(1).includes("button")){
 			if(image.substring(0,1) == "0"){//} image.substring(2,3)){
 				addImageToGrid("button", canvas, x, y, unit)
-				image = "" + (image.substring(2,3) - image.substring(0,1));
+				image = "B" + (image.substring(2,3) - image.substring(0,1));
 			}
 			else{
-				addImageToGrid("" + (image.substring(2,3) - image.substring(0,1)), canvas, x, y, unit)
-				image = "box-button";
+				var ctx = canvas.getContext('2d');
+				var image1 = document.getElementById("box-button");
+				ctx.drawImage(image1, x*unit, y*unit, unit, unit);
+				image = "B" + (image.substring(2,3) - image.substring(0,1));
 			}
 		}
 		var ctx = canvas.getContext('2d');
@@ -207,8 +310,20 @@ function run(program, pc){//returns true if line of program is used
 		return pick();
 	else if(program[pc].includes("put"))
 		return put();
-	else if(program[pc].includes("climb"))
+	else if(program[pc].includes("climbUp"))
 		return climb();
+	else if(program[pc].includes("climbDown"))
+		return climbDown();
+    return true;
+}
+
+function climbDown(){
+	var x,y;
+	[x, y] = findPlayer();
+    if(collsion(x, y+1)){
+        globalMap[x][y+1] = man;
+        globalMap[x][y] = undefined;
+    }
     return true;
 }
 

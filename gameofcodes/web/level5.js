@@ -7,8 +7,8 @@ function resetLevel5(){//change to current level
     globalStack = [];
 	globalMap = [];
 	globalBox = [];
-	globaly = 5;//size of map
-	globalx = 9;
+	globaly = 6;//size of map
+	globalx = 8;
 	globalX = 0;//for imaging translation and zoom (dont change)
 	globalY = 0;
 	man = "man";
@@ -22,26 +22,26 @@ function resetLevel5(){//change to current level
 	var M = "man";
 	
 	//put in globalBox
-	var B = "3,box";
-	var B1 = "1,box";
-	var b = "0,3,button";
-	var b1 = "0,1,button";
+	var B = "9,box";
+	var b = "0,9,button";
 	var L = "locked";
 	var l = "lock"
 	var H = "ladder";
 	
 	globalMap = [
-	[G,S,S,S,S,S,S,S,S],
-	[G,S,S,S,S,S,S,S,F],
-	[G,G,S,S,S,G,G,G,G],
-	[G,M,S,S,S,S,G,G,G],
+	[S,S,S,S,S,S,S,S],
+	[S,G,S,S,S,S,G,S],
+	[S,S,S,S,S,S,G,S],
+	[S,S,S,S,S,S,G,S],
+	[S,M,S,S,S,S,G,F],
 	[G,G,G,G,G,G,G,G]];
 	globalBox = [
-	[S,S,S,S,L ,S ,l,S,S],
-	[S,B,S,b,L ,b1,l,S,S],
-	[S,S,H,G,G ,S ,S,S,S],
-	[S,S,H,L,B1,S ,S,S,S],
-	[G,G,G,G,G ,G ,G,G,G]];
+	[S,b,S,S,S,S,L,S],
+	[H,S,l,l,l,l,S,S],
+	[H,S,S,S,S,S,S,S],
+	[H,S,S,S,S,S,S,S],
+	[H,S,B,S,S,S,S,S],
+	[G,G,G,G,G,G,G,G]];
 	invert();
 	updateTutorial();
     draw();
