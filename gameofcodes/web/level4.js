@@ -29,7 +29,7 @@ function resetLevel4(){//change to current level
 	var H = "ladder";
 	
 	globalMap = [
-	[S,S,S,S,S,S,S,S],
+	[S,S,S,S,S,G,S,S],
 	[S,S,S,S,S,S,S,S],
 	[S,S,S,S,S,S,F,S],
 	[G,G,G,G,S,G,G,G],

@@ -1,0 +1,20 @@
+moveR
+moveR
+moveR
+moveR
+loop 9{
+ climbDown
+ pick
+ moveL
+ moveL
+ moveL
+ loop 4{
+  climbUp
+ }
+ moveR
+ moveR
+ put
+ moveR
+}
+moveR
+moveR

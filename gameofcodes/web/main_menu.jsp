@@ -58,29 +58,22 @@ and open the template in the editor.
         Tutorial and Level buttons
         -->
         <div id="wrapper">
-            <button type="button">Tutorial</button>
-            <br>
-            <br>
             <button id="mylink" type="button" onclick="window.location.href='gamelaunch.html'">Level 1</button>
             <br>
             <br>
-            <button type="button">Level 2</button>
+            <button type="button" onclick="window.location.href='gamelaunch.html?level2'">Level 2</button>
             <br>
             <br>
-            <button type="button">Level 3</button>
+            <button type="button" onclick="window.location.href='gamelaunch.html?level3'">Level 3</button>
             <br>
             <br>
-            <button type="button">Level 4</button>
+            <button type="button" onclick="window.location.href='gamelaunch.html?level4'">Level 4</button>
             <br>
             <br>
-            <button type="button">Level 5</button>
-            <br>
-<!--        
-            <br>
-            <button type="button">Level 6</button>
+            <button type="button" onclick="window.location.href='gamelaunch.html?level5'"">Level 5</button>
             <br>
             <br>
-            <button type="button">Level 7</button>-->
+            <button type="button" onclick="window.location.href='gamelaunch.html?level6'"">Level 6</button>
             
         </div>
     </body>        
