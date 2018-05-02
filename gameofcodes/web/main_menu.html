@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<jsp:useBean id="obj" class="GameOfCodes.UserAccount" scope = "session"/>
+<jsp:setProperty property="*" name="obj"/>  
+<html>
+    <head>
+        <title>Main Menu</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- 
+        Connect Style Sheet
+        -->
+        <link rel="stylesheet" href="main_menu.css">
+        <audio autoplay loop>
+            <source src="8 Bit Adventure Querky Fun Game Music by HeatleyBros.mp3" type="audio/mpeg">
+            <!--Music from: https://www.youtube.com/watch?v=Wsw-86zjb8I&index=2&list=PLobY7vO0pgVKn4FRDgwXk5FUSiGS8_jA8 -->
+        </audio>
+        <script type="text/javascript" src="level1.js"></script>
+    </head>
+    <body>
+        <div align="right">
+        <!-- 
+        Buttons for settings and logout
+        -->
+            <button type="button" onclick="window.location.href='classroom.jsp'">Classroom</button>
+            <button type="button" onclick="window.location.href='settings.jsp'">Settings</button>
+            <button type="button" onclick="window.location.href='index.jsp'">Logout</button>
+            <button type="button" onclick="window.location.href='settings.jsp'">Settings</button>
+            <button type="button" onclick="window.location.href='index.jsp'">Logout</button>
+            <button type="button" onclick="window.location.href='settings.jsp'">Settings</button>
+            <button type="button" onclick="window.location.href='index.jsp'">Exit</button>
+            
+            
+        </div>
+        <!--
+        Game of Codes logo image
+        -->
+        <p align="center"> <img src="GOC_Logo.png" alt="Logo" style="width:500px;height:250px;"></p>
+        <p align="center"><font size="+4"><b>Select a Level</b></font></p>
+        <!--
+        Tutorial and Level buttons
+        -->
+        <div id="wrapper">
+            <button id="mylink" type="button" onclick="window.location.href='gamelaunch.html'">Level 1</button>
+            <br>
+            <br>
+            <button type="button" onclick="window.location.href='gamelaunch.html?level2'">Level 2</button>
+            <br>
+            <br>
+            <button type="button" onclick="window.location.href='gamelaunch.html?level3'">Level 3</button>
+            <br>
+            <br>
+            <button type="button" onclick="window.location.href='gamelaunch.html?level4'">Level 4</button>
+            <br>
+            <br>
+            <button type="button" onclick="window.location.href='gamelaunch.html?level5'"">Level 5</button>
+            <br>
+            <br>
+            <button type="button" onclick="window.location.href='gamelaunch.html?level6'"">Level 6</button>
+            
+        </div>
+    </body>        
+    
+</html>
