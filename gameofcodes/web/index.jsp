@@ -36,7 +36,7 @@
                     <form action="loginprocess.jsp" method="post" align="center"> 
 
                             <div class="form-card">
-                                <label for="userName">Username:</label>
+                                <label for="username">Username:</label>
                                 <input type="text" name="username"/>
                             </div>
                             <div class="form-card">

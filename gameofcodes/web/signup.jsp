@@ -24,43 +24,108 @@
         
         <div class='row'>
             <div class='col-lg-12 text-center'>
-                <img src="GoC-Logo2.png" alt="Logo" width="450px" height="300px">
+                <img src="GoC-Logo2.png" alt="Logo" width="300px" height="200px">
             </div>
         </div>
 
-        <form action="signupprocess.jsp" method="post"> 
-            <table>
-            <tr>
-                <td>Please enter a Username:</td>
-                <td><input type="text" name="username"/></td>
-            </tr>
-            <tr>
-                <td>Please enter your Password:</td>
-                <td><input type="password" name="password"/></td>
-            </tr>
-            <tr>
-                <td>Please enter your First Name:</td>
-                <td><input type="text" name="firstname"/></td>
-            </tr>
-            <tr>
-                <td>Please enter your Last Name:</td>
-                <td><input type="text" name="lastname"/></td>
-            </tr>
-            <tr>
-                <td>Please enter a Class Number (Optional):</td>
-                <td><input type="text" name="classno"/></td>
-            </tr>
-            <tr>
-                <td>I am:</td>
-                <td><input type="radio" id="acct1" name="type" value="0" checked/><label for="acct1">A Student</label></td>
-                <td><input type="radio" id="acct2" name="type" value="1"/><label for="acct2">An Educator</label></td>
-            </tr>
-                <td><input type="submit" value="Sign Up"/></td>
-                <td></td>
-            </tr>
-            
-            </table>
-        </form>
+        <%-- Form --%>
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 sign-up">
+                    <form action="signupprocess.jsp" method="post">
+
+                        <div class="row">
+
+                            <div class="col-md-12">
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h2 align="center" style="padding-bottom:3%">Sign-Up!</h2>    
+                                    </div>
+                                </div>
+
+                                <%-- UserName --%>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="username" class="col-md-5">Enter username: </label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" name="username">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <%-- Password --%>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="password" class="col-md-5">Choose a password:</label>
+                                        <div class="col-md-7">
+                                            <input type="password" class="form-control" name="password">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <%-- First-Name --%>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="firstname" class="col-md-5">Enter first name:</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control"name="firstname">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <%-- Last-Name --%>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="lastname" class="col-md-5">Enter last name:</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control"name="lastname">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <%-- Class-code --%>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="classcode" class="col-md-5">Enter class code (optional):</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control"name="classno">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <%-- Role --%>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="role" class="col-md-5">I am a:</label>
+                                        <div class="col-md-3">
+                                            <input type="radio" id="acct1" name="type" value="0" checked/> <label for="acct1">A Student</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="radio" id="acct2" name="type" value="1"/> <label for="acct2">An Educator</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <%-- Submit Button --%>
+                                <div class="row">
+                                    <button type="submit" class="btn btn-primary col-md-2 col-md-offset-9">Sign-Up</button>
+                                </div>
+
+                            </div>        
+
+                        </div>
+
+
+
+                    </form>
+                </div>
+            </div>
+        
+        <%--Container--%>
+        </div>
+
     </body>
 </html>
 
