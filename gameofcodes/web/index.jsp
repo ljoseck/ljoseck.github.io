@@ -61,7 +61,7 @@
                     </form>
 
                 <div align="center">
-                    <p>Not a user? You can <a href="signup.jsp">Sign-Up</a> or <a href="main_menu.html">play as a guest</a>
+                    <p>Not a user? You can <a href="signup.jsp">Sign-Up</a> or <a href="main_menu.jsp">play as a guest</a>
                 </div>
             </div>
         </div>
