@@ -128,7 +128,11 @@
 }
 
 .sign-up{
-	background:#c14545;
+	background: #444444;;
 	padding: 2%;
 	border-radius: 5px;
+}
+
+.pad{
+	padding-top: 5px;
 }

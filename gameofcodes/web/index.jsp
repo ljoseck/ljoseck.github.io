@@ -30,22 +30,33 @@
             </div>
         </div>
 
-
         <div class="form-group card-background" align="center">
             <h3 align="center">Log In</h3>
                     <form action="loginprocess.jsp" method="post" align="center"> 
 
                             <div class="form-card">
-                                <label for="username">Username:</label>
-                                <input type="text" name="username"/>
+                                <div class="row">
+                                    <label for="username" class="col-md-5">Username:</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="username"/>        
+                                    </div>
+                                </div>
                             </div>
+
                             <div class="form-card">
-                                <label for="password">Password:</label>
-                                <input type="password" name="password">
+                                <div class="row">
+                                    <label for="password" class="col-md-5">Password:</label>
+                                    <div class="col-md-7">
+                                        <input type="password" class="form-control" name="password">            
+                                    </div>
+                                </div>
                             </div>
                         
-                            <button type="submit" class="btn btn-primary" align="center">Log-In</button>
-
+                            <div class="form-card">
+                                <div>
+                                    <button type="submit" class="btn btn-primary " align="center">Log-In</button>    
+                                </div>
+                            </div>
                     </form>
 
                 <div align="center">
