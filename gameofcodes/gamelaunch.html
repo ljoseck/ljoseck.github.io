@@ -1,0 +1,218 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<audio loop autoplay>
+    <source src="8 Bit Summer Fun Upbeat Game Music by HeatleyBros.mp3" type="audio/mpeg">
+    <!--Music from: https://www.youtube.com/watch?v=TiE9Vvmlxew&index=10&list=PLobY7vO0pgVKn4FRDgwXk5FUSiGS8_jA8 -->
+</audio>
+<div style="display:none;">
+  <img id="ground" src="GrassTest5.png">
+  <img id="sky" src="sky.png">
+  <img id="sky2" src="sky2.png">
+  <img id="man" src="TheBro2.png">
+  <img id="manb" src="Bro_Box2.png">
+  <img id="finish" src="Flag2.png">
+  <img id="box" src="Box.png">
+  <img id="button" src="Button/Button.png">
+  <img id="box-button" src="Button/ButtonBox.png">
+  <img id="lock" src="Unlocked2.png">
+  <img id="locked" src="locked2.png">
+  <img id="lockedT" src="lockedTop.png">
+  <img id="lockedB" src="lockedBottom.png">
+  <img id="lockedC" src="lockedS.png">
+  <img id="lockedL" src="LockedBridge.png">
+  <img id="lockedLC" src="MiddleBridge.png">
+  <img id="lockedLL" src="LeftBridge.png">
+  <img id="lockedLR" src="RightBridge.png">
+  <img id="lockL" src="UnlockedBridgeLeft.png">
+  <img id="lockR" src="UnlockedBridgeRight.png">
+  <img id="lockT" src="UnlockTop.png">
+  <img id="lockB" src="UnlockBottom.png">
+  <img id="ladder" src="ladder.png">
+  <img id="0" src="0.png">
+  <img id="1" src="1.png">
+  <img id="2" src="2.png">
+  <img id="3" src="3.png">
+  <img id="4" src="4.png">
+  <img id="5" src="5.png">
+  <img id="6" src="6.png">
+  <img id="7" src="7.png">
+  <img id="8" src="8.png">
+  <img id="9" src="9.png">
+
+  <img id="B0" src="Button/Button0.png">
+  <img id="B1" src="Button/Button1.png">
+  <img id="B2" src="Button/Button2.png">
+  <img id="B3" src="Button/Button3.png">
+  <img id="B4" src="Button/Button4.png">
+  <img id="B5" src="Button/Button5.png">
+  <img id="B6" src="Button/Button6.png">
+  <img id="B7" src="Button/Button7.png">
+  <img id="B8" src="Button/Button8.png">
+  <img id="B9" src="Button/Button9.png">
+
+  <img id="groundT" src="Ground/GrassTop.png">
+  <img id="groundTL" src="Ground/GrassTopLeft.png">
+  <img id="groundTR" src="Ground/GrassTopRight.png">
+  <img id="groundTT" src="Ground/GrassTopTop.png">
+  <img id="groundN" src="Ground/GrassNone.png">
+  <img id="groundL" src="Ground/GrassLeft.png">
+  <img id="groundR" src="Ground/GrassRight.png">
+  <img id="groundLR" src="Ground/GrassLeftRight.png">
+  <img id="groundCR" src="Ground/GrassCornerRight.png">
+  <img id="groundCL" src="Ground/GrassCornerLeft.png">
+
+  <input id="playing" type="text" value="">
+  <link rel="stylesheet" href="style.css">
+  <canvas id="canvas">
+		This text is displayed if your browser does not support HTML5 Canvas.
+  </canvas>
+</div>
+</head>
+<body class="body">
+    <div class="column1">
+        <div id="options">
+			<input id="play" class="btn btn-primary" type="button" value="Play">
+            <input id="step" class="btn btn-primary" type="button" value="Step">
+
+            <input id="stop" class="btn btn-primary" type="button" value="Stop">
+            <input id="go" class="btn btn-primary" type="button" value="Go">
+            <input id="fast" class="btn btn-primary" type="button" value="Faster">
+            <input id="faster" class="btn btn-primary" type="button" value="Even Faster">
+            <input id="fastest" class="btn btn-primary" type="button" value="Slow">
+
+            <input id="ResetLevel" class="btn btn-primary" type="button" value="Reset Level">
+            <input id="LevelSelect" class="btn btn-primary" type="button" value="Level Select">
+            <!--<input id="reset" type="button" value="reset">-->
+            <div style="display: none">
+            <input id="level1" type="button" value="level1">
+            <input id="level2" type="button" value="level2">
+            <input id="level3" type="button" value="level3">
+            <input id="level4" type="button" value="level4">
+            <input id="level5" type="button" value="level5">
+            <input id="level6" type="button" value="level6">
+            <input id="level7" type="button" value="level7">
+            <input id="level8" type="button" value="level8">
+            <input id="level9" type="button" value="level9">
+            </div>
+            <script>
+function toggleSound() {
+	if(document.getElementById("mute").innerHTML == "Unmute")
+		document.getElementById("mute").innerHTML = "Mute";
+	else
+		document.getElementById("mute").innerHTML = "Unmute";
+  var elements = document.getElementsByTagName('audio');
+  for(var e = 0; e < elements.length; elements[e].muted = !elements[e].muted, e++);
+}
+</script>
+		
+		<button id="mute" type="button" onclick="toggleSound()">Mute</button>
+        </div>
+		<div id="div1">
+			<canvas id="mainCanvas">
+				This text is displayed if your browser does not support HTML5 Canvas.
+	        </canvas>
+	    </div>
+    </div>
+    <div class ="column2">
+    	<div class ="tutorial">
+    		<font size="5">Command List</font>
+    		<hr>
+    		<div id = "tutorial1" style="display: none">
+    			moveR | moves the player right one square</br>
+    			moveL | moves the player left one square<br>
+    		</div>
+    		<div id = "tutorial2" style="display: none">
+    			moveR | moves the player right one square</br>
+    			moveL | moves the player left one square<br>
+    			<br>
+    			jumpR | moves the player up and to the right one square<br>
+    			jumpL | moves the player up and to the left one square<br>
+    		</div>
+			<div id = "tutorial3" style="display: none">
+    			moveR | moves the player right one square</br>
+    			moveL | moves the player left one square<br>
+    			<br>
+    			jumpR | moves the player up and to the right one square<br>
+    			jumpL | moves the player up and to the left one square<br>
+    			<br>
+    			loop &ltI&gt { | loops the next comands &ltI&gt number of times<br>
+    			<br>
+    			}<br>
+    			<br>
+    			pick | picks up a create under the player character<br>
+    			<br>
+    			put | puts down a held create under the player character<br>
+    		</div>
+			<div id = "tutorial4" style="display: none">
+    			moveR | moves the player right one square</br>
+    			moveL | moves the player left one square<br>
+    			<br>
+    			jumpR | moves the player up and to the right one square<br>
+    			jumpL | moves the player up and to the left one square<br>
+    			<br>
+    			loop &ltI&gt { | loops the next comands &ltI&gt number of times<br>
+    			<br>
+    			}<br>
+    			<br>
+    			pick | picks up a create under the player character<br>
+    			<br>
+    			put | puts down a held create under the player character<br>
+				<br>
+				climbUp | moves the player up one level of a ladder<br>
+				climbDown | moves the player down one level of a ladder<br>
+    		</div>
+			<div id = "tutorial5" style="display: none">
+    			moveR | moves the player right one square</br>
+    			moveL | moves the player left one square<br>
+    			<br>
+    			jumpR | moves the player up and to the right one square<br>
+    			jumpL | moves the player up and to the left one square<br>
+    			<br>
+    			loop &ltI&gt { | loops the next comands &ltI&gt number of times<br>
+    			<br>
+    			}<br>
+    			<br>
+    			pick | picks up a create under the player character<br>
+    			<br>
+    			put | puts down a held create under the player character<br>
+				<br>
+				climbUp | moves the player up one level of a ladder<br>
+				climbDown | moves the player down one level of a ladder<br>
+    		</div>
+			<div id = "tutorial6" style="display: none">
+    			moveR | moves the player right one square</br>
+    			moveL | moves the player left one square<br>
+    			<br>
+    			jumpR | moves the player up and to the right one square<br>
+    			jumpL | moves the player up and to the left one square<br>
+    			<br>
+    			loop &ltI&gt { | loops the next comands &ltI&gt number of times<br>
+    			<br>
+    			}<br>
+    			<br>
+    			pick | picks up a create under the player character<br>
+    			<br>
+    			put | puts down a held create under the player character<br>
+				<br>
+				climbUp | moves the player up one level of a ladder<br>
+				climbDown | moves the player down one level of a ladder<br>
+    		</div>
+    	</div>
+    	<div id="father">
+        <textarea id="program" spellcheck="false" ></textarea>
+    	<div id="highlight">
+    	</div>
+    	</div>
+    </div>
+    <script type="text/javascript" src="level1.js"></script>
+    <script type="text/javascript" src="level2.js"></script>
+    <script type="text/javascript" src="level3.js"></script>
+    <script type="text/javascript" src="level4.js"></script>
+    <script type="text/javascript" src="level5.js"></script>
+    <script type="text/javascript" src="level6.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="testing.js"></script>
+</body>
+
+</html>	
