@@ -1,4 +1,4 @@
-//text has been corrected to closest matching symbols on pc
+﻿//text has been corrected to closest matching symbols
 Full
 ClrHome
 FnOff 

@@ -1,6 +1,11 @@
 function fileRenderer(val) {
     if (val != null) {
-		return "<a href='./" + val + "'>" + val + "</a>";
+		var folder = window.location.href.split('/')
+		folder = folder[folder.length - 2];
+		console.log(folder);
+		//https://github.com/ljoseck/ljoseck.github.io/blob/master/programs/MandelbrotSet/Mandelbrot.py
+		return "<a href='https://github.com/ljoseck/ljoseck.github.io/blob/master/programs/" + folder + '/' + val + "'>" + val + "</a>";
+		//return "<a href='./" + val + "'>" + val + "</a>";
     }
     return val;
 }

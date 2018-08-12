@@ -5,6 +5,7 @@ var cloneSets = Ext.create('Ext.data.Store', {  data: [
           {'1':"SkyRidge", '2':"Ti-Basic", '3':"2011", '4':"2014", '5':718},
           {'1':"2048", '2':"Ti-Basic", '3':"2014", '4':"2014", '5':227},
           {'1':"Interpreter", '2':"JavaScript", '3':"2014", '4':"2014", '5':332},
+          {'1':"Game Of Codes", '2':"JavaScript", '3':"2018", '4':"2018", '5':''},
 ]});
 
 function projectRenderer(val) {
