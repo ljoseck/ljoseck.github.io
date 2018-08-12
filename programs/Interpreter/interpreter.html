@@ -1,0 +1,30 @@
+<!-- code in main.js-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Louis Joseck Project1</title>
+</head>
+<body>
+	<input id="checkBox" type="checkbox"> Show stack frames</input>
+	<input type="text" id="file"  value="input" onchange="main()" style="height:40px; width:100%;" />
+	<br/><br/>
+	<button type="button" id="goButton" onclick="helper()" style="width: 50px;">Go</button>
+	<br/><br/>
+	<input type="text" id="output"  value="output" disabled style="height:40px; width: 200px;"/>
+	<br/><br/>
+	<div id="stack"></div>
+	
+	<script src="main.js"></script>
+	<script src="main2.js"></script>
+	<script> 
+		function helper()
+		{
+			if(document.getElementById("checkBox").checked)
+				main2();
+			else
+				main();
+		}
+	</script>
+</body>
+</html>

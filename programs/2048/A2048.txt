@@ -1,0 +1,227 @@
+94->Xmax
+-62->Ymin
+0->Xmin
+0->Ymax
+Lbl 1
+FnOff 
+AxesOff
+ClrDraw
+If dim(L3)!=16:{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}->L3
+prod(L3,1,1->A
+prod(L3,2,2->B
+prod(L3,3,3->C
+prod(L3,4,4->D
+prod(L3,5,5->E
+prod(L3,6,6->F
+prod(L3,7,7->G
+prod(L3,8,8->H
+prod(L3,9,9->I
+prod(L3,10,10)->J
+prod(L3,11,11->K
+prod(L3,12,12->L
+prod(L3,13,13->M
+prod(L3,14,14->N
+prod(L3,15,15->O
+prod(L3,16,16->P
+ClrHome
+Menu(" 2048","PLAY",2,"RESET",R,"STOP",E
+Lbl R
+2int(randIntNoRep(1,16)/16)+2int(randIntNoRep(1,16)/16)->L3
+If min(L3)!=2
+Then
+L3+2int(randIntNoRep(1,16)/16
+If max(L3)=6:Goto R
+End
+Goto 1
+Lbl E
+ClrDraw
+AxesOn 
+ZStandard
+ClrHome
+Stop
+Lbl 2
+ClrDraw
+Line(0,0,80,0
+Line(0,-15,80,-15
+Line(0,-30,80,-30
+Line(0,-45,80,-45
+Line(0,-60,80,-60
+Line(0,0,0,-60
+Line(20,0,20,-60
+Line(40,0,40,-60
+Line(60,0,60,-60
+Line(80,0,80,-60
+If A!=0:Text(4,3,A
+If B!=0:Text(19,3,B
+If C!=0:Text(34,3,C
+If D!=0:Text(48,3,D
+If E!=0:Text(4,23,E
+If F!=0:Text(19,23,F
+If G!=0:Text(34,23,G
+If H!=0:Text(48,23,H
+If I!=0:Text(4,43,I
+If J!=0:Text(19,43,J
+If K!=0:Text(34,43,K
+If L!=0:Text(48,43,L
+If M!=0:Text(4,63,M
+If N!=0:Text(19,63,N
+If O!=0:Text(34,63,O
+If P!=0:Text(48,63,P
+Repeat Ans
+getKey
+End
+Ans->R
+If R=34:Goto 3
+If R=25:Goto 4
+If R=24:Goto 5
+If R=26:Goto 6
+If R=45:Goto 1
+Goto 2
+Lbl 3
+If D=0:Then:C->D:0->C:End:If C=D:Then:D+C->D:0->C:End
+If C=0:Then:B->C:0->B:End:If B=C:Then:C+B->C:0->B:End
+If B=0:Then:A->B:0->A:End:If A=B:Then:B+A->B:0->A:End
+If D=0:Then:C->D:0->C:End:If C=D:Then:C+D->D:0->C:End
+If C=0:Then:B->C:0->B:End:If B=C:Then:B+C->C:0->B:End
+If D=0:Then:C->D:0->C:End:If C=D:Then:C+D->D:0->C:End
+If H=0:Then:G->H:0->G:End:If G=H:Then:G+H->H:0->G:End
+If G=0:Then:F->G:0->F:End:If F=G:Then:F+G->G:0->F:End
+If F=0:Then:E->F:0->E:End:If E=F:Then:E+F->F:0->E:End
+If H=0:Then:G->H:0->G:End:If G=H:Then:G+H->H:0->G:End
+If G=0:Then:F->G:0->F:End:If F=G:Then:F+G->G:0->F:End
+If H=0:Then:G->H:0->G:End:If G=H:Then:G+H->H:0->G:End
+
+If L=0:Then:K->L:0->K:End:If K=L:Then:K+L->L:0->K:End
+If K=0:Then:J->K:0->J:End:If J=K:Then:J+K->K:0->J:End
+If J=0:Then:I->J:0->I:End:If I=J:Then:I+J->J:0->I:End
+If L=0:Then:K->L:0->K:End:If K=L:Then:K+L->L:0->K:End
+If K=0:Then:J->K:0->J:End:If J=K:Then:J+K->K:0->J:End
+If L=0:Then:K->L:0->K:End:If K=L:Then:K+L->L:0->K:End
+
+If P=0:Then:O->P:0->O:End:If O=P:Then:O+P->P:0->O:End
+If O=0:Then:N->O:0->N:End:If N=O:Then:N+O->O:0->N:End
+If N=0:Then:M->N:0->M:End:If M=N:Then:M+N->N:0->M:End
+If P=0:Then:O->P:0->O:End:If O=P:Then:O+P->P:0->O:End
+If O=0:Then:N->O:0->N:End:If N=O:Then:N+O->O:0->N:End
+If P=0:Then:O->P:0->O:End:If O=P:Then:O+P->P:0->O:End
+Goto 7
+Lbl 4
+If A=0:Then:B->A:0->B:End:If B=A:Then:B+A->A:0->B:End
+If B=0:Then:C->B:0->C:End:If C=B:Then:C+B->B:0->C:End
+If C=0:Then:D->C:0->D:End:If D=C:Then:D+C->C:0->D:End
+If A=0:Then:B->A:0->B:End:If B=A:Then:B+A->A:0->B:End
+If B=0:Then:C->B:0->C:End:If C=B:Then:C+B->B:0->C:End
+If A=0:Then:B->A:0->B:End:If B=A:Then:B+A->A:0->B:End
+
+If E=0:Then:F->E:0->F:End:If F=E:Then:F+E->E:0->F:End
+If F=0:Then:G->F:0->G:End:If G=F:Then:G+F->F:0->G:End
+If G=0:Then:H->G:0->H:End:If H=G:Then:H+G->G:0->H:End
+If E=0:Then:F->E:0->F:End:If F=E:Then:F+E->E:0->F:End
+If F=0:Then:G->F:0->G:End:If G=F:Then:G+F->F:0->G:End
+If E=0:Then:F->E:0->F:End:If F=E:Then:F+E->E:0->F:End
+
+If I=0:Then:J->I:0->J:End:If J=I:Then:J+I->I:0->J:End
+If J=0:Then:K->J:0->K:End:If K=J:Then:K+J->J:0->K:End
+If K=0:Then:L->K:0->L:End:If L=K:Then:L+K->K:0->L:End
+If I=0:Then:J->I:0->J:End:If J=I:Then:J+I->I:0->J:End
+If J=0:Then:K->J:0->K:End:If K=J:Then:K+J->J:0->K:End
+If I=0:Then:J->I:0->J:End:If J=I:Then:J+I->I:0->J:End
+
+If M=0:Then:N->M:0->N:End:If N=M:Then:N+M->M:0->N:End
+If N=0:Then:O->N:0->O:End:If O=N:Then:O+N->N:0->O:End
+If O=0:Then:P->O:0->P:End:If P=O:Then:P+O->O:0->P:End
+If M=0:Then:N->M:0->N:End:If N=M:Then:N+M->M:0->N:End
+If N=0:Then:O->N:0->O:End:If O=N:Then:O+N->N:0->O:End
+If M=0:Then:N->M:0->N:End:If N=M:Then:N+M->M:0->N:End
+Goto 7
+Lbl 5
+If A=0:Then:E->A:0->E:End:If E=A:Then:E+A->A:0->E:End
+If E=0:Then:I->E:0->I:End:If I=E:Then:I+E->E:0->I:End
+If I=0:Then:M->I:0->M:End:If M=I:Then:M+I->I:0->M:End
+If A=0:Then:E->A:0->E:End:If E=A:Then:E+A->A:0->E:End
+If E=0:Then:I->E:0->I:End:If I=E:Then:I+E->E:0->I:End
+If A=0:Then:E->A:0->E:End:If E=A:Then:E+A->A:0->E:End
+
+If B=0:Then:F->B:0->F:End:If F=B:Then:F+B->B:0->F:End
+If F=0:Then:J->F:0->J:End:If J=F:Then:J+F->F:0->J:End
+If J=0:Then:N->J:0->N:End:If N=J:Then:N+J->J:0->N:End
+If B=0:Then:F->B:0->F:End:If F=B:Then:F+B->B:0->F:End
+If F=0:Then:J->F:0->J:End:If J=F:Then:J+F->F:0->J:End
+If B=0:Then:F->B:0->F:End:If F=B:Then:F+B->B:0->F:End
+
+If C=0:Then:G->C:0->G:End:If G=C:Then:G+C->C:0->G:End
+If G=0:Then:K->G:0->K:End:If K=G:Then:K+G->G:0->K:End
+If K=0:Then:O->K:0->O:End:If O=K:Then:O+K->K:0->O:End
+If C=0:Then:G->C:0->G:End:If G=C:Then:G+C->C:0->G:End
+If G=0:Then:K->G:0->K:End:If K=G:Then:K+G->G:0->K:End
+If C=0:Then:G->C:0->G:End:If G=C:Then:G+C->C:0->G:End
+
+If D=0:Then:H->D:0->H:End:If H=D:Then:H+D->D:0->H:End
+If H=0:Then:L->H:0->L:End:If L=H:Then:L+H->H:0->L:End
+If L=0:Then:P->L:0->P:End:If P=L:Then:P+L->L:0->P:End
+If D=0:Then:H->D:0->H:End:If H=D:Then:H+D->D:0->H:End
+If H=0:Then:L->H:0->L:End:If L=H:Then:L+H->H:0->L:End
+If D=0:Then:H->D:0->H:End:If H=D:Then:H+D->D:0->H:End
+Goto 7
+Lbl 6
+If M=0:Then:I->M:0->I:End:If I=M:Then:I+M->M:0->I:End
+If I=0:Then:E->I:0->E:End:If E=I:Then:E+I->I:0->E:End
+If E=0:Then:A->E:0->A:End:If A=E:Then:A+E->E:0->A:End
+If M=0:Then:I->M:0->I:End:If I=M:Then:I+M->M:0->I:End
+If I=0:Then:E->I:0->E:End:If E=I:Then:E+I->I:0->E:End
+If M=0:Then:I->M:0->I:End:If I=M:Then:I+M->M:0->I:End
+
+If N=0:Then:J->N:0->J:End:If J=N:Then:J+N->N:0->J:End
+If J=0:Then:F->J:0->F:End:If F=J:Then:F+J->J:0->F:End
+If F=0:Then:B->F:0->B:End:If B=F:Then:B+F->F:0->B:End
+If N=0:Then:J->N:0->J:End:If J=N:Then:J+N->N:0->J:End
+If J=0:Then:F->J:0->F:End:If F=J:Then:F+J->J:0->F:End
+If N=0:Then:J->N:0->J:End:If J=N:Then:J+N->N:0->J:End
+
+If O=0:Then:K->O:0->K:End:If K=O:Then:K+O->O:0->K:End
+If K=0:Then:G->K:0->G:End:If G=K:Then:G+K->K:0->G:End
+If G=0:Then:C->G:0->C:End:If C=G:Then:C+G->G:0->C:End
+If O=0:Then:K->O:0->K:End:If K=O:Then:K+O->O:0->K:End
+If K=0:Then:G->K:0->G:End:If G=K:Then:G+K->K:0->G:End
+If O=0:Then:K->O:0->K:End:If K=O:Then:K+O->O:0->K:End
+
+If P=0:Then:L->P:0->L:End:If L=P:Then:L+P->P:0->L:End
+If L=0:Then:H->L:0->H:End:If H=L:Then:H+L->L:0->H:End
+If H=0:Then:D->H:0->D:End:If D=H:Then:D+H->H:0->D:End
+If P=0:Then:L->P:0->L:End:If L=P:Then:L+P->P:0->L:End
+If L=0:Then:H->L:0->H:End:If H=L:Then:H+L->L:0->H:End
+If P=0:Then:L->P:0->L:End:If L=P:Then:L+P->P:0->L:End
+Lbl 7
+
+If sum(({A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P}=L3)!=16
+Then
+{A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P}->L3
+If min(L3)=0
+Then
+Lbl 8
+randInt(1,16->Q
+randInt(1,10->W
+2int(W/10)->W
+If Q=1 and A=0:2+W->A
+If Q=2 and B=0:2+W->B
+If Q=3 and C=0:2+W->C
+If Q=4 and D=0:2+W->D
+If Q=5 and E=0:2+W->E
+If Q=6 and F=0:2+W->F
+If Q=7 and G=0:2+W->G
+If Q=8 and H=0:2+W->H
+If Q=9 and I=0:2+W->I
+If Q=10 and J=0:2+W->J
+If Q=11 and K=0:2+W->K
+If Q=12 and L=0:2+W->L
+If Q=13 and M=0:2+W->M
+If Q=14 and N=0:2+W->N
+If Q=15 and O=0:2+W->O
+If Q=16 and P=0:2+W->P
+If sum({A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P})=sum(L3)
+Then
+Goto 8
+End
+End
+End
+Goto 2

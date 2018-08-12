@@ -1,0 +1,719 @@
+//text has been corrected to closest matching symbols on pc
+Full
+ClrHome
+FnOff 
+If sum(L1)/10!=mean(L1) or sum(L1)=0
+Then
+Goto 3
+End
+prod(L1,1,1)->D
+prod(L1,2,2)->E
+prod(L1,3,3)->T
+prod(L1,4,4)->F
+prod(L1,5,5)->G
+prod(L1,6,6)->H
+prod(L1,7,7)->I
+prod(L1,8,8)->U
+prod(L1,9,9)->V
+prod(L1,10,10)->W
+If G!=D+E+T+F+H+I+U+V+W
+Then
+ClrHome
+Disp "HACKER
+{0,0,0,0,0,0,0,0,0}->L1
+Goto 3
+End
+FnOff 
+Lbl 1
+Full
+ClrHome
+ClrDraw
+GridOff
+AxesOff
+0->Xmin
+94->Xmax
+­62->Ymin
+0->Ymax
+RecallPic 2
+Pause 
+0->R
+Menu(" SKYRIDGE","PLAY",2,"RESET",3,"STOP",4
+Lbl 13
+ClrHome
+Full
+Goto 3
+Lbl 2
+Horiz
+­30->Ymin
+1->C
+D+E+T+F+H+I+U+V+W->G
+{D,E,T,F,G,H,I,U,V,W}->L1
+0->R
+Menu(" WINTERHOLD","RIVER",8,"ME",6,"TRAVEL",5,"POTION SHOP",7,"MEDIC",33,"STOP",4)
+Lbl 6
+Clear Entries
+ClrDraw
+Full
+­62->Ymin
+Text(1,1,"WEAPON LEVEL:
+Text(1,49,E
+Text(7,1,"ARMOR LEVEL:
+Text(7,45,D
+Text(13,1,"MIN ATTACK:
+Text(13,41,T+E^2+5
+Text(19,1,"MAX ATTACK:
+Text(19,41,2T+E^2+10
+Text(25,1,"TOTAL DEFENCE:
+Text(25,53,int(1/4(2+D)^2
+Text(31,1,"GOLD COINS:
+Text(31,41,F
+Text(37,1,"EXP:
+Text(37,16,H
+Text(43,1,"LEVEL:
+Text(43,24,T
+Text(49,1,"EXP TO NEXT LEVEL:
+Text(49,63,T^2*5
+Text(55,1,"POTIONS:
+Text(55,32,U
+Text(39,60,"HP:
+Text(35,70,I
+Text(43,70,10T+90
+Line(70,­42,80,­42
+Pause 
+Goto 32
+End
+Lbl 4
+D+E+T+F+H+I+U+V+W->G
+{D,E,T,F,G,H,I,U,V,W}->L1
+0->A
+0->B
+0->C
+0->D
+0->E
+0->F
+0->G
+0->H
+0->I
+0->J
+0->K
+0->L
+0->M
+0->N
+0->O
+0->P
+0->Q
+0->R
+0->S
+0->T
+0->U
+0->V
+0->W
+0->X
+0->Y
+0->Z
+0->θ
+0->
+ClrDraw
+ClrHome
+Full
+AxesOn 
+ZStandard
+ClrHome
+Stop
+Lbl 3
+Output(3,5,"YOU DIED"
+Output(4,3,"BETTER LUCK"
+Output(5,4,"NEXT TIME"
+1->U
+1->T
+100->I
+101->G
+0->F
+0->D
+0->E
+0->H
+0->V
+0->W
+{D,E,T,F,G,H,I,U,V,W}->L1
+Pause 
+Menu("DIFICULTY","EASY",37,"MEDIUM",38,"HARD",39
+Lbl 39
+W+1->W
+W+1->W
+Lbl 38
+W+1->W
+W+1->W
+Lbl 37
+Goto 1
+Lbl 8
+randInt(1,4)->Y
+randInt(int(W),int(W)+1)->B
+If Y=4
+Then
+Goto 98
+End
+Goto 99
+Lbl 99
+25+5B->M
+1->K
+5->S
+0->J
+1+B->A
+5+5B->P
+Horiz
+ClrDraw
+RecallPic 5
+Text(1,1,"FISH
+Text(7,1,"LV.
+Text(7,11,1+B
+Goto 9
+Lbl 98
+100+10B->M
+10->K
+15->S
+2->J
+10+B->A
+50+5B->P
+Horiz
+ClrDraw
+RecallPic 5
+Text(1,1,"BIG FISH
+Text(7,1,"LV.
+Text(7,11,3+B
+Goto 9
+Lbl 9
+Text(1,83,"                    
+Text(1,83,I
+Text(9,83,10T+90
+Line(83,­8,93,­8
+Disp "FIGHT:1
+Disp "FLEE:2
+Disp "USE POTION:3
+Input B
+ClrHome
+If B=3
+Then
+If U<1
+Then
+ClrHome
+Disp "NO MORE POTIONS
+Pause 
+Goto 9
+End
+ClrHome
+U-1->U
+I+20->I
+If I>10T+90
+Then
+10T+90->I
+End
+Disp "YOU HAVE
+Output(1,10,U
+Disp "POTIONS LEFT
+Pause 
+Goto 9
+End
+If B=2
+Then
+If R≥1
+Then
+Disp "THERE IS
+Disp "NO EXCAPE
+Pause 
+Goto 12
+End
+Goto 32
+End
+If B=1
+Then
+randInt(T+E^2+4,2T+E^2+8)->Q
+ClrHome
+Disp "YOU DAMAGED BY"
+If Q<=1
+Then
+1->Q
+End
+Disp Q
+M-Q->M
+Disp "HP:
+If M<1
+Then
+0->M
+End
+Output(3,4,M
+Pause 
+If M=0
+Then
+Goto 11
+End
+Lbl 12
+ClrHome
+randInt(K,S)->Q
+int(Q-(1/4(2+D)^2)->Q
+If Q<=1
+Then
+1->Q
+End
+I-Q->I
+Disp "YOU GOT DAMAGE
+Disp Q
+Disp "HP:
+If I<1
+Then
+0->I
+End
+Output(3,4,I)
+Pause 
+If I=0
+Then
+Goto 13
+End
+End
+Goto 9
+Lbl 11
+ClrHome
+Full
+F+P->F
+H+A->H
+W+1/20->W
+Disp "GOLD:
+Disp "EXP:
+Output(1,6,P
+Output(2,5,A
+Output(6,4,"TOTAL
+Output(7,1,"GOLD:
+Output(8,1,"EXP:
+Output(7,6,F
+Output(8,5,H
+Pause 
+Lbl 18
+If H≥T^2*5
+Then
+T+1->T
+10T+90->I
+Full
+ClrHome
+Output(1,1,"LEVEL UP
+Output(2,1,"LV:
+Output(2,4,T
+Pause 
+Goto 18
+End
+If R=1
+Then
+Goto 89
+End
+If R=2
+Then
+Goto 36
+End
+ClrDraw
+Goto 32
+Lbl 5
+ClrHome
+ClrDraw
+D+E+H+I+U+F+T+V+W->G
+Menu(" TRAVEL","WINTERHOLD",2,"WHITERUN",26,"RIFTEN",28,"MORTHAL",30
+Lbl 7
+Full
+Disp "SHOP
+Disp " 
+Disp " 
+Disp " 
+Output(2,1,"POTIONS
+Output(3,1,"50 GOLD EACH
+Output(4,1,"HOW MANY?
+Disp "GOLD:
+Output(5,6,F
+Input Q
+If Q*50>F or Q<0 or int(Q)!=Q
+Then
+Output(7,1,"NEED MORE GOLD"
+Pause 
+Goto 2
+End
+F-50Q->F
+U+Q->U
+Goto 2
+Lbl 26
+ClrHome
+ClrDraw
+2->C
+D+E+T+F+H+I+U+V+W->G
+{D,E,T,F,G,H,I,U,V,W}->L1
+Menu(" WHITERUN","FOREST",21,"ME",6,"TRAVEL",5,"ARMOR SHOP",27,"STOP",4)
+Lbl 27
+Full
+ClrHome
+Disp "SHOP
+Disp "ARMOR LV:
+Output(2,10,D
+Disp "NEXT LV COSTS
+Disp " 
+Disp " 
+Disp " 
+Output(4,1,5(D^2+2)^2
+Output(5,1,"GOLD:
+Output(5,6,F
+Output(6,1,"BUY:1   DON'T:2
+Input B
+If B=1
+Then
+If F≥5((D^2+2))^2
+Then
+F-5((D^2+2))^2->F
+D+1->D
+Goto 32
+End
+Output(7,1,"NEED MORE GOLD"
+Pause 
+End
+Goto 32
+Lbl 21
+ClrDraw
+Horiz
+­30->Ymin
+0->R
+randInt(1,20)->Y
+randInt(int(W),int(W+1->B
+If Y=1
+Then
+500->M
+1+B->K
+20+B->S
+10+B->J
+25+2B->A
+300+5B->P
+Text(1,1,"ENT
+RecallPic 4
+Text(7,1,"LV.
+Text(7,11,10+B
+Goto 9
+End
+If Y<=6
+Then
+150+15B->M
+20->K
+30->S
+0->J
+15+2B->A
+25+5B->P
+Text(1,1,"SNAKE
+RecallPic 6
+Text(7,1,"LV.
+Text(7,11,5+B
+Goto 9
+End
+200+5B->M
+15+B->K
+15+B->S
+2->J
+20+2B->A
+100+5B->P
+Text(1,1,"WOLF
+RecallPic 7
+Text(7,1,"LV.
+Text(7,11,7+B
+Goto 9
+End
+Lbl 28
+ClrHome
+Full
+ClrDraw
+3->C
+D+E+T+F+I+H+U+V+W->G
+{D,E,T,F,G,H,I,U,V,W}->L1
+D+E+T+F+H+I+U+V+W->G
+Menu(" RIFTEN","DEEP FOREST",24,"ME",6,"TRAVEL",5,"WEAPON SHOP",29,"STOP",4)
+Lbl 30
+ClrHome
+Full
+ClrDraw
+4->C
+D+E+T+F+H+I+U+V+W->G
+{D,E,T,F,G,H,I,U,V,W}->L1
+D+E+T+F+H+I+U+V+W->G
+Menu(" MORTHAL","ORB CHAMBER",25,"ME",6,"TRAVEL",5,"TRANING",31,"BOMB SHOP",35,"STOP",4)
+Lbl 29
+Full
+ClrHome
+Disp "SHOP
+Disp "WEAPON LV:"
+Output(2,11,E
+Disp "NEXT LV COSTS
+Disp "    
+Output(4,1,5((E^2+2))^2
+Disp "GOLD:
+Output(5,6,F
+Disp "BUY:1  DON'T:2
+Input B
+If B=1
+Then
+If F≥5((E^2+2))^2
+Then
+F-5((E^2+2))^2->F
+E+1->E
+End
+End
+Goto 32
+Lbl 31
+ClrHome
+Full
+Disp "GOLD:
+Output(1,6,F
+Disp "1000 GOLD
+Disp "FOR 100 EXP
+Disp "BUY:1  DONT:2
+Input B
+If B=1 and F≥1000
+Then
+F-1000->F
+H+100->H
+End
+Goto 32
+Lbl 24
+Horiz
+­30->Ymin
+0->R
+randInt(1,20)->Y
+randInt(int(W),int(W+1)->B
+If Y<=9
+Then
+Goto 94
+End
+If Y=10
+Then
+Goto 93
+End
+If Y=11
+Then
+Goto 92
+End
+Goto 91
+Lbl 94
+Text(1,1,"BEAR
+Text(7,1,"LV.
+Text(7,11,15+B
+250+10B->M
+30+B->K
+40+B->S
+5+2B->J
+50+2B->A
+200+10B->P
+Goto 9
+Lbl 93
+Text(1,1,"A HUDAK
+Text(7,1,"LV.
+Text(7,11,3+B
+50+B->M
+5->K
+10->S
+50+5B->J
+20+B->A
+100+5B->P
+Goto 9
+Lbl 25
+ClrHome
+If V=1
+Then
+Disp " 
+Disp " 
+Output(1,1,"USE THE BOMB?
+Output(2,2,"YES:1  NO:2
+Input A
+If A=1
+Then
+Goto 90
+End
+End
+ClrHome
+Output(3,3,"ORB CHAMBER"
+Output(4,2,"IS BLOCKED OFF"
+Output(5,2,"BY ROCKS COME"
+Output(6,4,"BACK LATER"
+Pause 
+Goto 30
+Lbl 91
+ClrDraw
+Horiz
+100+5B->M
+50+2B->K
+60+2B->S
+1+B->J
+75+2B->A
+500+10B->P
+RecallPic 9
+Text(1,1,"SWARM OF BEES
+Text(7,1,"LV.
+Text(7,11,13+B
+Goto 9
+Lbl 92
+ClrDraw
+Horiz
+500+20B->M
+50->K
+60->S
+10+3B->J
+100+2B->A
+1000+10B->P
+Text(1,1,"BABY DRAGON
+RecallPic 0
+Text(7,1,"LV.
+Text(7,11,20+B
+Goto 9
+Lbl 32
+ClrDraw
+If C=1
+Then
+Goto 2
+End
+If C=2
+Then
+Goto 26
+End
+If C=3
+Then
+Goto 28
+End
+Goto 30
+Lbl 33
+ClrHome
+Full
+Disp "I CAN HEAL YOU
+Disp "TO FULL HEALTH
+Disp "FOR ONLY
+Disp "     GOLD
+Output(4,1,5int((10T+94-I)/5
+Disp "YES:1  NO:2
+Input A
+If A=1
+Then
+If (5int((10T+94-I)/5))<=F
+Then
+F-5(int((10T+94-I)/5->F
+10T+90->I
+Else
+Disp "I DONT WORK FOR
+Disp "FREE!
+Pause 
+End
+End
+Goto 32
+Lbl 90
+ClrHome
+Disp "BOOM
+Pause 
+Disp "THE CHAMBE HAS
+Pause 
+Disp "A SMALL HOLE IN
+Pause 
+Disp "ITS ENTRECE YOU
+Pause 
+Disp "CRAWL INSIDE THE
+Pause 
+Disp "CHAMBER IS LIT
+Pause 
+Disp "UP BY THE LIGHT
+Pause 
+Disp "FROM THE SMALL
+Disp "HOLE
+Pause 
+Disp "YOU SEE A DRAGON
+Disp "THEN THE SMALL
+Disp "HOLE GETS
+Pause 
+Disp "COVERED BY THE
+Disp "SHAKING OF THE
+Disp "GROUND
+Pause 
+Disp "THE DRAGON
+Disp "ATTACKS YOU
+Pause 
+1000->M
+30->K
+40->S
+15->J
+200->A
+5->P
+1->R
+Horiz
+RecallPic 0
+Text(1,1,"DRAGON
+Text(7,1,"LV.
+Text(7,11,50
+Goto 12
+Lbl 89
+ClrHome
+Disp "YOU HAVE KILLED
+Disp "IT
+Pause 
+Disp "MAYBE...
+Pause 
+Disp "NOPE NOW ITS MAD
+Pause 
+Horiz
+Text(7,11,100
+2->R
+2000->M
+50->K
+60->S
+12->J
+Horiz
+Text(1,1,"DRAGON
+Text(7,1,"LV.
+RecallPic 0
+Goto 9
+Lbl 36
+ClrHome
+Disp "YOU WIN
+Pause 
+Disp "FOREVER
+Pause 
+ClrHome
+Disp "YOU SELL THE
+Disp "HIDE OF THE 
+Disp "DRAGON FOR 50000
+Disp "GOLD!
+F+50000->F
+Pause 
+Goto 32
+Lbl 35
+ClrHome
+Disp "DUDE I FOUND A
+Disp "WAY TO MAKE 
+Disp "BOMBS
+Pause 
+Disp "CAN YOU SPARE
+Disp "10,000 GOLD I
+Disp "WILL GIVE YOU
+Disp "DA BOMB
+Pause 
+ClrHome
+Disp "YES:1  NO:2
+Input A
+If A=1
+Then
+If F>10000
+Then
+Disp "THAT SEEMS LIKE
+Disp "10000 GOLD
+F-10000->F
+1->V
+Disp "
+Disp "MMM KAY
+Disp "HEAR YOU GO
+Pause 
+Goto 32
+End
+Disp "
+Disp "SORRY THE BOMBS 
+Disp "I SELL ARE WORTH
+Disp "MORE THAN YOU
+Pause 
+Goto 32
+End
+Disp "
+Disp "OK I WILL BE
+Disp "HERE MAKING BOMBS
+Pause 
+Goto 32
