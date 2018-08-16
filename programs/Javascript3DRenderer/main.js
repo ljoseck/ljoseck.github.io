@@ -6,10 +6,20 @@ var originX = 0;
 var originY = 0;
 var originZ = 0;
 
-var camaraX = 0;
-var camaraY = 0;
-var camaraZ = 3000;
-var pointRadius = 1
+var defultCamaraX = 0;
+var defultCamaraY = 0;
+var defultCamaraZ = 3000;
+
+var focalX = originX;
+var focalY = originY;
+var focalZ = originZ;
+
+var camaraX = defultCamaraX;
+var camaraY = defultCamaraY;
+var camaraZ = defultCamaraZ;
+
+
+var pointRadius = 5
 main();
 /* notes:
 
@@ -32,7 +42,8 @@ function main(){
 		}
 		point3D(x, y, z){
 			if(this.x != undefined || this.y != undefined || this.z != undefined){
-				line3D(this.x, this.y, this.z, x, y, z);
+				//line3D(this.x, this.y, this.z, x, y, z);
+				lineBasis3D(this.x, this.y, this.z, x, y, z);
 			}
 			this.x = x;
 			this.y = y;
@@ -47,9 +58,12 @@ function main(){
 	}
 
 	var lb = new LineBuilder();
-	zoomTown(lb);
+	//zoomTown(lb);
+	circleTown(lb);
+	//panTown(lb);
 	//town(lb);
 	//twoPencels(lb);
+	console.log("done");
 	return;
 	// var lastJ = 0;
 	// for(var j = 0; j <= 10; j++){
@@ -65,8 +79,45 @@ function main(){
 	}
 }
 
+async function circleTown(lb){
+	// camaraX = 500;
+	// camaraY = 500;
+	// town(lb);
+	// return;
+	for(var theta = 0; theta <= 40*Math.PI; theta += Math.PI/32){
+		clearCanvas();
+		camaraX = 1000*Math.cos(theta);
+		camaraY = 1000*Math.sin(theta);
+		town(lb);
+		pointBasis3D(1,1,1);
+		await sleep(100);
+	}
+	// for( var i = 0; i <= 20; i++){
+		// town(lb);
+		// //camaraX += 50;
+		// camaraY += 50;
+		// //camaraZ -= 50;
+	// }
+}
+
+async function panTown(lb){
+	// camaraX = 500;
+	// camaraY = 500;
+	// town(lb);
+	// return;
+	for( var i = 0; i <= 20; i++){
+		clearCanvas();
+		town(lb);
+		pointBasis3D(1,1,1);
+		await sleep(100);
+		//camaraX += 50;
+		camaraY += 50;
+		//camaraZ -= 50;
+	}
+}
+
 async function zoomTown(lb){
-	for(camaraZ = 10000; camaraZ >= 1000; camaraZ -= 50){
+	for(defultCamaraZ = 10000; defultCamaraZ >= 1000; defultCamaraZ -= 50){
 		clearCanvas();
 		town(lb);
 		await sleep(10);
@@ -83,9 +134,9 @@ function clearCanvas(){
 
 function town(lb){
 	base(lb);
-	box(lb, -300, -100, 950, 50, -300, 1000);
-	box(lb, -100, 50, 950, 200, 300, 800);
-	box(lb, 75, -100, 950, 150, 0, 1000);
+	boxBasis(lb, -300, -100, 0, 50, -300, 500);
+	boxBasis(lb, -100, 50, 0, 200, 300, 400);
+	boxBasis(lb, 75, -100, 0, 150, 0, 500);
 }
 
 function box(lb, x1, y1, z1, x2, y2, z2){
@@ -104,6 +155,24 @@ function box(lb, x1, y1, z1, x2, y2, z2){
 	line3D(x2, y1, z1, x2, y1, z2);
 	line3D(x1, y2, z1, x1, y2, z2);
 	line3D(x2, y2, z1, x2, y2, z2);
+}
+
+function boxBasis(lb, x1, y1, z1, x2, y2, z2){
+	// lb.point3D(x1, y1, z1);
+	lineBasis3D(x1, y1, z1, x1, y2, z1);
+	lineBasis3D(x2, y1, z1, x2, y2, z1);
+	lineBasis3D(x1, y1, z1, x2, y1, z1);
+	lineBasis3D(x1, y2, z1, x2, y2, z1);
+	
+	lineBasis3D(x1, y1, z2, x1, y2, z2);
+	lineBasis3D(x2, y1, z2, x2, y2, z2);
+	lineBasis3D(x1, y1, z2, x2, y1, z2);
+	lineBasis3D(x1, y2, z2, x2, y2, z2);
+	
+	lineBasis3D(x1, y1, z1, x1, y1, z2);
+	lineBasis3D(x2, y1, z1, x2, y1, z2);
+	lineBasis3D(x1, y2, z1, x1, y2, z2);
+	lineBasis3D(x2, y2, z1, x2, y2, z2);
 }
 
 
@@ -154,7 +223,7 @@ function point(x, y){
 
 function point3DHelper(x, y, z){
 	var radius = (x**2 + y**2)**.5;
-	var xy = Math.atan(radius/(camaraZ - z))*((camaraZ/* - z*/)**2 + x**2 + y**2)**.5;
+	var xy = Math.atan(radius/(defultCamaraZ - z))*((defultCamaraZ/* - z*/)**2 + x**2 + y**2)**.5;
 	//pointRadius = 3000/(((camaraZ - z)**2 + x**2 + y**2)**.5);
 	return [xy*x/radius,xy*y/radius];
 	console.log(xy*x/radius);
@@ -163,21 +232,85 @@ function point3DHelper(x, y, z){
 }
 
 function point3D(x, y, z){
-	var [X, Y] = point3DHelper(x, y, z);
+    var [X, Y] = point3DHelper(x, y, z);
 	point(X,Y);
 }
 
 function line3D(x1, y1, z1, x2, y2, z2){
-	var [X1, Y1] = point3DHelper(x1, y1, z1);
+    var [X1, Y1] = point3DHelper(x1, y1, z1);
 	var [X2, Y2] = point3DHelper(x2, y2, z2);
-	line(X1, Y1, X2, Y2)
+	line(X1, Y1, X2, Y2);
 }
 
-function basis3DHelper(x, y, z){
-	//cross product
-	//[ a2 * b3 - a3 * b2, a3 * b1 - a1 * b3, a1 * b2 - a2 * b1 ]
+function pointBasis3D(x, y, z){
+    var [xF, yF, zF] = changeBasis(x, y, z);
 	
-	point3DHelper(xF, yF, zF)
+	point3D(xF, yF, zF);
+}
+
+function lineBasis3D(x1, y1, z1, x2, y2, z2){
+    var [X1, Y1, Z1] = changeBasis(x1, y1, z1);
+	var [X2, Y2, Z2] = changeBasis(x2, y2, z2);
+	
+	line3D(X1, Y1, Z1, X2, Y2, Z2);
+}
+
+function changeBasis(x, y, z){
+    [x, y, z] = rotate(x, y, z);
+    [x, y, z] = translate(x, y, z);
+	
+	return [x, y, z];
+}
+
+function rotate(x, y, z){
+	
+    var [a1, a2, a3] = getUnitVector(defultCamaraX, defultCamaraY, defultCamaraZ, originX, originY, originZ);
+    var [b1, b2, b3] = getUnitVector(camaraX, camaraY, camaraZ, focalX, focalY, focalZ);
+	
+	var [u, v, w] = crossProduct(a1, a2, a3, b1, b2, b3);
+	[u, v, w] = unitVector(u, v, w);
+	//console.log(unitVector(u, v, w))
+	var theta = angleOfCameras();
+	return f(x, y, z, defultCamaraX, defultCamaraY,  defultCamaraZ, u, v, w, theta);
+}
+
+function translate(x, y, z){
+	x += defultCamaraX - camaraX;
+	y += defultCamaraY - camaraY;
+	z += defultCamaraZ - camaraZ;
+	return [x, y, z];
+}
+
+
+
+function angleOfCameras(){
+    var [a1, a2, a3] = getVector(defultCamaraX, defultCamaraY, defultCamaraZ, originX, originY, originZ);
+    var [b1, b2, b3] = getVector(camaraX, camaraY, camaraZ, focalX, focalY, focalZ);
+    return vectorAngle(a1, a2, a3, b1, b2, b3); // could be backwards
+}
+
+function getUnitVector(x1, y1, z1, x2, y2, z2){
+    var [x, y, z] = getVector(x1, y1, z1, x2, y2, z2);
+    return unitVector(x, y, z);
+}
+
+function getVector(x1, y1, z1, x2, y2, z2){
+    return [x2 - x1, y2 - y1, z2- z1];
+}
+
+function unitVector(x, y, z){
+    var dist = (x**2 + y**2 + z**2)**.5;
+    return [x/dist, y/dist, z/dist];
+}
+
+function vectorAngle(x1, y1, z1, x2, y2, z2){ //returns the angle between two unit vectors in rads
+    var [a1, a2, a3] = unitVector(x1, y1, z1);
+    var [b1, b2, b3] = unitVector(x2, y2, z2);
+    return -Math.acos(dotProduct(a1, a2, a3, b1, b2, b3));
+}
+
+function dotProduct(a1, a2, a3, b1, b2, b3){
+    return a1*b1 + a2*b2 + a3*b3;
 }
 
 function crossProduct(a1, a2, a3, b1, b2, b3){
@@ -189,10 +322,9 @@ function crossProduct(a1, a2, a3, b1, b2, b3){
 function f(x,y,z,a,b,c,u,v,w,theta) {
 	return [
 	(a*(v**2 + w**2) - u*(b*v + c*w - u*x - v*y - w*z))*(1 - Math.cos(theta)) + x*Math.cos(theta) + (-c*v + b*w - w*y + v*z)*Math.sin(theta),
-	(b*(v**2 + w**2) - v*(a*v + c*w - u*x - v*y - w*z))*(1 - Math.cos(theta)) + y*Math.cos(theta) + (c*u - a*w + w*x - u*z)*Math.sin(theta),
-	(c*(v**2 + w**2) - w*(a*v + b*w - u*x - v*y - w*z))*(1 - Math.cos(theta)) + z*Math.cos(theta) + (-b*u + a*v - v*x + u*y)*Math.sin(theta)]
+	(b*(u**2 + w**2) - v*(a*u + c*w - u*x - v*y - w*z))*(1 - Math.cos(theta)) + y*Math.cos(theta) + (c*u - a*w + w*x - u*z)*Math.sin(theta),
+	(c*(u**2 + v**2) - w*(a*u + b*v - u*x - v*y - w*z))*(1 - Math.cos(theta)) + z*Math.cos(theta) + (-b*u + a*v - v*x + u*y)*Math.sin(theta)]
 }
-
 
 
 
