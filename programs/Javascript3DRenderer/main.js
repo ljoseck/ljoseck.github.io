@@ -14,9 +14,9 @@ var focalX = originX;
 var focalY = originY;
 var focalZ = originZ;
 
-var camaraX = defultCamaraX;
-var camaraY = defultCamaraY;
-var camaraZ = defultCamaraZ;
+var camaraX = defultCamaraX+1;
+var camaraY = defultCamaraY+1;
+var camaraZ = defultCamaraZ+1;
 
 
 var pointRadius = 5
@@ -58,12 +58,13 @@ function main(){
 	}
 
 	var lb = new LineBuilder();
+	dropCircleTown(lb);
+	//dropTown(lb);
 	//zoomTown(lb);
-	circleTown(lb);
+	//circleTown(lb);
 	//panTown(lb);
 	//town(lb);
 	//twoPencels(lb);
-	console.log("done");
 	return;
 	// var lastJ = 0;
 	// for(var j = 0; j <= 10; j++){
@@ -79,6 +80,22 @@ function main(){
 	}
 }
 
+async function dropCircleTown(lb){
+	var dist = 1000;
+	for(var theta = 0; theta <= 5.5*Math.PI; theta += Math.PI/640){
+		clearCanvas();
+		camaraX = dist*Math.cos(theta);
+		camaraY = Math.abs(dist*Math.sin(theta));
+		town(lb);
+		pointBasis3D(0,0,0);
+		pointBasis3D(focalX,focalY,focalZ);
+		focalZ += .5;
+		dist += .5;
+		await sleep(1);
+	}
+	console.log("done");
+}
+
 async function circleTown(lb){
 	// camaraX = 500;
 	// camaraY = 500;
@@ -92,12 +109,24 @@ async function circleTown(lb){
 		pointBasis3D(1,1,1);
 		await sleep(100);
 	}
-	// for( var i = 0; i <= 20; i++){
-		// town(lb);
-		// //camaraX += 50;
-		// camaraY += 50;
-		// //camaraZ -= 50;
-	// }
+	console.log("done");
+}
+
+async function dropTown(lb){
+	// camaraX = 500;
+	camaraY = 500;
+	// town(lb);
+	// return;
+	for( var i = 0; i <= 20; i++){
+		clearCanvas();
+		town(lb);
+		pointBasis3D(1,1,1);
+		focalZ -= 50;
+		camaraY += 100;
+		await sleep(100);
+		//camaraX += 50;
+		//camaraZ -= 50;
+	}
 }
 
 async function panTown(lb){
