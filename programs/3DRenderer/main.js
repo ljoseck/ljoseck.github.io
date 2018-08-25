@@ -58,13 +58,13 @@ function main(){
 	}
 
 	var lb = new LineBuilder();
-	dropCircleTown(lb);
+	//dropCircleTown(lb);
 	//dropTown(lb);
 	//zoomTown(lb);
 	//circleTown(lb);
 	//panTown(lb);
 	//town(lb);
-	//twoPencels(lb);
+	twoPencels(lb);
 	return;
 	// var lastJ = 0;
 	// for(var j = 0; j <= 10; j++){

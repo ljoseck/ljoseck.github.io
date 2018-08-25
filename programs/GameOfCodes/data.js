@@ -1,15 +1,16 @@
 var files = Ext.create('Ext.data.Store', {  data: [
 
-          {'1':"main.py", '2':"Python", '3':"2018", '4':"", '5':114},
+          {'1':"SkyRidge.txt", '2':"Ti-Basic", '3':"2011", '4':"2014", '5':718},
 ]});
 
 
-var discription = "&emsp;I am very fond of the mathematical concepts where complexity forms out of simplicity. The Mandelbrot set is a great example. I made these programs as a test to see if I could render the Mandelbrot with the language<br/><img src='mandelbrot1.png' style='width:1200px;height:600px;'><br/><img src='mandelbrot2.png' style='width:1200px;height:600px;'>";
+var discription = "";
+
 
 var discriptionBox = Ext.create('Ext.form.Panel', {
 
 	//width: "80%",
-	height: 500,
+	height: 400,
 	layout: 'fit', 
 	resizable:{
 			pinned:true,
@@ -29,6 +30,7 @@ var discriptionBox = Ext.create('Ext.form.Panel', {
 		},
 		
 		html: discription,
+		id: "disc"
 		
 	}],
 	

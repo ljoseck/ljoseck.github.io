@@ -1,11 +1,14 @@
 var cloneSets = Ext.create('Ext.data.Store', {  data: [
 
-          {'1':"8 Queens Problem", '2':"Python", '3':"2015", '4':"", '5':86},
-          {'1':"Mandelbrot Set", '2':"Python", '3':"2015", '4':"", '5':""},
-          {'1':"SkyRidge", '2':"Ti-Basic", '3':"2011", '4':"2014", '5':718},
-          {'1':"2048", '2':"Ti-Basic", '3':"2014", '4':"2014", '5':227},
-          {'1':"Interpreter", '2':"JavaScript", '3':"2014", '4':"2014", '5':332},
-          {'1':"Game Of Codes", '2':"JavaScript", '3':"2018", '4':"2018", '5':''},
+          {'1':"3D Renderer", '2':"JavaScript", '3':"2018", '4':"2018", '5': "Personal Project",'6':''},
+          {'1':"Game Of Codes", '2':"JavaScript", '3':"2018", '4':"2018", '5': "School Project",'6':''},
+          {'1':"File System", '2':"C", '3':"2016", '4':"2016", '5': "School Project",'6':426},
+          {'1':"Mandelbrot Set", '2':"Python", '3':"2015", '4':"", '5': "Personal Project",'6':""},
+          {'1':"8 Queens Problem", '2':"Python", '3':"2015", '4':"2015", '5': "Personal Project",'6':86},
+          {'1':"Auto Trader", '2':"AutoHotkey", '3':"2015", '4':"2015", '5': "Personal Project",'6':538},
+          {'1':"Interpreter", '2':"JavaScript", '3':"2014", '4':"2014", '5': "Personal Project",'6':332},
+          {'1':"2048", '2':"Ti-Basic", '3':"2014", '4':"2014", '5': "Personal Project",'6':227},
+          {'1':"SkyRidge", '2':"Ti-Basic", '3':"2011", '4':"2014", '5': "Personal Project",'6':718},
 ]});
 
 function projectRenderer(val) {
@@ -43,7 +46,8 @@ var table = Ext.create('Ext.grid.Panel', {
         { text: "Languages", width: 120, dataIndex: '2', sortable: true },
         { text: "Development Start", width: 160, dataIndex: '3', sortable: true },
         { text: "Development End", width: 150, dataIndex: '4', sortable: true },
-        { text: "Lines of Code", flex: 1, dataIndex: '5', sortable: true }
+        { text: "Type", width: 150, dataIndex: '5', sortable: true },
+        { text: "Lines of Code", flex: 1, dataIndex: '6', sortable: true }
     ],
     store: cloneSets
 });
@@ -51,41 +55,41 @@ var table = Ext.create('Ext.grid.Panel', {
 
 var searchForm = Ext.create('Ext.form.Panel', {
 
-    //width: "80%",
-    height: 300,
+    // //width: "80%",
+    // height: 300,
 	
-	items: [{
-		xtype: 'fieldset',
-        title:'Search',
+	// items: [{
+		// xtype: 'fieldset',
+        // title:'Search',
 
-        columnWidth: 0.35,
-        //margin: '0 10 0 10',
-        layout: 'anchor',
-        defaultType: 'textfield',
+        // columnWidth: 0.35,
+        // //margin: '0 10 0 10',
+        // layout: 'anchor',
+        // defaultType: 'textfield',
 
-        items: [{
-            fieldLabel: 'Name',
-        }, {
-            fieldLabel: 'Price',
-        }, {
-            fieldLabel: '% Change',
-        }, {
-            xtype: 'datefield',
-            fieldLabel: 'Last Updated',
-        }, {
-			xtype: 'button',
-			text: 'Language',
-			menu: [{
-                text:'C'
-            },{
-                text:'C#'
-            },{
-                text:'Python'	
-            }]
-		}]
+        // items: [{
+            // fieldLabel: 'Name',
+        // }, {
+            // fieldLabel: 'Price',
+        // }, {
+            // fieldLabel: '% Change',
+        // }, {
+            // xtype: 'datefield',
+            // fieldLabel: 'Last Updated',
+        // }, {
+			// xtype: 'button',
+			// text: 'Language',
+			// menu: [{
+                // text:'C'
+            // },{
+                // text:'C#'
+            // },{
+                // text:'Python'	
+            // }]
+		// }]
 
 		
-	}],
+	// }],
 	
 });
 

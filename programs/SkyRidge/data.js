@@ -10,7 +10,7 @@ var discription = "";
 var discriptionBox = Ext.create('Ext.form.Panel', {
 
 	//width: "80%",
-	height: 500,
+	height: 400,
 	layout: 'fit', 
 	resizable:{
 			pinned:true,
