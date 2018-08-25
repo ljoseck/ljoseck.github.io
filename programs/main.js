@@ -43,7 +43,7 @@ var table = Ext.create('Ext.grid.Panel', {
 	
     columns: [
         { text: "Project", width: 300, dataIndex: '1', sortable: true, renderer: projectRenderer },
-        { text: "Languages", width: 120, dataIndex: '2', sortable: true },
+        { text: "Language", width: 120, dataIndex: '2', sortable: true },
         { text: "Development Start", width: 160, dataIndex: '3', sortable: true },
         { text: "Development End", width: 150, dataIndex: '4', sortable: true },
         { text: "Type", width: 150, dataIndex: '5', sortable: true },
