@@ -1,0 +1,25 @@
+<head>
+	
+    <script type="text/javascript" src="..\..\SenchaResources\examples\classic\shared\include-ext.js"></script>
+	<title>Louis Joseck</title>
+</head>
+
+<body style="background-color: #DEDEDE;">
+    <script type="text/javascript" src="./data.js"></script>
+    <script type="text/javascript" src="../programs.js"></script>
+    <div id = "Discription">
+	
+    	This 3D renderer was made in an afternoon as a quick personal project and rapid prototype. I created this with the intension of making interesting 3D shapes and animations. I am not much of an artist, but I enjoy the geometric designs people have made. 
+<br/>
+<br/>
+This project was done with JavaScript on an HTML canvas. JavaScript was chosen as I could easily render 2D lines and shapes with animations from different calculated frames. HTML allows for this project to be easily demoed and shared. By selecting the main.html file below you can view the final renderer in action.
+<br/>
+<br/>
+The renderer I made is a single point perspective renderer meaning that objects very close to the camera would appear distorted and curved. While my renderer could achieve these distortions by plotting each point on a line, I had to make assumptions to improve performance. Each line in the 3D space would appear as straight lines on the two-dimensional canvas, while maintaining the correct end points. All the calculations to create the core renderer with a stationary camera were done independently in the same afternoon I started this project. This rapid prototype was able to render any three-dimensional shape as a wire frame. 
+<br/>
+<br/>
+My next goal was allowing for a moving camera. While I created the high-level functionality to achieve this goal, I did get help online concerning a certain function allowing for the rotation of the camera. Knowing what I was looking for I discovered a function that would rotate an arbitrary point an arbitrary angle about an arbitrary vector. This allowed for the full wire frame animation I currently am demoing.
+
+		
+	</div>
+</body>

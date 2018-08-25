@@ -19,7 +19,10 @@ var camaraY = defultCamaraY+1;
 var camaraZ = defultCamaraZ+1;
 
 
-var pointRadius = 5
+var pointRadius = 5;
+
+//var token = 0; // handle cancellation of dropCircleTown
+var cancellationToken = 0;
 main();
 /* notes:
 
@@ -33,7 +36,27 @@ the angle from center to far side is arctan(.5/3) = 0.165148677 rad = 9.46232221
 
 
 
-function main(){
+async function main(action = "dropCircleTown"){
+	cancellationToken++;
+	var options = document.getElementById("options");
+		console.log(options.children);
+	// for(var i = 0; i < options.children.length; i++){
+		// options.children[i].disabled = true;
+	// }
+	defultCamaraX = 0;
+	defultCamaraY = 0;
+	defultCamaraZ = 3000;
+
+	focalX = originX;
+	focalY = originY;
+	focalZ = originZ;
+
+	camaraX = defultCamaraX+1;
+	camaraY = defultCamaraY+1;
+	camaraZ = defultCamaraZ+1;
+
+
+	pointRadius = 5
 	class LineBuilder {
 		constructor() {
 			this.x = undefined;
@@ -58,13 +81,32 @@ function main(){
 	}
 
 	var lb = new LineBuilder();
-	//dropCircleTown(lb);
-	//dropTown(lb);
-	//zoomTown(lb);
-	//circleTown(lb);
-	//panTown(lb);
-	//town(lb);
-	twoPencels(lb);
+	
+	clearCanvas();
+	if(action == "dropCircleTown"){
+		await dropCircleTown(lb);
+	}
+	if(action == "dropTown"){
+		await dropTown(lb);
+	}
+	if(action == "zoomTown"){
+		await zoomTown(lb);
+	}
+	if(action == "circleTown"){
+		await circleTown(lb);
+	}
+	if(action == "panTown"){
+		await panTown(lb);
+	}
+	if(action == "town"){
+		await town(lb);
+	}
+	if(action == "twoPencels"){
+		await twoPencels(lb);
+	}
+	for(var i = 0; i < options.children.length; i++){
+		options.children[i].disabled = false;
+	}
 	return;
 	// var lastJ = 0;
 	// for(var j = 0; j <= 10; j++){
@@ -81,8 +123,10 @@ function main(){
 }
 
 async function dropCircleTown(lb){
+	var heldCancellationToken = cancellationToken;
+	
 	var dist = 1000;
-	for(var theta = 0; theta <= 5.5*Math.PI; theta += Math.PI/640){
+	for(var theta = 0; theta <= 5.5*Math.PI && heldCancellationToken == cancellationToken; theta += Math.PI/640){
 		clearCanvas();
 		camaraX = dist*Math.cos(theta);
 		camaraY = Math.abs(dist*Math.sin(theta));
@@ -97,11 +141,12 @@ async function dropCircleTown(lb){
 }
 
 async function circleTown(lb){
+	var heldCancellationToken = cancellationToken;
 	// camaraX = 500;
 	// camaraY = 500;
 	// town(lb);
 	// return;
-	for(var theta = 0; theta <= 40*Math.PI; theta += Math.PI/32){
+	for(var theta = 0; theta <= 40*Math.PI && heldCancellationToken == cancellationToken; theta += Math.PI/32){
 		clearCanvas();
 		camaraX = 1000*Math.cos(theta);
 		camaraY = 1000*Math.sin(theta);
@@ -113,11 +158,12 @@ async function circleTown(lb){
 }
 
 async function dropTown(lb){
+	var heldCancellationToken = cancellationToken;
 	// camaraX = 500;
 	camaraY = 500;
 	// town(lb);
 	// return;
-	for( var i = 0; i <= 20; i++){
+	for( var i = 0; i <= 20 && heldCancellationToken == cancellationToken; i++){
 		clearCanvas();
 		town(lb);
 		pointBasis3D(1,1,1);
@@ -130,11 +176,12 @@ async function dropTown(lb){
 }
 
 async function panTown(lb){
+	var heldCancellationToken = cancellationToken;
 	// camaraX = 500;
 	// camaraY = 500;
 	// town(lb);
 	// return;
-	for( var i = 0; i <= 20; i++){
+	for( var i = 0; i <= 20 && heldCancellationToken == cancellationToken; i++){
 		clearCanvas();
 		town(lb);
 		pointBasis3D(1,1,1);
@@ -146,7 +193,8 @@ async function panTown(lb){
 }
 
 async function zoomTown(lb){
-	for(defultCamaraZ = 10000; defultCamaraZ >= 1000; defultCamaraZ -= 50){
+	var heldCancellationToken = cancellationToken;
+	for(camaraZ = 10000; camaraZ >= 1000 && heldCancellationToken == cancellationToken; camaraZ -= 50){
 		clearCanvas();
 		town(lb);
 		await sleep(10);

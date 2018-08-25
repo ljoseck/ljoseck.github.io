@@ -1,6 +1,23 @@
 <head>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body style="overflow-y:hidden">
+<body>
+<!--	//dropCircleTown(lb);
+	//dropTown(lb);
+	//zoomTown(lb);
+	//circleTown(lb);
+	//panTown(lb);
+	//town(lb);
+	twoPencels(lb);-->
+    <div id="options">
+		<input onclick='main("dropCircleTown")' type="button" value="dropCircleTown">
+		<input onclick='main("dropTown")' type="button" value="dropTown">
+		<input onclick='main("zoomTown")' type="button" value="zoomTown">
+		<input onclick='main("circleTown")' type="button" value="circleTown">
+		<input onclick='main("panTown")' type="button" value="panTown">
+		<input onclick='main("town")' type="button" value="town">
+		<input onclick='main("twoPencels")' type="button" value="twoPencels">
+	</div>
 	<canvas id="myCanvas" width="1000" height="1000" style="border:1px solid #000000;"></canvas>
 	<script type="text/javascript" src="main.js"></script>
 <body>
