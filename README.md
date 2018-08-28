@@ -1,5 +1,5 @@
 # game-of-codes
 
-ljoseck.github.io
+https://ljoseck.github.io/
 
 Master branch
