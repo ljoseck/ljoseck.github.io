@@ -1,4 +1,4 @@
-# game-of-codes
+# Louis Joseck
 
 https://ljoseck.github.io/
 
