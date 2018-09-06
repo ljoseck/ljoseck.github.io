@@ -28,7 +28,8 @@ body{
 
 h1 {
 	font-family: "Trebuchet MS";
-	color: #1D4C5E;
+	/* color: #1D4C5E; */
+	color: FFF;
 }
 
 .image {
@@ -55,9 +56,10 @@ h1 {
 button {
 	height: 40px;
 	width: 200px;
-	color: #1D4C5E;
-	background-color: #021F2B;
-	border-color: #021F2B;
+	/* color: #1D4C5E; */
+	color: FFF;
+	background-color: #0A3342;
+	border-color: #0A3342;
 	margin-top: 20px;
 	text-align: center;
 	justify-content: center;

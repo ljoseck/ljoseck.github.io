@@ -66,10 +66,10 @@ async function main() {
 		stripComplex([[x1, y1], [x3, y3], [x2, y2]], 50, 50, i+.2);
 		stripComplex([[x1, y1], [x3, y3], [x2, y2]], 50, 50, i+.3);
 		stripComplex([[x1, y1], [x3, y3], [x2, y2]], 50, 50, i+.4);
-		stripComplex([[x1, y1], [x3, y3], [x2, y2]], 50, 50, 1-i-.1);
-		stripComplex([[x1, y1], [x3, y3], [x2, y2]], 50, 50, 1-i-.2);
-		stripComplex([[x1, y1], [x3, y3], [x2, y2]], 50, 50, 1-i-.3);
-		stripComplex([[x1, y1], [x3, y3], [x2, y2]], 50, 50, 1-i-.4);
+		// stripComplex([[x1, y1], [x3, y3], [x2, y2]], 50, 50, 1-i-.1);
+		// stripComplex([[x1, y1], [x3, y3], [x2, y2]], 50, 50, 1-i-.2);
+		// stripComplex([[x1, y1], [x3, y3], [x2, y2]], 50, 50, 1-i-.3);
+		// stripComplex([[x1, y1], [x3, y3], [x2, y2]], 50, 50, 1-i-.4);
 		// stripComplex([[x1, y1], [x3, y3], [x2, y2]], 100, 100);
 		// context.bezierCurveTo(x1,x2,)
 		//line(x2, y2, x3, y3);
@@ -180,5 +180,4 @@ function addComplex(list1, x, y){
 	}
 	return result;
 }
-
-//main();
+main();
