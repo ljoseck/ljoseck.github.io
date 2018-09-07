@@ -57,6 +57,32 @@ async function main() {
 	// canvas.stroke();
 	// canvas.fill();
 	// return;
+	clearCanvas();
+	var [[x1, y1], [x2, y2]] = [[100, 500], [1000,50]];
+	//line(x1, y1, x2, y2);
+	var [x3, y3] = triangulate(.5, [[x1, y1], [x2, y2]]);
+	var [x4, y4] = triangulate(.5, [[x2, y2], [x1, y1]]);
+	for(var i = 0; i <= 1; i += .0002){
+		clearCanvas();
+		var number = 12;
+		//stripComplex([[x1, y1], [x3, y3], [x2, y2]], 50, 50, number, i, ["#6A1C0C", "#1D4C5E"], "#132200");
+		// stripComplex(addComplex([[x2, y2], [x3, y3], [x1, y1]], 0, 0), -50, -50, number, i, ["#1D4C5E", "#6A1C0C"], "#132200", -1);
+		// stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], -100, -100), 50, 50, number, i, ["#6A1C0C", "#1D4C5E"], "#132200");
+		
+		// stripComplex(addComplex([[x2, y2], [x3, y3], [x1, y1]], -100, -100), -50, -50, number, i, ["#1D4C5E", "#6A1C0C"], "#132200", -1);
+		// stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], -200, -200), 50, 50, number, i, ["#233E00", "#1D4C5E", "#003212", "#1D4C5E"], "#132200");
+		
+		
+		for(var x = 0; x <= 2; x++){
+		stripComplex(addComplex([[x2, y2], [x3, y3], [x1, y1]], x*100, x*100), -50, -50, number, i, ["#021F2B", "#003212", "#021F2B", "#233E00"], "#132200", -1);
+		stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], x*100, x*100), 50, 50, number, i, ["#233E00", "#021F2B", "#003212", "#021F2B"], "#132200");
+			
+		}
+		await sleep(100);
+		//return;
+	}
+	
+	return;
 	for(var i = 0; i <= 1; i += .0002){
 		clearCanvas();
 		var [[x1, y1], [x2, y2]] = [[100, 500], [1000,50]];
@@ -81,15 +107,66 @@ async function main() {
 	//testB([[1,2],[100,200],[200,100]]);
 }
 
-function stripComplex(points, offsetX, offsetY, dist){ // two points
-	BSimple(points);
-	// dist = .1;
-	var subdist = .5;
-	var [point1, point2] = [B(dist, points), B(dist, addComplex(points, offsetX, offsetY))];
-	var point3 = triangulate(subdist, [point1, point2]);
-	BSimple([point1, point3, point2]);
-	BSimple(addComplex(points, offsetX, offsetY));
+function stripComplex(points, offsetX, offsetY, amount, offset, colors, lineColor, isBackwards = 1){ // two points
+	var dist = 0
+	var	subdist = .5;
 	
+	
+	// var [point1, point2] = [B(dist, points), B(dist, addComplex(points, offsetX, offsetY))];
+	// var point3 = triangulate(subdist, [point1, point2]);
+	//BSimple(points);
+	// dist = .1;
+	// var subdist = .5;
+	// dist = 0;
+	for(var i = 0; i < amount; i++) {
+		canvas.beginPath();
+		canvas.fillStyle = colors[i % colors.length];
+		canvas.strokeStyle = lineColor;
+		canvas.lineWidth = 2;
+		
+		//rightside large arc
+		var [point1, point2] = [B(i/amount + offset, points), B((i + 1)/amount + offset, points)];
+		canvas.moveTo(point1[0], point1[1]);
+		
+		
+		var point3 = triangulate(isBackwards * subdist/amount, [point1, point2]);
+		BSimpleComplex([point1, point3, point2]);
+		
+		// await sleep(100);
+		
+		//forward facing small arc
+		var [point1, point2] = [B((i + 1)/amount + offset, points), B((i + 1)/amount + offset, addComplex(points, offsetX, offsetY))];
+		var point3 = triangulate(subdist, [point1, point2]);
+		BSimpleComplex([point1, point3, point2]);
+		
+		// await sleep(100);
+		
+		
+		//left large arc
+		var [point1, point2] = [B(i/amount + offset, points), B((i + 1)/amount + offset, points)];
+		var point3 = triangulate(isBackwards * subdist/amount, [point1, point2]);
+		BSimpleComplex(addComplex([point2, point3, point1], offsetX, offsetY));
+		
+		//await sleep(100);
+		
+		
+		
+		//back end small arc
+		var [point1, point2] = [B(i/amount + offset, points), B(i/amount + offset, addComplex(points, offsetX, offsetY))];
+		var point3 = triangulate(subdist, [point1, point2]);
+		BSimpleComplex([point2, point3, point1]);
+		
+		//await sleep(100);
+		canvas.closePath();
+		canvas.stroke();
+		canvas.fill();
+	}
+	// dist = 1;
+	// var [point1, point2] = [B(1, points), B(1, addComplex(points, offsetX, offsetY))];
+	// var point3 = triangulate(subdist, [point1, point2]);
+	// BSimple([point1, point3, point2]);
+	
+	//BSimple(addComplex(points, offsetX, offsetY));
 }
 function clearCanvas(){
 	canvas.clearRect(0, 0, sizeX, sizeY);
@@ -115,6 +192,13 @@ function BSimple(points){ // 3 points
 	
 	canvas.quadraticCurveTo(x2, y2, x3, y3);
 	canvas.stroke();
+}
+
+function BSimpleComplex(points){ // 3 points
+	var [[x1, y1], [x2, y2], [x3, y3]] = points;
+	canvas.lineTo(x1, y1);
+	
+	canvas.quadraticCurveTo(x2, y2, x3, y3);
 }
 
 function testB(points){
@@ -151,7 +235,7 @@ function line(x1, y1, x2, y2){
 }
 
 function B(t, points){
-	console.log(points);
+	//console.log(points);
 	if(points.length <= 1){
 		return points[0];
 	}
