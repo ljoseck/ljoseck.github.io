@@ -24,6 +24,7 @@ highlights
 
 body{
 	background-color: #011118;
+	//height: 100%;
 }
 
 h1 {
@@ -35,6 +36,7 @@ h1 {
 .image {
 	width:250px;
 	border-radius: 6px;
+   border:6px solid #0A3342;
 	
 }
 

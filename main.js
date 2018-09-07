@@ -30,19 +30,21 @@ B(P0,P1,P2,P3,t) = (1-t)*B(P1,P2,P3,t)+t*B(P0,P1,P2,t)
 
 */
 var htmlCanvas = document.getElementById("canvas");
+var canvasWrapper = document.getElementById("canvas-wrapper");
 var canvas = htmlCanvas.getContext("2d");
 var sizeX = window.innerWidth;
 var sizeY = window.innerHeight;
 
 htmlCanvas.width = sizeX;
-htmlCanvas.height = sizeY <= 685 ? 685 : sizeY;
+htmlCanvas.height = sizeY;
+canvasWrapper.style.height = sizeY;
 
 window.onresize = function (){
 	sizeX = window.innerWidth;
 	sizeY = window.innerHeight;
 
 	htmlCanvas.width = sizeX;
-	htmlCanvas.height = sizeY <= 685 ? 685 : sizeY;
+	htmlCanvas.height = sizeY;
 };
 
 async function main() {
@@ -77,8 +79,14 @@ async function main() {
 	// var [x6, y6] = triangulate(.5, [[x4, y4], [x5, y5]]);
 	
 	// var [x4, y4] = triangulate(.5, [[x2, y2], [x1, y1]]);
+		var colors = ["#011118", "#222222", "#011118", "#555555"];
+		var colors2 = ["#555555", "#011118", "#222222", "#011118"];
 	for(var i = 0; i <= 1; i += .0001){
-		
+		if(i >= .05){
+			colors.rotate(-1);
+			colors2.rotate(-1);
+			i = 0;
+		}
 		var [[x1, y1], [x2, y2]] = [[0, sizeY], [sizeX + 100,50]];
 		var [x3, y3] = triangulate(.5, [[x1, y1], [x2, y2]]);
 		clearCanvas();
@@ -90,13 +98,15 @@ async function main() {
 		// stripComplex(addComplex([[x2, y2], [x3, y3], [x1, y1]], -100, -100), -50, -50, number, i, ["#1D4C5E", "#6A1C0C"], "#132200", -1);
 		// stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], -200, -200), 50, 50, number, i, ["#233E00", "#1D4C5E", "#003212", "#1D4C5E"], "#132200");
 		
-		
-		for(var x = -3; x <= 10; x++){
-		stripComplex(addComplex([[x2, y2], [x3, y3], [x1, y1]], x*100, x*100), -50, -50, number, i, ["#011118", "#222222", "#011118", "#555555"], "#111111", -1);
-		stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], x*100, x*100), 50, 50, number, i, ["#555555", "#011118", "#222222", "#011118"], "#111111");
-		
-		// stripComplex(addComplex([[x5, y5], [x6, y6], [x4, y4]], x*-100, x*100), 50, -50, number, i, ["#021F2B", "#003212", "#021F2B", "#233E00"], "#132200", -1);
+		// colors.rotate(-1);
+		for(var x = -3; x <= 6; x++){
+		// for(var x = 0; x <= 0; x++){
+			// temp.rotate(1);
+			stripComplex(addComplex([[x2, y2], [x3, y3], [x1, y1]], x*100, x*100), -50, -50, number, i, colors, "#111111", -1);
+			stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], x*100, x*100), 50, 50, number, i, colors2, "#111111");
 			
+			// stripComplex(addComplex([[x5, y5], [x6, y6], [x4, y4]], x*-100, x*100), 50, -50, number, i, ["#021F2B", "#003212", "#021F2B", "#233E00"], "#132200", -1);
+				
 		}
 		await sleep(100);
 		//return;
@@ -126,10 +136,32 @@ async function main() {
 	
 	//testB([[1,2],[100,200],[200,100]]);
 }
+//var tempG = 0;
+Array.prototype.rotate = (function() {
+    var unshift = Array.prototype.unshift,
+        splice = Array.prototype.splice;
+
+    return function(count) {
+        var len = this.length >>> 0,
+            count = count >> 0;
+
+        unshift.apply(this, splice.call(this, count % len, len));
+        return this;
+    };
+})();
 
 function stripComplex(points, offsetX, offsetY, amount, offset, colors, lineColor, isBackwards = 1){ // two points
 	var dist = 0
 	var	subdist = .5;
+	// console.log(offset);
+	// console.log(1 / amount * colors.length);
+	// if(offset >= tempG){
+		// tempG = offset;
+	// } else {
+		// alert(tempG);
+		// console.log(tempG);
+	// }
+	//console.log(offset);
 	
 	
 	// var [point1, point2] = [B(dist, points), B(dist, addComplex(points, offsetX, offsetY))];
