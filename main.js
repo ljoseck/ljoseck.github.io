@@ -34,6 +34,14 @@ var sizeY = window.innerHeight;
 htmlCanvas.width = sizeX;
 htmlCanvas.height = sizeY;
 
+window.onresize = function (){
+	sizeX = window.innerWidth;
+	sizeY = window.innerHeight;
+
+	htmlCanvas.width = sizeX;
+	htmlCanvas.height = sizeY;
+};
+
 async function main() {
 	
 	
@@ -58,13 +66,20 @@ async function main() {
 	// canvas.fill();
 	// return;
 	clearCanvas();
-	var [[x1, y1], [x2, y2]] = [[100, 500], [1000,50]];
+	var [[x1, y1], [x2, y2]] = [[0, sizeY], [sizeX + 100,50]];
 	//line(x1, y1, x2, y2);
 	var [x3, y3] = triangulate(.5, [[x1, y1], [x2, y2]]);
-	var [x4, y4] = triangulate(.5, [[x2, y2], [x1, y1]]);
-	for(var i = 0; i <= 1; i += .0002){
+	
+	// var [[x4, y4], [x5, y5]] = [[100,50], [1000, 500]];
+	// var [x6, y6] = triangulate(.5, [[x4, y4], [x5, y5]]);
+	
+	// var [x4, y4] = triangulate(.5, [[x2, y2], [x1, y1]]);
+	for(var i = 0; i <= 1; i += .0001){
+		
+		var [[x1, y1], [x2, y2]] = [[0, sizeY], [sizeX + 100,50]];
+		var [x3, y3] = triangulate(.5, [[x1, y1], [x2, y2]]);
 		clearCanvas();
-		var number = 12;
+		var number = 20;
 		//stripComplex([[x1, y1], [x3, y3], [x2, y2]], 50, 50, number, i, ["#6A1C0C", "#1D4C5E"], "#132200");
 		// stripComplex(addComplex([[x2, y2], [x3, y3], [x1, y1]], 0, 0), -50, -50, number, i, ["#1D4C5E", "#6A1C0C"], "#132200", -1);
 		// stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], -100, -100), 50, 50, number, i, ["#6A1C0C", "#1D4C5E"], "#132200");
@@ -73,9 +88,12 @@ async function main() {
 		// stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], -200, -200), 50, 50, number, i, ["#233E00", "#1D4C5E", "#003212", "#1D4C5E"], "#132200");
 		
 		
-		for(var x = 0; x <= 2; x++){
+		for(var x = 0; x <= 1; x++){
 		stripComplex(addComplex([[x2, y2], [x3, y3], [x1, y1]], x*100, x*100), -50, -50, number, i, ["#021F2B", "#003212", "#021F2B", "#233E00"], "#132200", -1);
+		// stripComplex(addComplex([[x4, y4], [x6, y6], [x5, y5]], x*-100, x*100), -50, 50, number, i, ["#233E00", "#021F2B", "#003212", "#021F2B"], "#132200");
+		
 		stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], x*100, x*100), 50, 50, number, i, ["#233E00", "#021F2B", "#003212", "#021F2B"], "#132200");
+		// stripComplex(addComplex([[x5, y5], [x6, y6], [x4, y4]], x*-100, x*100), 50, -50, number, i, ["#021F2B", "#003212", "#021F2B", "#233E00"], "#132200", -1);
 			
 		}
 		await sleep(100);
@@ -99,7 +117,7 @@ async function main() {
 		// stripComplex([[x1, y1], [x3, y3], [x2, y2]], 100, 100);
 		// context.bezierCurveTo(x1,x2,)
 		//line(x2, y2, x3, y3);
-		await sleep(100);
+		await sleep(200);
 	}
 	
 	
@@ -122,7 +140,7 @@ function stripComplex(points, offsetX, offsetY, amount, offset, colors, lineColo
 		canvas.beginPath();
 		canvas.fillStyle = colors[i % colors.length];
 		canvas.strokeStyle = lineColor;
-		canvas.lineWidth = 2;
+		canvas.lineWidth = 8;
 		
 		//rightside large arc
 		var [point1, point2] = [B(i/amount + offset, points), B((i + 1)/amount + offset, points)];
