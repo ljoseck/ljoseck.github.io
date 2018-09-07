@@ -73,9 +73,9 @@ async function main() {
 		// stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], -200, -200), 50, 50, number, i, ["#233E00", "#1D4C5E", "#003212", "#1D4C5E"], "#132200");
 		
 		
-		for(var x = 0; x <= 2; x++){
-		stripComplex(addComplex([[x2, y2], [x3, y3], [x1, y1]], x*100, x*100), -50, -50, number, i, ["#021F2B", "#003212", "#021F2B", "#233E00"], "#132200", -1);
-		stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], x*100, x*100), 50, 50, number, i, ["#233E00", "#021F2B", "#003212", "#021F2B"], "#132200");
+		for(var x = -3; x <= 10; x++){
+		stripComplex(addComplex([[x2, y2], [x3, y3], [x1, y1]], x*100, x*100), -50, -50, number, i, ["#011118", "#003212", "#011118", "#233E00"], "#132200", -1);
+		stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], x*100, x*100), 50, 50, number, i, ["#233E00", "#011118", "#003212", "#011118"], "#132200");
 			
 		}
 		await sleep(100);
