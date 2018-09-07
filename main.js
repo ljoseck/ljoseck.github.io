@@ -42,9 +42,11 @@ canvasWrapper.style.height = sizeY;
 window.onresize = function (){
 	sizeX = window.innerWidth;
 	sizeY = window.innerHeight;
+	console.log(window.innerHeight);
 
 	htmlCanvas.width = sizeX;
 	htmlCanvas.height = sizeY;
+	canvasWrapper.style.height = sizeY;
 };
 
 async function main() {
@@ -79,9 +81,11 @@ async function main() {
 	// var [x6, y6] = triangulate(.5, [[x4, y4], [x5, y5]]);
 	
 	// var [x4, y4] = triangulate(.5, [[x2, y2], [x1, y1]]);
-		var colors = ["#011118", "#222222", "#011118", "#555555"];
-		var colors2 = ["#555555", "#011118", "#222222", "#011118"];
+	var colors = ["#011118", "#222222", "#011118", "#555555"];
+	var colors2 = ["#555555", "#011118", "#222222", "#011118"];
 	for(var i = 0; i <= 1; i += .0001){
+		
+		var scale = sizeY/6.6;
 		if(i >= .05){
 			colors.rotate(-1);
 			colors2.rotate(-1);
@@ -102,8 +106,8 @@ async function main() {
 		for(var x = -3; x <= 6; x++){
 		// for(var x = 0; x <= 0; x++){
 			// temp.rotate(1);
-			stripComplex(addComplex([[x2, y2], [x3, y3], [x1, y1]], x*100, x*100), -50, -50, number, i, colors, "#111111", -1);
-			stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], x*100, x*100), 50, 50, number, i, colors2, "#111111");
+			stripComplex(addComplex([[x2, y2], [x3, y3], [x1, y1]], x*scale, x*scale), -scale/2, -scale/2, number, i, colors, "#111111", -1);
+			stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], x*scale, x*scale), scale/2, scale/2, number, i, colors2, "#111111");
 			
 			// stripComplex(addComplex([[x5, y5], [x6, y6], [x4, y4]], x*-100, x*100), 50, -50, number, i, ["#021F2B", "#003212", "#021F2B", "#233E00"], "#132200", -1);
 				
