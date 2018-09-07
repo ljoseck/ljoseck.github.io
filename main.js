@@ -20,6 +20,9 @@ highlights
 #021F2B
 #233E00
 
+grays
+#555555
+
 B(P0) = P0;
 
 B(P0,P1,P2,P3,t) = (1-t)*B(P1,P2,P3,t)+t*B(P0,P1,P2,t)
@@ -32,14 +35,14 @@ var sizeX = window.innerWidth;
 var sizeY = window.innerHeight;
 
 htmlCanvas.width = sizeX;
-htmlCanvas.height = sizeY;
+htmlCanvas.height = sizeY <= 685 ? 685 : sizeY;
 
 window.onresize = function (){
 	sizeX = window.innerWidth;
 	sizeY = window.innerHeight;
 
 	htmlCanvas.width = sizeX;
-	htmlCanvas.height = sizeY;
+	htmlCanvas.height = sizeY <= 685 ? 685 : sizeY;
 };
 
 async function main() {
@@ -88,11 +91,10 @@ async function main() {
 		// stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], -200, -200), 50, 50, number, i, ["#233E00", "#1D4C5E", "#003212", "#1D4C5E"], "#132200");
 		
 		
-		for(var x = 0; x <= 1; x++){
-		stripComplex(addComplex([[x2, y2], [x3, y3], [x1, y1]], x*100, x*100), -50, -50, number, i, ["#021F2B", "#003212", "#021F2B", "#233E00"], "#132200", -1);
-		// stripComplex(addComplex([[x4, y4], [x6, y6], [x5, y5]], x*-100, x*100), -50, 50, number, i, ["#233E00", "#021F2B", "#003212", "#021F2B"], "#132200");
+		for(var x = -3; x <= 10; x++){
+		stripComplex(addComplex([[x2, y2], [x3, y3], [x1, y1]], x*100, x*100), -50, -50, number, i, ["#011118", "#222222", "#011118", "#555555"], "#111111", -1);
+		stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], x*100, x*100), 50, 50, number, i, ["#555555", "#011118", "#222222", "#011118"], "#111111");
 		
-		stripComplex(addComplex([[x1, y1], [x3, y3], [x2, y2]], x*100, x*100), 50, 50, number, i, ["#233E00", "#021F2B", "#003212", "#021F2B"], "#132200");
 		// stripComplex(addComplex([[x5, y5], [x6, y6], [x4, y4]], x*-100, x*100), 50, -50, number, i, ["#021F2B", "#003212", "#021F2B", "#233E00"], "#132200", -1);
 			
 		}
@@ -117,7 +119,7 @@ async function main() {
 		// stripComplex([[x1, y1], [x3, y3], [x2, y2]], 100, 100);
 		// context.bezierCurveTo(x1,x2,)
 		//line(x2, y2, x3, y3);
-		await sleep(200);
+		await sleep(100);
 	}
 	
 	
