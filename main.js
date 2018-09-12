@@ -35,9 +35,27 @@ var canvas = htmlCanvas.getContext("2d");
 var sizeX = window.innerWidth;
 var sizeY = window.innerHeight;
 
+var mouseX;
+var mouseY;
+
 htmlCanvas.width = sizeX;
 htmlCanvas.height = sizeY;
 canvasWrapper.style.height = sizeY;
+
+function getMousePos(canvas, evt) {
+	var rect = canvas.getBoundingClientRect();
+	return {
+		x: evt.clientX - rect.left,
+		y: evt.clientY - rect.top
+	};
+}
+	  
+window.addEventListener('mousemove', function(evt) {
+	var mousePos = getMousePos(htmlCanvas, evt);
+	mouseX = mousePos.x;
+	mouseY = mousePos.y;
+	console.log(mouseX, mouseY);
+}, false);
 
 window.onresize = function (){
 	sizeX = window.innerWidth;
@@ -117,7 +135,7 @@ async function main() {
 	}
 	
 	return;
-	for(var i = 0; i <= 1; i += .0002){
+	for(var i = 0; i <= 1; i += .00002){
 		clearCanvas();
 		var [[x1, y1], [x2, y2]] = [[100, 500], [1000,50]];
 		//line(x1, y1, x2, y2);
@@ -133,7 +151,7 @@ async function main() {
 		// stripComplex([[x1, y1], [x3, y3], [x2, y2]], 100, 100);
 		// context.bezierCurveTo(x1,x2,)
 		//line(x2, y2, x3, y3);
-		await sleep(100);
+		await sleep(10);
 	}
 	
 	
@@ -176,7 +194,18 @@ function stripComplex(points, offsetX, offsetY, amount, offset, colors, lineColo
 	// dist = 0;
 	for(var i = 0; i < amount; i++) {
 		canvas.beginPath();
-		canvas.fillStyle = colors[i % colors.length];
+		var color = colors[i % colors.length];
+		if(mouseX && mouseY && color != "#011118"){
+			var grd = canvas.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 500);
+			grd.addColorStop(0,color == "#555555" ? "#666666" : "#444444");
+			grd.addColorStop(1, color);
+
+			// Fill with gradient
+			canvas.fillStyle = grd;
+		} else {
+			canvas.fillStyle = color;
+		}
+		
 		canvas.strokeStyle = lineColor;
 		canvas.lineWidth = 8;
 		
