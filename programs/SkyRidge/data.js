@@ -3,6 +3,7 @@ var files = Ext.create('Ext.data.Store', {  data: [
           {'1':"SkyRidge.txt", '2':"Ti-Basic", '3':"2011", '4':"2014", '5':718},
 ]});
 
+var title = "Sky Ridge";
 
 var discription = "";
 

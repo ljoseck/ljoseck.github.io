@@ -3,6 +3,7 @@ var files = Ext.create('Ext.data.Store', {  data: [
           {'1':"queenproblem.py", '2':"Python", '3':"2015", '4':"", '5':86},
 ]});
 
+var title = "Eight Queens Problem";
 
 var discription = "&emsp;The eight queens problem is the problem of placing eight queens on an 8x8 sized chessboard such that none of them attack one another. I first solved this basic problem before solving the more general case of nxn sized chessboard. This program prints the solutions starting with a 0x0 board then incrmenting upwards <br/> example output: <br/> 0 by 0 board<br/>\
 <br/>\

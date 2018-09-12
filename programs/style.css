@@ -1,0 +1,67 @@
+div {
+	
+	font-family: "Georgia";
+    font-size: 14px;
+}
+
+h1 {
+	font-family: "Trebuchet MS";
+	/* color: #1D4C5E; */
+	color: #0A3342;
+	margin: 10 10 10 0
+}
+
+/* .x-autocontainer-outerCt { */
+	
+/* } */
+
+.header {
+	background-color: #BBBBBB;
+    display:inline-block;
+	height: 100%;
+	width: 100%;
+	text-align: left;
+	
+}
+
+.x-column-header-text {
+	font-family: "Trebuchet MS";
+	
+}
+.x-fieldset-header-default > .x-fieldset-header-text {
+	font-family: "Trebuchet MS";
+    font-size: 18px;
+	
+}
+
+.x-btn-inner-default-small {
+	font-family: "Trebuchet MS";
+    font-size: 14px;
+	
+}
+
+.x-btn{
+	color: FFF;
+	background-color: #0A3342;
+	border-color: #0A3342;
+}
+
+/* unvisited link */
+a:link {
+    color: #4f6ec6;
+}
+
+/* visited link */
+a:visited {
+    color: #bc6249;
+}
+
+/* mouse over link */
+a:hover {
+    color: #Cc7259;
+}
+
+/* selected link */
+a:active {
+    color: #ecb279;
+}

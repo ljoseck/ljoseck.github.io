@@ -88,6 +88,15 @@ if(discriptionBox == null){
 		
 	});
 }
+var header = Ext.create('Ext.form.Panel', {
+	html:'<div class="header"><h1>' + title + '</h1>',
+
+    width: 308,
+    height: 36,
+	margin: '0 0 10 0',
+	
+});
+
 
 Ext.onReady(function () {
  	var viewport = Ext.create('Ext.container.Viewport', {
@@ -106,6 +115,7 @@ Ext.onReady(function () {
 			window.open("../index.html", "_self");
 			}
 		},
+		header,
 		discriptionBox,
 		table,
 		]

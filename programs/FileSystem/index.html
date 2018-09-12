@@ -1,0 +1,17 @@
+<head>
+	
+    <script type="text/javascript" src="..\..\SenchaResources\examples\classic\shared\include-ext.js"></script>
+	<title>Louis Joseck</title>
+</head>
+
+<body style="background-color: #BBBBBB;">
+    <script type="text/javascript" src="./data.js"></script>
+    <script type="text/javascript" src="../programs.js"></script>
+    <link href="../style.css" rel="stylesheet" type="text/css">
+    <div id = "Discription">
+	The final project for Data structures required the recreation of a basic version of standard operating systems console’s file controls. Each of the basic command line operations relating to file and directory manipulation were recreated. The following commands were implemented cd, pwd, ls, mkdir, touch, rm, and find. Along with the implementation, error handling needed to be created to let the user know if their input was invalid in anyway.
+<br/><br/>
+	Each student needed to design an approach from what they had learned in the course to complete this project. I used a custom data structure similar to the doubly linked list. The structure for each directory had a directory pointer to its parent directory and a list of pointers to each of the sub directories. By using this approach, with some additional metadata, I was able to create each of the commands precisely. The required functionality of commands had a large amount of self-similarity, as each of the directory’s subdirectory has the exact data structure as its parent. Most of the commands used one of four recursive functions to achieve its desired results. While not required, the recursive solutions I created increased readability with the more elegant designs.
+
+	</div>
+</body>

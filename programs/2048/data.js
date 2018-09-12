@@ -4,6 +4,8 @@ var files = Ext.create('Ext.data.Store', {  data: [
 ]});
 
 
+var title = "2048";
+
 var discription = "";
 
 

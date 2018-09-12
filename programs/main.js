@@ -23,12 +23,11 @@ var table = Ext.create('Ext.grid.Panel', {
 
     //width: "80%",
 
-
 	
     defaults: {
         bodyPadding: 10,
     },
-	
+
 	
     scrollable: true,
     features: [{
@@ -42,8 +41,8 @@ var table = Ext.create('Ext.grid.Panel', {
 	
 	
     columns: [
-        { text: "Project", width: 300, dataIndex: '1', sortable: true, renderer: projectRenderer },
-        { text: "Language", width: 120, dataIndex: '2', sortable: true },
+        { text: "Project", width: 250, dataIndex: '1', sortable: true, renderer: projectRenderer },
+        { text: "Language", width: 150, dataIndex: '2', sortable: true },
         { text: "Development Start", width: 160, dataIndex: '3', sortable: true },
         { text: "Development End", width: 150, dataIndex: '4', sortable: true },
         { text: "Type", width: 150, dataIndex: '5', sortable: true },
@@ -53,40 +52,40 @@ var table = Ext.create('Ext.grid.Panel', {
 });
 
 
-var searchForm = Ext.create('Ext.form.Panel', {
+var header = Ext.create('Ext.form.Panel', {
+	html:'<div class="header"><h1>Programming Projects</h1>',
 
-    // //width: "80%",
-    // height: 300,
-	
+    width: 308,
+    height: 36,
+	margin: '0 0 10 0',
 	// items: [{
 		// xtype: 'fieldset',
-        // title:'Search',
 
         // columnWidth: 0.35,
-        // //margin: '0 10 0 10',
+        // //
         // layout: 'anchor',
         // defaultType: 'textfield',
 
-        // items: [{
-            // fieldLabel: 'Name',
-        // }, {
-            // fieldLabel: 'Price',
-        // }, {
-            // fieldLabel: '% Change',
-        // }, {
-            // xtype: 'datefield',
-            // fieldLabel: 'Last Updated',
-        // }, {
-			// xtype: 'button',
-			// text: 'Language',
-			// menu: [{
-                // text:'C'
-            // },{
-                // text:'C#'
-            // },{
-                // text:'Python'	
-            // }]
-		// }]
+        // // items: [{
+            // // fieldLabel: 'Name',
+        // // }, {
+            // // fieldLabel: 'Price',
+        // // }, {
+            // // fieldLabel: '% Change',
+        // // }, {
+            // // xtype: 'datefield',
+            // // fieldLabel: 'Last Updated',
+        // // }, {
+			// // xtype: 'button',
+			// // text: 'Language',
+			// // menu: [{
+                // // text:'C'
+            // // },{
+                // // text:'C#'
+            // // },{
+                // // text:'Python'	
+            // // }]
+		// // }]
 
 		
 	// }],
@@ -109,6 +108,6 @@ Ext.onReady(function () {
 				
 			window.open("../index.html", "_self");
 			}
-		},searchForm,table]);
+		},header,table]);
 	//viewport.add(table);
 });
