@@ -1,13 +1,14 @@
 var files = Ext.create('Ext.data.Store', {  data: [
 
           {'1':"main.html", '2':"Html", '3':"2018", '4':"2018", '5':""},
-          {'1':"main.js", '2':"JavaScript", '3':"2018", '4':"2018", '5':357},
+          {'1':"main.js", '2':"JavaScript", '3':"2018", '4':"2018", '5':404},
 ]});
 
 var title = "3D Renderer";
 
 var discription = "";
 
+var demoLink = "main.html";
 
 var discriptionBox = Ext.create('Ext.form.Panel', {
 

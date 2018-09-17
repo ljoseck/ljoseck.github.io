@@ -5,9 +5,11 @@ var files = Ext.create('Ext.data.Store', {  data: [
           {'1':"interpreter.html", '2':"HTML", '3':"March 2017", '4':"March 2017", '5':""},
 ]});
 
-var title = "Interpreter";
+var title = "Boolean Expression Interpreter";
 
 var discription = "";
+
+var demoLink = "interpreter.html";
 
 
 var discriptionBox = Ext.create('Ext.form.Panel', {

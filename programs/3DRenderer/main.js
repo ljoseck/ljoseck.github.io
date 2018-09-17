@@ -282,7 +282,7 @@ function twoPencels(lb){
 		lb.doReset();
 	}
 }
-
+/* -------  End of Drawing Examples -- Start of Renderering Calculations  -------*/
 
 function line(x1, y1, x2, y2){ // does not account for the curvature of perspective lines
 	canvas.beginPath();

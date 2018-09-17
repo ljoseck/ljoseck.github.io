@@ -91,7 +91,7 @@ if(discriptionBox == null){
 var header = Ext.create('Ext.form.Panel', {
 	html:'<div class="header"><h1>' + title + '</h1>',
 
-    width: 308,
+    width: 508,
     height: 36,
 	margin: '0 0 10 0',
 	
@@ -99,6 +99,20 @@ var header = Ext.create('Ext.form.Panel', {
 
 
 Ext.onReady(function () {
+	var demoButton = {};
+	try{
+		if(demoLink){
+			demoButton = {
+				margin: '0 0 10 10',
+				xtype: 'button',
+				text: 'Demo',
+				handler: function() {
+					
+				window.open(demoLink, "_self");
+				}
+			};
+		}
+	} catch(ex){};
  	var viewport = Ext.create('Ext.container.Viewport', {
         margin: '20 20 0 20',
  	//var viewport = Ext.create('Ext.panel.Panel', {
@@ -115,6 +129,7 @@ Ext.onReady(function () {
 			window.open("../index.html", "_self");
 			}
 		},
+		demoButton,
 		header,
 		discriptionBox,
 		table,

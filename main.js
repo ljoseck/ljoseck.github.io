@@ -54,13 +54,13 @@ window.addEventListener('mousemove', function(evt) {
 	var mousePos = getMousePos(htmlCanvas, evt);
 	mouseX = mousePos.x;
 	mouseY = mousePos.y;
-	console.log(mouseX, mouseY);
+	// console.log(mouseX, mouseY);
 }, false);
 
 window.onresize = function (){
 	sizeX = window.innerWidth;
 	sizeY = window.innerHeight;
-	console.log(window.innerHeight);
+	// console.log(window.innerHeight);
 
 	htmlCanvas.width = sizeX;
 	htmlCanvas.height = sizeY;
@@ -289,7 +289,7 @@ function BSimpleComplex(points){ // 3 points
 function testB(points){
 	var [x1, y1] = B(0, points);
 	for(var i = .1; i <= 1.01; i += .1){
-		i > .9 ? console.log(i) : "";
+		// i > .9 ? console.log(i) : "";
 		var [x2, y2] = B(i, points);
 		line(x1, y1, x2, y2);
 		[x1, y1] = [x2, y2];

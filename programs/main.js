@@ -1,12 +1,12 @@
 var cloneSets = Ext.create('Ext.data.Store', {  data: [
 
-          {'1':"3D Renderer", '2':"JavaScript", '3':"2018", '4':"2018", '5': "Personal Project",'6':''},
-          {'1':"Game Of Codes", '2':"JavaScript", '3':"2018", '4':"2018", '5': "School Project",'6':''},
+          {'1':"3D Renderer", '2':"JavaScript", '3':"2018", '4':"2018", '5': "Personal Project",'6':404},
+          {'1':"Game Of Codes", '2':"JavaScript", '3':"2018", '4':"2018", '5': "School Project",'6':1334},
           {'1':"File System", '2':"C", '3':"2016", '4':"2016", '5': "School Project",'6':426},
           {'1':"Mandelbrot Set", '2':"Python", '3':"2015", '4':"", '5': "Personal Project",'6':""},
           {'1':"8 Queens Problem", '2':"Python", '3':"2015", '4':"2015", '5': "Personal Project",'6':86},
           {'1':"Auto Trader", '2':"AutoHotkey", '3':"2015", '4':"2015", '5': "Personal Project",'6':538},
-          {'1':"Interpreter", '2':"JavaScript", '3':"2014", '4':"2014", '5': "Personal Project",'6':332},
+          {'1':"Boolean Expression Interpreter", '2':"JavaScript", '3':"2014", '4':"2014", '5': "School Project",'6':332},
           {'1':"2048", '2':"Ti-Basic", '3':"2014", '4':"2014", '5': "Personal Project",'6':227},
           {'1':"SkyRidge", '2':"Ti-Basic", '3':"2011", '4':"2014", '5': "Personal Project",'6':718},
 ]});
