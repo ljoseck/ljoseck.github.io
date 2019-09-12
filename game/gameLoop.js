@@ -1,17 +1,25 @@
 var game;
+var key = {};
 /// constants
 
 var keyUp = "87";
 var keyDown = "83";
 var keyLeft = "65";
 var keyRight = "68";
+var keyRotateClockwise = "81";
+var keyRotateCounterClockwise = "69";
+var keyResetRotation = "82";
 
 /// end constants
 
 function mainGameLoop(){
+	game.gameTick++;
+	readKeys();
+	handleRotate();
 	handleMove();
+	game.moveAllObjects();
 
-	adjustCamera();
+	game.adjustCameraToPlayer();
 }
 
 /*
@@ -19,48 +27,53 @@ function mapActions(){
 
 }
 */
+function XNOR(a, b){
+	return (a && !b) || (!a && b);
+}
+
+function handleRotate(){
+	if(key.resetRotation){
+		game.angle = 0;
+		drawTimeMax = 0; //for debug
+		game.adjustAllSpriteDirections();
+		return;
+	}
+	if(XNOR(key.rotateClockwise, key.rotateCounterClockwise)){
+		if(key.rotateClockwise) {
+			game.angle += game.rotateSpeed;
+			game.adjustAllSpriteDirections();
+		}
+		if(key.rotateCounterClockwise) {
+			game.angle -= game.rotateSpeed;
+			game.adjustAllSpriteDirections();
+		}
+	}
+}
 
 function handleMove(){
+	
 	var angles = [null, 0, 180, null, 90, 45, 135, null, 270, 315, 225, null, null, null, null, null]; // udlr as binary
-	var keys = Object.keys(game.map);
-	var up = keys.includes(keyUp);
-	var down = keys.includes(keyDown);
-	var left = keys.includes(keyLeft);
-	var right = keys.includes(keyRight);
-
-	var angle = angles[right + left*2 + down*4 + up*8];
+	var angle = angles[key.right + key.left*2 + key.down*4 + key.up*8];
 	if(angle != null){
 		var angleInRad = angle*Math.PI/180;
-		game.player.entity.angle = angleInRad;
-		game.player.positionY += Math.sin(game.player.entity.angle)*game.player.entity.speed;
-		game.player.positionX += Math.cos(game.player.entity.angle)*game.player.entity.speed;
+		game.player.entity.angleAbsolute = angleInRad - game.angle;
+		//game.player.entity.angle = angleInRad - game.angle;
+		// game.player.positionY += Math.sin(game.player.entity.angle)*game.player.entity.speed;
+		// game.player.positionX += Math.cos(game.player.entity.angle)*game.player.entity.speed;
+		game.player.entity.moving = true;
+		game.player.entity.move();
 	}
 
-	game.player.entity.adjustSpriteDirection();
-	/*
-	if(up){
-		game.player.positionY -= game.player.speed;
-		game.player.entity.sprite.direction = "up";
-	}
-	if(down){
-		game.player.positionY += game.player.speed;
-		game.player.entity.sprite.direction = "down"; 
-	}
-	if(left){
-		game.player.positionX -= game.player.speed;
-		game.player.entity.sprite.direction = "left"; 
-	}
-	if(right){
-		game.player.positionX += game.player.speed;
-		game.player.entity.sprite.direction = "right"; 
-	}
-	*/
-	
+	game.player.entity.adjustSpriteDirection();	
 }
 
-
-function adjustCamera(){
-	game.cameraX = game.width / 2 - game.player.positionX;
-	game.cameraY = game.height / 2 - game.player.positionY;
+function readKeys(){
+	var keys = Object.keys(game.map);
+	key.up = keys.includes(keyUp);
+	key.down = keys.includes(keyDown);
+	key.left = keys.includes(keyLeft);
+	key.right = keys.includes(keyRight);
+	key.rotateClockwise = keys.includes(keyRotateClockwise);
+	key.rotateCounterClockwise = keys.includes(keyRotateCounterClockwise);
+	key.resetRotation = keys.includes(keyResetRotation);
 }
-

@@ -1,4 +1,4 @@
-var game = new Game();
+
 
 var canvas = document.getElementById("mainCanvas");
 var convasDiv = document.getElementById("mainCanvasDiv")
@@ -17,16 +17,21 @@ var fpsMax = 60;
 var fps = 0;
 var adjust = 0;
 
-game.map = {};
 
 /// constants
 
 var debug = true;
+var debugDrawing = true;
 var debugLevel = 4;
 var adjustment = 1/32;
 
+var rotateSpeed = 2;
+var playerSpeed = 15;
+
 /// end constants
 
+var game = new Game();
+game.map = {};
 window.onload = startUp;
 
 function startUp(){
@@ -44,17 +49,19 @@ async function main(){
 	var frameTimes = [];
 	var count = 0;
 	while(true){
+		var fast = false;
 		var start = performance.now();
 		gameLoop();
 		drawTime = performance.now() - start;
 		if(drawTime < 1/(fpsMax) * 1000){
 			await sleep((1/(fpsMax) * 1000) - drawTime + adjust);
+			fast = true;
 		} else {
 			await sleep(0)
 		}
 		frameTime = performance.now() - start;
-		if(drawTime > drawTimeMax){
-			drawTimeMax = drawTime
+		if(frameTime > drawTimeMax){
+			drawTimeMax = frameTime;
 		}
 		frameTimes.push(frameTime);
 		count++;
@@ -65,13 +72,13 @@ async function main(){
 		if(count % 60 == 0){
 			count = 0;
 			
-			if(fps - 1 > fpsMax){
+			if(fps - 1 > fpsMax && fast){
 				adjust += adjustment;
 				if(fps - .4 > fpsMax){
 					adjust += adjustment;
 				}
 			}
-			if(fps + .5 < fpsMax){
+			if(fps + .5 < fpsMax && fast){
 				adjust -= adjustment;
 				if(fps + .2 < fpsMax){
 					adjust -= adjustment;
@@ -102,9 +109,19 @@ function clearCanvas(){
 
 function draw(){
 	copyMap();
-	drawPlayer();
+	drawObjects();
+	//drawPlayer();
 	counter();
+	drawDebugThings();
 	addDebugText();
+}
+
+function drawObjects(){
+	game.entityList.sort();
+	game.entityList.list.forEach(o => {
+		addSprite(game.get(o.key).sprite);
+	});
+	//game.objects.forEach(e => addSprite(e.sprite));
 }
 
 function drawPlayer(){
@@ -112,7 +129,19 @@ function drawPlayer(){
 }
 
 function copyMap(){
-	addToContext(mapCanvas, 0, 0);
+	var p = new Point(0, 0);
+	var adjXPlayer = game.player.positionX + game.cameraX;
+	var adjYPlayer = game.player.positionY + game.cameraY;
+	var adjXZero = p.positionX + game.cameraX;
+	var adjYZero = p.positionY + game.cameraY;
+	context.save();
+	context.translate(adjXPlayer , adjYPlayer);
+	context.rotate(game.angle);
+	context.translate(-adjXPlayer, -adjYPlayer);
+	addToContext(mapCanvas, adjXZero, adjYZero);
+	//context.drawImage(mapCanvas, 0, 0);
+	//context.translate(-positionX, -positionY);
+	context.restore();
 }
 
 function resize(){
@@ -122,21 +151,19 @@ function resize(){
 	drawMap();
 	
 	//blueprint.draw();
-	addDebugText();
+	draw();
 }
 	
 
 function addSprite(sprite){
-	addToContext(sprite.getImg(), sprite.x, sprite.y, sprite.width, sprite.height);
+	addToContext(sprite.getImg(), sprite.adjustXCordSprite(), sprite.adjustYCordSprite(), sprite.width, sprite.height);
 }
 
 function addToContext(img, x, y, width = null, height = null){
-	var adjX = x + game.cameraX;
-	var adjY = y + game.cameraY;
 	if(width && height){
-		context.drawImage(img, adjX, adjY, width, height)
+		context.drawImage(img, x, y, width, height)
 	} else {
-		context.drawImage(img, adjX, adjY);
+		context.drawImage(img, x, y);
 	}
 }
 
@@ -159,22 +186,6 @@ function loadSprite(url) {
 		img.src = url;
 	}
 }
-*/
-
-/*
-function rotateAndPaintImage(img, angleInDeg , positionX, positionY, sizeX, sizeY ) {
-	var angleInRad = angleInDeg*Math.PI/180
-	
-	positionX += sizeX/2;
-	positionY += sizeY/2;
-	
-	context.translate(positionX, positionY);
-	context.rotate(angleInRad);
-	context.drawImage(img, -sizeX/2, -sizeY/2, sizeX, sizeY);
-	context.rotate(-angleInRad);
-	context.translate(-positionX, -positionY);
-}
-
 */
 
 function drawMap(){
@@ -221,51 +232,6 @@ function counter(){
 }
 ///end temp
 
-class DebugInfo {
-	constructor(level = 0){
-		this.font = "14px Verdana,sans-serif";
-		this.leftMargin = 10;
-		this.topMargin = 200;
-		this.gap = 15;
-		this.lines = 0;
-		this.level = level;
-		context.font = this.font;
-	}
-	
-	add(str, level=0){
-		if(level <= this.level){
-			context.fillText(str, this.leftMargin, this.topMargin + this.gap * this.lines);
-			this.lines++;
-		}
-	}
-}
-
-function addDebugText(){
-	if(!debug) return;
-	var debugInfo = new DebugInfo(debugLevel);
-	debugInfo.add("fps: " + fps.toFixed(0), 1);
-	debugInfo.add("Width: " + canvas.width, 4);
-	debugInfo.add("Height: " + canvas.height, 4);
-	debugInfo.add("Draw Time " + drawTime, 3);
-	debugInfo.add("Draw Time Max " + drawTimeMax, 2);
-	debugInfo.add("performance.now() " + performance.now(), 4);
-	debugInfo.add("Frame Time " + frameTime, 4);
-	debugInfo.add("adjust " + adjust, 4);
-	debugInfo.add("Keys Pressed " + getKeys(), 3);
-	debugInfo.add("Player Position X " + game.player.positionX.toFixed(2), 4);
-	debugInfo.add("Player Position Y " + game.player.positionY.toFixed(2), 4);
-	debugInfo.add("Player Angle " + game.player.entity.angle, 4);
-}
-
-function getKeys(){
-	keys = ""
-	Object.keys(game.map).forEach(function(key){
-		// keys += String.fromCharCode(key) + " ";
-		keys += key + " ";
-	});
-	return keys;
-}
-
 onkeydown = onkeyup = function(e){
     e = e || event; // to deal with IE
 	if(e.type == 'keydown'){
@@ -275,3 +241,33 @@ onkeydown = onkeyup = function(e){
 	}
 	// console.log(game.map)
 }
+
+
+/*
+var num = 0;
+class t {
+	constructor(){
+		this.x = Math.random();
+	}
+
+	get i(){
+		var x = [];
+		for(var i = 0; i < 100; i++){
+			x.push(Math.random());
+		}
+		x.sort();
+		num++;
+		return this.x;
+	}
+}
+
+function test(){
+	var x = [];
+	for(var i = 0; i < 100; i++){
+		x.push(new t());
+	}
+	x.sort((a,b) => (a.i - b.i));
+	console.log(num);
+}
+
+*/
