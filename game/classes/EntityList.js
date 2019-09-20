@@ -9,7 +9,7 @@ class EntityList {
     }
 
     sort(){
-        this.list.sort((a, b) =>{
+        this.list.sort((a, b) => {
             return a.getVertical() - b.getVertical();
         })
     }

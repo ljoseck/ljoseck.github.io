@@ -1,5 +1,6 @@
 class Game {
 	constructor(){
+		game = this;
 		this.map = {};
 		this.player = new Player(playerSpeed);
 		this.width;
@@ -14,6 +15,7 @@ class Game {
 		
 		this.objects = [];
 		this.entityList = new EntityList();
+		this.gameMap = new Map();
 		this.entityList.add(0); // Add player
 
 		//this.objects.push(new Entity("player", 0, 200, 200, 48, 48));

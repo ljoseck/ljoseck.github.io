@@ -52,12 +52,13 @@ async function main(){
 		var fast = false;
 		var start = performance.now();
 		gameLoop();
+		await sleep(0)
 		drawTime = performance.now() - start;
 		if(drawTime < 1/(fpsMax) * 1000){
 			await sleep((1/(fpsMax) * 1000) - drawTime + adjust);
 			fast = true;
 		} else {
-			await sleep(0)
+			// await sleep(0)
 		}
 		frameTime = performance.now() - start;
 		if(frameTime > drawTimeMax){
@@ -192,12 +193,15 @@ function drawMap(){
 	
 	mapCanvas.width = 3000;
 	mapCanvas.height = 3000;
-	drawGrass();
+	game.gameMap.currentMap();
+	//drawGrass();
 }
 
 ///temp
 var img = new Image();
-img.src = "./sprites/background/pixil-frame-0.png";
+img.src = "./sprites/background/grassBasic.png";
+var water = new Image();
+water.src = "./sprites/background/waterBasic.png";
 function drawGrass(){
 	var x = 0;
 	var y = 0;
@@ -209,12 +213,17 @@ function drawGrass(){
 		sum2++;
 		for(var j = y; j <= y + height*30; j += height/2){
 			// rotateAndPaintImage(img, 10, i, j, width, height);
-			mapContext.drawImage(img, i, j, width, height);
+			if((i >= 96*4 && i <= 96*6 && j >= 96*3 && j <= 96*5) || (j >= 96*12 && j <= 96*14)){
+				mapContext.drawImage(water, i, j, width, height);
+
+			} else {
+
+				mapContext.drawImage(img, i, j, width, height);
+			}
 			sum++;
 			
 		}
 	}
-	console.log(sum, sum2)
 }
 
 

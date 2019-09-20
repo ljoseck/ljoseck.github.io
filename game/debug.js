@@ -58,9 +58,9 @@ function drawDebugThings(){
     //drawDebugThings.drawCircle(game.player.positionX, game.player.positionY, 30);
     //drawDebugThings.drawPixel(200, 200);
 	//drawDebugThings.drawCircle(200, 200, 30);
-	// drawDebugThings.mark(game.player.entity);
-	// drawDebugThings.markSprite(game.player.entity.sprite);
-	// drawDebugThings.direction(game.player.entity);
+	drawDebugThings.mark(game.player.entity);
+	drawDebugThings.markSprite(game.player.entity.sprite);
+	drawDebugThings.direction(game.player.entity);
 	try {
 		drawDebugThings.markSprite(game.objects[0].sprite);
 		drawDebugThings.direction(game.objects[0]);
