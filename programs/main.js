@@ -104,6 +104,7 @@ Ext.onReady(function () {
 			margin: '0 0 10 0',
 			xtype: 'button',
 			text: 'Back',
+			height: 30,
 			handler: function() {
 				
 			window.open("../index.html", "_self");

@@ -106,6 +106,7 @@ Ext.onReady(function () {
 			margin: '0 0 10 10',
 			xtype: 'button',
 			text: 'Demo',
+			height: 30,
 			handler: function() {
 				
 			window.open(demoLink, "_self");
@@ -123,6 +124,7 @@ Ext.onReady(function () {
 			margin: '0 0 10 0',
 			xtype: 'button',
 			text: 'Back',
+			height: 30,
 			handler: function() {
 				
 			window.open("../index.html", "_self");
