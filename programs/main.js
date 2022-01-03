@@ -1,6 +1,6 @@
 var cloneSets = Ext.create('Ext.data.Store', {  data: [
 
-          {'1':"Lost Gems of Condor", '2':"JavaScript", '3':"2019", '4':"Present", '5': "Personal Project",'6':5604},
+          {'1':"Lost Gems of Condor", '2':"JavaScript", '3':"2019", '4':"Present", '5': "Personal Project",'6':6900},
           {'1':"3D Renderer", '2':"JavaScript", '3':"2018", '4':"2018", '5': "Personal Project",'6':404},
           {'1':"Game Of Codes", '2':"JavaScript", '3':"2018", '4':"2018", '5': "School Project",'6':1334},
           {'1':"File System", '2':"C", '3':"2016", '4':"2016", '5': "School Project",'6':426},
