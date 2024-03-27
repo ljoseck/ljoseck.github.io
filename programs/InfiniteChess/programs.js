@@ -1,31 +1,16 @@
 function fileRenderer(val) {
     if (val != null) {
 		if(val.includes('.html')){
-			return "<a href='./" + val + "'>" + val + "</a>";
+			return "<a href='./src/" + val + "'>" + val + "</a>";
 		}
 		else{
 			var folder = window.location.href.split('/');
 			folder = folder[folder.length - 2];
-			return "<a href='https://github.com/ljoseck/ljoseck.github.io/blob/master/programs/" + folder + '/' + val + "'>" + val + "</a>";
+			return "<a href='https://github.com/ljoseck/ljoseck.github.io/blob/master/programs/" + folder + '/src/' + val + "'>" + val + "</a>";
 		}
     }
     return val;
 }
-
-/*
-var discription = Ext.create('Ext.panel.Panel', {
-	
-	bodyPadding: 10,
-	scrollable : {
-		direction     : 'vertical'
-	},
-	xtype: 'panel',
-	//layout: 'fit',
-	height: 300,
-	//flex: 1,
-	html: discription,
-});*/
-
 
 var table = Ext.create('Ext.grid.Panel', {
 
@@ -41,7 +26,6 @@ var table = Ext.create('Ext.grid.Panel', {
         groupHeaderTpl: '{name}',
         hideGroupedHeader: true,
         enableGroupingMenu: false,
-        //startCollapsed: true
     }],
 	
 	
